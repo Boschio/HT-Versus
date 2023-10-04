@@ -1,7 +1,9 @@
 package window.scenes;
 
 import player.Player;
-import player.Character;
+import player.PlayerConstants;
+import util.HitBox;
+import util.HurtBox;
 import util.io.KL;
 import window.Window;
 import window.WindowConstants;
@@ -14,18 +16,18 @@ public class GameScene extends Scene{
 
     private int _frameRate = 0;
     private String _displayInfo = "";
-    private Player _player = new Player();
-//    private Character _player = new Character();
+    private Player _player1 = new Player((int)PlayerConstants.PLAYER1_START_X, (int)PlayerConstants.PLAYER_START_Y);
+    private Player _player2 = new Player((int)PlayerConstants.PLAYER2_START_X, (int)PlayerConstants.PLAYER_START_Y);
 
-
-
+    private HurtBox hurtTest = new HurtBox((int)PlayerConstants.PLAYER2_START_X, (int)PlayerConstants.PLAYER_START_Y, 200, 200, Color.GREEN);
 
     @Override
     public void update(double deltaTime) {
         _frameRate = (int) (1/deltaTime);
         _displayInfo = String.format("%d FPS (%.3f)", _frameRate,deltaTime);
 
-        _player.update(deltaTime);
+        _player1.update(deltaTime);
+        _player2.update(deltaTime);
 
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE)){
             Window.getWindow().changeState(WindowConstants.MENU_SCENE);
@@ -40,9 +42,22 @@ public class GameScene extends Scene{
         g.setColor(Color.GREEN);
         g.drawString(_displayInfo,10, (int) (WindowConstants.INSET_SIZE*1.5));
 
-
-        _player.draw(g);
-
-
+        hurtTest.draw(g);
+        _player1.draw(g);
+        if (_player1.isAttacking) {
+            HitBox h = new HitBox((int) _player1.x + PlayerConstants.PLAYER_WIDTH,(int) _player1.y + 50,150,70,Color.RED);
+            h.draw(g);
+            if (h.overlaps(hurtTest)) {
+                System.out.println("HIT!");
+                hurtTest.setColor(Color.YELLOW);
+            }
+            _player1.isAttacking = false;
+        }
+        _player2.draw(g);
+        if (_player2.isAttacking) {
+            HitBox h = new HitBox((int) _player2.x + PlayerConstants.PLAYER_WIDTH,(int) _player2.y + 50,150,70,Color.BLUE);
+            h.draw(g);
+            _player2.isAttacking = false;
+        }
     }
 }

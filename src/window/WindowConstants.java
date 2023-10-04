@@ -2,8 +2,8 @@ package window;
 
 public class WindowConstants {
 
-    public static final int SCREEN_WIDTH = 1920;
-    public static final int SCREEN_HEIGHT = 1080;
+    public static final int SCREEN_WIDTH = 1280;
+    public static final int SCREEN_HEIGHT = 720;
 
     public static int INSET_SIZE = 0;
 

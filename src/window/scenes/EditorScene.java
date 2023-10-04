@@ -56,11 +56,11 @@ public class EditorScene extends Scene {
         g.fillRect(0,0, WindowConstants.SCREEN_WIDTH, WindowConstants.SCREEN_HEIGHT );
 
         g.setColor(Color.green);
-        g.fillRect(addRect.x, addRect.y, addRect.w, addRect.h);
+        g.fillRect((int)addRect.x, (int)addRect.y, (int)addRect.w, (int)addRect.h);
 
         g.setColor(Color.blue);
         for (Rect rectangle : rectList) {
-            g.fillRect(rectangle.x, rectangle.y, rectangle.w, rectangle.h);
+            g.fillRect((int)rectangle.x, (int)rectangle.y, (int)rectangle.w, (int)rectangle.h);
         }
 
 

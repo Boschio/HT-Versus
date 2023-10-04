@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Rect {
-    double x;
-    double y;
-    double w;
-    double h;
+    public double x;
+    public double y;
+    public double w;
+    public double h;
 
     double vx = 0;
     double vy = 0;
@@ -52,7 +52,6 @@ public class Rect {
         y += vy;
 
         vy += ay;
-
     }
 
     public void moveBy(int dx, int dy)
