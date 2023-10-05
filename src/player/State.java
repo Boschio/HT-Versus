@@ -1,9 +1,12 @@
 package player;
 
-public abstract class State {
-    Player player;
+import java.awt.event.KeyEvent;
 
-    abstract void enter();
-    abstract void update();
+public interface State {
+
+    void enter();
+    void exit();
+    State input(KeyEvent e);
+    State update(double deltaTime);
 
 }

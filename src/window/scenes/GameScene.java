@@ -52,6 +52,7 @@ public class GameScene extends Scene{
                 hurtTest.setColor(Color.YELLOW);
             }
             _player1.isAttacking = false;
+            h.setColor(Color.RED);
         }
         _player2.draw(g);
         if (_player2.isAttacking) {
