@@ -26,8 +26,8 @@ public class GameScene extends Scene{
         _frameRate = (int) (1/deltaTime);
         _displayInfo = String.format("%d FPS (%.3f)", _frameRate,deltaTime);
 
-        _player1.update(deltaTime);
-        _player2.update(deltaTime);
+        _player1.update(_player1, deltaTime);
+        _player2.update(_player2, deltaTime);
 
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE)){
             Window.getWindow().changeState(WindowConstants.MENU_SCENE);

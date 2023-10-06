@@ -1,12 +1,13 @@
 package player;
 
-import java.awt.event.KeyEvent;
+import util.io.KL;
 
 public interface State {
 
     void enter();
     void exit();
-    State input(KeyEvent e);
-    State update(double deltaTime);
+    State input(KL keyListener);
+    State update(Player player, double deltaTime);
 
+//    State physicsProcess(double deltaTime);
 }

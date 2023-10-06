@@ -1,6 +1,6 @@
 package player;
 
-import java.awt.event.KeyEvent;
+import util.io.KL;
 
 public class AttackState implements State{
     @Override
@@ -14,12 +14,12 @@ public class AttackState implements State{
     }
 
     @Override
-    public State input(KeyEvent e) {
+    public State input(KL e) {
         return null;
     }
 
     @Override
-    public State update(double deltaTime) {
+    public State update(Player player, double deltaTime) {
         return null;
     }
 }
