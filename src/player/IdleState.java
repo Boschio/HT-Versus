@@ -8,7 +8,7 @@ public class IdleState implements State {
     private KL keyListener = KL.getKeyListener();
 
     @Override
-    public void enter() {
+    public void enter(Player player) {
 
     }
 
@@ -19,9 +19,9 @@ public class IdleState implements State {
 
     @Override
     public State input(KL e) {
-        if (e.isKeyDown(KeyEvent.VK_A) || e.isKeyDown(KeyEvent.VK_D)) {
-            return new MoveState();
-        }
+//        if (e.isKeyDown(KeyEvent.VK_A) || e.isKeyDown(KeyEvent.VK_D)) {
+//            return new MoveState();
+//        }
         return null;
     }
 
@@ -32,6 +32,9 @@ public class IdleState implements State {
         }
         if(player.keyListener.isKeyDown(KeyEvent.VK_W)){
             return new JumpState();
+        }
+        if(player.keyListener.isKeyDown(KeyEvent.VK_J)) {
+            return new AttackState();
         }
         return new IdleState();
     }

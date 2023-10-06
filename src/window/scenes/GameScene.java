@@ -19,7 +19,7 @@ public class GameScene extends Scene{
     private Player _player1 = new Player((int)PlayerConstants.PLAYER1_START_X, (int)PlayerConstants.PLAYER_START_Y);
     private Player _player2 = new Player((int)PlayerConstants.PLAYER2_START_X, (int)PlayerConstants.PLAYER_START_Y);
 
-    private HurtBox hurtTest = new HurtBox((int)PlayerConstants.PLAYER2_START_X, (int)PlayerConstants.PLAYER_START_Y, 200, 200, Color.GREEN);
+    private HurtBox hurtTest = new HurtBox((int)PlayerConstants.PLAYER2_START_X, (int)PlayerConstants.PLAYER_START_Y, 200, 200);
 
     @Override
     public void update(double deltaTime) {
@@ -45,18 +45,17 @@ public class GameScene extends Scene{
         hurtTest.draw(g);
         _player1.draw(g);
         if (_player1.isAttacking) {
-            HitBox h = new HitBox((int) _player1.x + PlayerConstants.PLAYER_WIDTH,(int) _player1.y + 50,150,70,Color.RED);
+            HitBox h = new HitBox((int) (_player1.x + PlayerConstants.PLAYER_WIDTH),(int) _player1.y + 50,150,70);
             h.draw(g);
             if (h.overlaps(hurtTest)) {
                 System.out.println("HIT!");
                 hurtTest.setColor(Color.YELLOW);
             }
             _player1.isAttacking = false;
-            h.setColor(Color.RED);
         }
         _player2.draw(g);
         if (_player2.isAttacking) {
-            HitBox h = new HitBox((int) _player2.x + PlayerConstants.PLAYER_WIDTH,(int) _player2.y + 50,150,70,Color.BLUE);
+            HitBox h = new HitBox((int) (_player2.x + PlayerConstants.PLAYER_WIDTH),(int) _player2.y + 50,150,70);
             h.draw(g);
             _player2.isAttacking = false;
         }

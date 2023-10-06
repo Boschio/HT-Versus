@@ -20,7 +20,8 @@ public class Player {
     public double y;
     double vx = 0;
     double vy = 0;
-    final static double gravity = 0.3;
+    int jumpHeight = 10;
+    final static double gravity = 0.1;
     double ay = gravity;
 
     public boolean isAttacking = false;
@@ -36,7 +37,7 @@ public class Player {
     public void draw(Graphics g){
 
         g.setColor(PlayerConstants.characterColor);
-        g.fillRect((int) this.x, (int) this.y, PlayerConstants.PLAYER_WIDTH, PlayerConstants.PLAYER_HEIGHT);
+        g.fillRect((int) this.x, (int) this.y, (int)PlayerConstants.PLAYER_WIDTH, (int)PlayerConstants.PLAYER_HEIGHT);
 
     }
 
@@ -44,7 +45,7 @@ public class Player {
         activeState.exit();
         // Do I need to clear old state from mem?
         activeState = newState;
-        activeState.enter();
+        activeState.enter(this);
     }
 
     void input(KL keyListener) {
@@ -55,48 +56,11 @@ public class Player {
     }
 
     public void update(Player player, double deltaTime){
-//        move();
-//        HandleMovement(deltaTime);
-//        HandleAttack(deltaTime);
         State newState = activeState.update(this, deltaTime);
         if (newState != null) {
             changeState(newState);
         }
-    }
-
-    public void move() {
-        x += vx;
-        y += vy;
-        vy += ay;
-        if (this.y + PlayerConstants.PLAYER_HEIGHT >= PlayerConstants.FLOOR) {
-            pushAbove(PlayerConstants.FLOOR);
-            stopFalling();
-        }
-
-    }
-
-    public void stopFalling() {
-        vy = 0;
-    }
-
-    public void pushAbove(double floor) {
-        y = floor - PlayerConstants.PLAYER_HEIGHT - 1;
-    }
-
-
-
-    private void HandleAttack(double deltaTime){
-        if(keyListener.isKeyDown(KeyEvent.VK_J)){
-            isAttacking = true;
-        }
-
-        if(keyListener.isKeyDown(KeyEvent.VK_K)){
-            isAttacking = true;
-        }
-
-        if(keyListener.isKeyDown(KeyEvent.VK_L)){
-            isAttacking = true;
-        }
+//        System.out.println("Current State: " + activeState.toString());
     }
 
 }

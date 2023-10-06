@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class HitBox extends Rect {
 
-    public HitBox(int x, int y, int w, int h, Color c) {
-        super(x, y, w, h, c);
+    public HitBox(int x, int y, int w, int h) {
+        super(x, y, w, h, Color.RED);
     }
 
     public boolean overlaps(Rect hurtbox)

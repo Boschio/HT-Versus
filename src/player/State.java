@@ -4,7 +4,7 @@ import util.io.KL;
 
 public interface State {
 
-    void enter();
+    void enter(Player player);
     void exit();
     State input(KL keyListener);
     State update(Player player, double deltaTime);

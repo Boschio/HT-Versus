@@ -6,8 +6,10 @@ import java.awt.event.KeyEvent;
 
 public class JumpState implements State {
     @Override
-    public void enter() {
-
+    public void enter(Player player) {
+        if (player.keyListener.isKeyDown(KeyEvent.VK_W) && player.keyListener.isKeyDown(KeyEvent.VK_D)) jump(player, player.jumpHeight, 10);
+        else if (player.keyListener.isKeyDown(KeyEvent.VK_W) && player.keyListener.isKeyDown(KeyEvent.VK_A)) jump(player, player.jumpHeight, -10);
+        else jump(player, player.jumpHeight, 0);
     }
 
     @Override
@@ -22,40 +24,25 @@ public class JumpState implements State {
 
     @Override
     public State update(Player player, double deltaTime) {
-        jump(player, 1);
-
-        if (player.vy < 0) {
-            while (player.vy <= 0) {
-                System.out.println(player.vy);
-                jump(player, 0);
-            }
-//            move(player);
-//            return new JumpState();
-        }
-        return new IdleState();
-    }
-
-    private void jump(Player player, double dy) {
-        // y = a(x-h)2 + k, where h is the vertex or x^2 = -4ay
-        player.vy -= dy;
+        player.x += player.vx;
         player.y += player.vy;
         player.vy += player.ay;
         if (player.y + PlayerConstants.PLAYER_HEIGHT >= PlayerConstants.FLOOR) {
             pushAbove(player, PlayerConstants.FLOOR);
             stopFalling(player);
+            return new IdleState();
         }
+        return null;
     }
 
-//    public void move(Player player) {
-//        player.y += player.vy;
-//        player.vy += player.ay;
-//        if (player.y + PlayerConstants.PLAYER_HEIGHT >= PlayerConstants.FLOOR) {
-//            pushAbove(player, PlayerConstants.FLOOR);
-//            stopFalling(player);
-//        }
-//
-//    }
+    private void jump(Player player, double dy, double dx) {
+        // y = a(x-h)2 + k, where h is the vertex or x^2 = -4ay
+        player.vy -= dy;
+        player.vx = dx;
+    }
+
     public void stopFalling(Player player) {
+        player.vx = 0;
         player.vy = 0;
     }
 
