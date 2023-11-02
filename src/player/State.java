@@ -4,10 +4,9 @@ import util.io.KL;
 
 public interface State {
 
-    void enter(Player player);
-    void exit();
+    void enter(Fighter fighter);
     State input(KL keyListener);
-    State update(Player player, double deltaTime);
+    State update(Fighter fighter, double deltaTime);
 
 //    State physicsProcess(double deltaTime);
 }

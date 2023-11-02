@@ -6,15 +6,8 @@ import java.awt.event.KeyEvent;
 
 public class JumpState implements State {
     @Override
-    public void enter(Player player) {
-        if (player.keyListener.isKeyDown(KeyEvent.VK_W) && player.keyListener.isKeyDown(KeyEvent.VK_D)) jump(player, player.jumpHeight, 10);
-        else if (player.keyListener.isKeyDown(KeyEvent.VK_W) && player.keyListener.isKeyDown(KeyEvent.VK_A)) jump(player, player.jumpHeight, -10);
-        else jump(player, player.jumpHeight, 0);
-    }
-
-    @Override
-    public void exit() {
-
+    public void enter(Fighter fighter) {
+        fighter.vy -= fighter.jumpHeight;
     }
 
     @Override
@@ -23,31 +16,32 @@ public class JumpState implements State {
     }
 
     @Override
-    public State update(Player player, double deltaTime) {
-        player.x += player.vx;
-        player.y += player.vy;
-        player.vy += player.ay;
-        if (player.y + PlayerConstants.PLAYER_HEIGHT >= PlayerConstants.FLOOR) {
-            pushAbove(player, PlayerConstants.FLOOR);
-            stopFalling(player);
+    public State update(Fighter fighter, double deltaTime) {
+//        fighter.x += fighter.vx * deltaTime;
+        fighter.y += fighter.vy * deltaTime;
+        fighter.vy += fighter.ay * deltaTime;
+
+        if (fighter.y + FighterConstants.PLAYER_HEIGHT >= FighterConstants.FLOOR) {
+            pushAbove(fighter, FighterConstants.FLOOR);
+            stopFalling(fighter);
             return new IdleState();
         }
         return null;
     }
 
-    private void jump(Player player, double dy, double dx) {
+    private void jump(Fighter fighter, double dy, double dx) {
         // y = a(x-h)2 + k, where h is the vertex or x^2 = -4ay
-        player.vy -= dy;
-        player.vx = dx;
+        fighter.vy -= dy;
+//        player.vx = dx;
     }
 
-    public void stopFalling(Player player) {
-        player.vx = 0;
-        player.vy = 0;
+    public void stopFalling(Fighter fighter) {
+        fighter.vx = 0;
+        fighter.vy = 0;
     }
 
-    public void pushAbove(Player player, double floor) {
-        player.y = floor - PlayerConstants.PLAYER_HEIGHT - 1;
+    public void pushAbove(Fighter fighter, double floor) {
+        fighter.y = floor - FighterConstants.PLAYER_HEIGHT - 1;
     }
 
 }

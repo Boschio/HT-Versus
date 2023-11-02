@@ -2,7 +2,9 @@ package player;
 
 import util.io.KL;
 
-public class AttackState implements State{
+import java.awt.event.KeyEvent;
+
+public class JumpForwardState implements State {
     @Override
     public void enter(Fighter fighter) {
 
@@ -15,11 +17,6 @@ public class AttackState implements State{
 
     @Override
     public State update(Fighter fighter, double deltaTime) {
-        HandleAttack(fighter);
-        return new IdleState();
-    }
-
-    private void HandleAttack(Fighter fighter){
-        fighter.isAttacking = true;
+        return null;
     }
 }

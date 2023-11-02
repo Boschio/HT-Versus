@@ -8,13 +8,10 @@ public class IdleState implements State {
     private KL keyListener = KL.getKeyListener();
 
     @Override
-    public void enter(Player player) {
-
-    }
-
-    @Override
-    public void exit() {
-
+    public void enter(Fighter fighter) {
+        fighter.isMoving = false;
+        fighter.pose = fighter.IDLE;
+        fighter.vx = 0.0;
     }
 
     @Override
@@ -26,14 +23,21 @@ public class IdleState implements State {
     }
 
     @Override
-    public State update(Player player, double deltaTime) {
-        if (keyListener.isKeyDown(KeyEvent.VK_A) || keyListener.isKeyDown(KeyEvent.VK_D)) {
-            return new MoveState();
+    public State update(Fighter fighter, double deltaTime) {
+
+        if (keyListener.isKeyDown(KeyEvent.VK_A)) {
+            return new WalkBackwardState();
         }
-        if(player.keyListener.isKeyDown(KeyEvent.VK_W)){
+        if (keyListener.isKeyDown(KeyEvent.VK_D)) {
+            return new WalkForwardState();
+        }
+        if(fighter.keyListener.isKeyDown(KeyEvent.VK_W)){
             return new JumpState();
         }
-        if(player.keyListener.isKeyDown(KeyEvent.VK_J)) {
+        if(fighter.keyListener.isKeyDown(KeyEvent.VK_W) && fighter.keyListener.isKeyDown(KeyEvent.VK_D)){
+            return new JumpForwardState();
+        }
+        if(fighter.keyListener.isKeyDown(KeyEvent.VK_J)) {
             return new AttackState();
         }
         return new IdleState();

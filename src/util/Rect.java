@@ -9,10 +9,10 @@ public class Rect {
     public double w;
     public double h;
 
-    double vx = 0;
-    double vy = 0;
+    public double vx = 0;
+    public double vy = 0;
 
-    double ay = G; // acceleration
+    public double ay = G; // acceleration
 
     static final double G = 0.4; // Gravity
 
