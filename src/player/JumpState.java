@@ -17,6 +17,7 @@ public class JumpState implements State {
 
     @Override
     public State update(Fighter fighter, double deltaTime) {
+        fighter.pose = fighter.JUMP;
 //        fighter.x += fighter.vx * deltaTime;
         fighter.y += fighter.vy * deltaTime;
         fighter.vy += fighter.ay * deltaTime;
