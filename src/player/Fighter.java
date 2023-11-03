@@ -2,6 +2,7 @@ package player;
 
 import component.Sprite;
 import util.HitBox;
+import util.HurtBox;
 import util.io.KL;
 
 import java.awt.*;
@@ -14,6 +15,8 @@ public class Fighter extends Sprite {
 //    public double h;
 //    public double vx = 0;
 //    double vy = 0;
+    public HitBox hitbox;
+    public HurtBox hurtbox;
     int jumpHeight = 650;
     public final static double gravity = 1500;
     double ay = gravity;
@@ -66,14 +69,15 @@ public class Fighter extends Sprite {
         if (newState != null) {
             changeState(newState);
         }
-//        System.out.println("Current State: " + activeState.toString());
+        System.out.println("Current State: " + currentState.toString());
     }
 
     public void draw(Graphics g){
         super.draw(g);
         if (this.isAttacking) {
-            HitBox h = new HitBox((int) (this.x + FighterConstants.PLAYER_WIDTH),(int) this.y + 50,150,70);
-            h.draw(g);
+            this.hitbox = new HitBox((int) (this.x + FighterConstants.PLAYER_WIDTH),(int) this.y + 50,150,70);
+            hitbox.draw(g);
+
 
             this.isAttacking = false;
         }

@@ -14,6 +14,7 @@ public class Sprite extends Rect {
     public final static int IDLE = 0;
     public final static int LT = 1;
     public final static int RT = 2;
+    public final static int LIGHT_ATTACK = 3;
 
     public int pose = IDLE;
 
@@ -45,7 +46,7 @@ public class Sprite extends Rect {
         vx = dx;
     }
 
-    public void draw(Graphics pen) {
+    public void draw(Graphics g) {
         Image temp;
 
         if (!isMoving) {
@@ -57,9 +58,9 @@ public class Sprite extends Rect {
         w = scale * temp.getWidth(null);
         h = scale * temp.getHeight(null);
 
-        pen.drawImage(temp, (int)x, (int)y, (int)w, (int)h, null);
-        pen.setColor(Color.red);
-        pen.drawRect((int)x, (int)y, (int)w, (int)h);
+        g.drawImage(temp, (int)x, (int)y, (int)w, (int)h, null);
+        g.setColor(Color.red);
+        g.drawRect((int)x, (int)y, (int)w, (int)h);
     }
 
 }

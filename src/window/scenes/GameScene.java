@@ -23,7 +23,7 @@ public class GameScene extends Scene{
 
     private HurtBox hurtTest = new HurtBox((int) FighterConstants.PLAYER2_START_X, (int) FighterConstants.PLAYER_START_Y, 200, 200);
 
-    Ryu ryu = new Ryu((int) FighterConstants.PLAYER1_START_X, (int) FighterConstants.PLAYER_START_Y, 80, 80);
+    Fighter ryu = new Ryu((int) FighterConstants.PLAYER1_START_X, (int) FighterConstants.PLAYER_START_Y, 80, 80);
 
     @Override
     public void update(double deltaTime) {
@@ -34,9 +34,21 @@ public class GameScene extends Scene{
 //        _fighter1.update(_fighter1, deltaTime);
 //        _fighter2.update(_fighter2, deltaTime);
 
+        if(ryu.isAttacking) {
+            if(ryu.hitbox != null && ryu.hitbox.overlaps(hurtTest)) {
+                System.out.println("HIT!");
+            }
+        }
+
+
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE)){
             Window.getWindow().changeState(WindowConstants.MENU_SCENE);
         }
+        try
+        {
+            Thread.sleep(15);
+        }
+        catch(Exception x) {}
 
     }
 

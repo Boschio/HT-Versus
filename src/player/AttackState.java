@@ -5,7 +5,7 @@ import util.io.KL;
 public class AttackState implements State{
     @Override
     public void enter(Fighter fighter) {
-
+        fighter.isAttacking = true;
     }
 
     @Override
