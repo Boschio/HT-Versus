@@ -12,6 +12,8 @@ public class IdleState implements State {
         fighter.isMoving = false;
         fighter.pose = fighter.IDLE;
         fighter.vx = 0.0;
+
+        fighter.animator.changeAnimationTo(fighter.IDLE);
     }
 
     @Override
@@ -24,7 +26,6 @@ public class IdleState implements State {
 
     @Override
     public State update(Fighter fighter, double deltaTime) {
-
         if (keyListener.isKeyDown(KeyEvent.VK_A)) {
             return new WalkBackwardState();
         }
@@ -40,6 +41,6 @@ public class IdleState implements State {
         if(fighter.keyListener.isKeyDown(KeyEvent.VK_J)) {
             return new AttackState();
         }
-        return new IdleState();
+        return null;
     }
 }

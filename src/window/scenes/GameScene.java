@@ -2,7 +2,8 @@ package window.scenes;
 
 import player.Fighter;
 import player.FighterConstants;
-import player.Ryu;
+//import player.Ryu;
+import player.RyuTest;
 import util.HitBox;
 import util.HurtBox;
 import util.io.KL;
@@ -23,7 +24,7 @@ public class GameScene extends Scene{
 
     private HurtBox hurtTest = new HurtBox((int) FighterConstants.PLAYER2_START_X, (int) FighterConstants.PLAYER_START_Y, 200, 200);
 
-    Fighter ryu = new Ryu((int) FighterConstants.PLAYER1_START_X, (int) FighterConstants.PLAYER_START_Y, 80, 80);
+    Fighter ryu = new RyuTest((int) FighterConstants.PLAYER1_START_X, (int) FighterConstants.PLAYER_START_Y, 80, 80);
 
     @Override
     public void update(double deltaTime) {

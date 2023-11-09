@@ -12,6 +12,8 @@ public class FighterConstants {
     //200px per second
     public static final double PLAYER_SPEED = 200.0;
 
+    public static final double SCALE = 2.0;
+
     public enum direction {
         LEFT,
         RIGHT

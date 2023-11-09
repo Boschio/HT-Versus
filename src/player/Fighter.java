@@ -1,20 +1,18 @@
 package player;
 
-import component.Sprite;
+import component.Animate;
+import component.Animation;
+import component.Entity;
 import util.HitBox;
 import util.HurtBox;
 import util.io.KL;
 
 import java.awt.*;
+import java.util.Map;
 
-public class Fighter extends Sprite {
+public class Fighter extends Entity {
     public State currentState = new IdleState();
-//    public double x;
-//    public double y;
-//    public double w;
-//    public double h;
-//    public double vx = 0;
-//    double vy = 0;
+
     public HitBox hitbox;
     public HurtBox hurtbox;
     int jumpHeight = 650;
@@ -24,44 +22,33 @@ public class Fighter extends Sprite {
 
     public KL keyListener = KL.getKeyListener();
 
-    public Fighter(String name, String[] pose, int count, int start, String fileType, int x, int y, int w, int h){
-        super(name, pose, 6, 0, ".png", x, y, w, h);
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-    }
+    // TESTING
+    public Animation[] animation;
+    public final static String IDLE = "IDLE";
+    public final static String WALKFORWARD = "WALKFORWARD";
+    public final static String WALKBACKWARD = "WALKBACKWARD";
+    public final static String JUMP = "JUMP";
+    public String pose = IDLE;
+    public boolean isMoving = false;
 
-//    public State FighterState {
-//        IDLE(){
-//            void init() {
-//
-//            }
-//        },
-//        CROUCHING(){},
-//        JUMP(){},
-//        JUMP_FORWARD(){},
-//        JUMP_BACKWARD(){},
-//        WALK_FORWARD(){},
-//        WALK_BACKWARD(){},
-//        LIGHT_ATTACK(){},
-//        MEDIUM_ATTACK(){},
-//        HEAVY_ATTACK(){},
-//    }
+
+    //FIXME
+    protected final Animate animator;
+
+    IdleState idleState = new IdleState();
+    WalkForwardState WalkForwardState = new WalkForwardState();
+    //END
+
+    public Fighter(String name, String[] pose, int x, int y, int w, int h){
+        super(x, y, (int)(w*scale), (int)(w*scale));
+
+        this.animator = new Animate(0.150);
+
+    }
 
     public void changeState(State newState) {
-//        currentState.exit();
-        // Do I need to clear old state from mem?
         currentState = newState;
         currentState.enter(this);
-//        this.currentState = newState;
-    }
-
-    void input(KL keyListener) {
-        State newState = currentState.input(keyListener);
-        if (newState != null) {
-            changeState(newState);
-        }
     }
 
     public void update(Fighter fighter, double deltaTime){
@@ -69,21 +56,24 @@ public class Fighter extends Sprite {
         if (newState != null) {
             changeState(newState);
         }
+        animator.update(deltaTime);
+
         System.out.println("Current State: " + currentState.toString());
     }
 
     public void draw(Graphics g){
         super.draw(g);
+
+        if(animator.hasAnimations()) {
+            animator.RenderCurrentSprite(g, (int) x, (int) y);
+        }
+
         if (this.isAttacking) {
             this.hitbox = new HitBox((int) (this.x + FighterConstants.PLAYER_WIDTH),(int) this.y + 50,150,70);
             hitbox.draw(g);
 
-
             this.isAttacking = false;
         }
-//        g.setColor(FighterConstants.characterColor);
-//        g.fillRect((int) this.x, (int) this.y, (int) FighterConstants.PLAYER_WIDTH, (int) FighterConstants.PLAYER_HEIGHT);
-
     }
 
 }
