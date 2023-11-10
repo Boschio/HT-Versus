@@ -12,7 +12,7 @@ public class AnimateTest {
     private ArrayList<ImageIcon> frames = new ArrayList<>();
     public int xOffset = 0;
     public int yOffset = 0;
-    public double scaleFactor = 3.0;
+    public double scaleFactor = 3;
 
     public AnimateTest(String path, Rect rects[]){
         try{
@@ -48,7 +48,6 @@ public class AnimateTest {
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
 
     public ImageIcon getFrame(int index){

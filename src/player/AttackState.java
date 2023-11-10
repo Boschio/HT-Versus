@@ -5,6 +5,9 @@ import util.io.KL;
 public class AttackState implements State{
     @Override
     public void enter(Fighter fighter) {
+        fighter.pose = fighter.ATTACK;
+        fighter.animator.changeAnimationTo(fighter.pose);
+
         fighter.isAttacking = true;
     }
 

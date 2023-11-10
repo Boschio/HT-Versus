@@ -121,14 +121,22 @@ public class Animate {
     }
 
     public void RenderCurrentSprite(Graphics g,int x, int y){
+        int w = (int) (currentFrame.getIconWidth() * currentAnimation.scaleFactor);
+        int h = (int) (currentFrame.getIconHeight() * currentAnimation.scaleFactor);
         g.drawImage(
                 currentFrame.getImage(),
-                (int) (x + currentAnimation.xOffset),
-                (int) (y + currentAnimation.yOffset),
+                (int) (x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2),
+                (int) (y + currentAnimation.yOffset * currentAnimation.scaleFactor - h),
                 (int) (currentFrame.getIconWidth() * currentAnimation.scaleFactor),
                 (int) (currentFrame.getIconHeight() * currentAnimation.scaleFactor),
                 null
         );
+        g.setColor(Color.red);
+        g.drawRect((int)(x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2), (int)(y + currentAnimation.yOffset * currentAnimation.scaleFactor - h), w, h);
+
+        g.setColor(Color.green);
+        g.drawLine((int) (x-8), (int) y, (int) (x+7), (int) y);
+        g.drawLine((int) (x), (int) (y-8), (int) (x), (int) (y+7));
     }
 
     public void RenderCurrentSpriteFlipVer(Graphics g,int x, int y){

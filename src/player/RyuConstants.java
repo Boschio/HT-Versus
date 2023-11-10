@@ -49,7 +49,7 @@ public class RyuConstants {
     };
 
     public final static AnimateTest IDLE_ANIMATION = new AnimateTest(
-            IDLE_PATH, IDLE_SPRITES
+            IDLE_PATH, IDLE_SPRITES//, -33, -90, 3
     );
 
 
@@ -79,6 +79,20 @@ public class RyuConstants {
 
     public final static AnimateTest WALKBACKWARD_ANIMATION = new AnimateTest(
             WALKBACKWARD_PATH, WALKBACKWARD_SPRITES
+    );
+
+    public final static String ATTACK_PATH = "./src/images/Ryu/ryu_idle_walk.png";
+    public final static Rect[] ATTACK_SPRITES = {
+            new Rect(607,18,68,94),
+            new Rect(680,18,74,94),
+            new Rect(758,21,77,91),
+            new Rect(839,21,112,91),
+            new Rect(955,21,77,91),
+            new Rect(1036,18,68,94)
+    };
+
+    public final static AnimateTest ATTACK_ANIMATION = new AnimateTest(
+            ATTACK_PATH, ATTACK_SPRITES
     );
 
 }

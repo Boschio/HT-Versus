@@ -13,5 +13,6 @@ public class RyuTest extends Fighter {
         animator.addAnimation(RyuConstants.IDLE_ANIMATION, "IDLE");
         animator.addAnimation(RyuConstants.WALKFORWARD_ANIMATION, "WALKFORWARD");
         animator.addAnimation(RyuConstants.WALKBACKWARD_ANIMATION, "WALKBACKWARD");
+        animator.addAnimation(RyuConstants.ATTACK_ANIMATION, "ATTACK");
     }
 }

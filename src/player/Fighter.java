@@ -28,6 +28,8 @@ public class Fighter extends Entity {
     public final static String WALKFORWARD = "WALKFORWARD";
     public final static String WALKBACKWARD = "WALKBACKWARD";
     public final static String JUMP = "JUMP";
+    public final static String ATTACK = "ATTACK";
+
     public String pose = IDLE;
     public boolean isMoving = false;
 

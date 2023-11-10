@@ -40,15 +40,13 @@ public class Entity {
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.red);
-        g.drawRect((int)x, (int)y, (int)w, (int)h);
-        this.drawDebug(g);
+//        this.drawDebug(g);
     }
 
-    public void drawDebug(Graphics g) {
-        g.setColor(Color.green);
-        g.drawLine((int) (x-8), (int) y, (int) (x+7), (int) y);
-        g.drawLine((int) (x), (int) (y-8), (int) (x), (int) (y+7));
-    }
+//    public void drawDebug(Graphics g) {
+//        g.setColor(Color.green);
+//        g.drawLine((int) (x-8), (int) y, (int) (x+7), (int) y);
+//        g.drawLine((int) (x), (int) (y-8), (int) (x), (int) (y+7));
+//    }
 
 }

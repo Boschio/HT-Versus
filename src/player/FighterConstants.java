@@ -30,7 +30,7 @@ public class FighterConstants {
 
 
 //    public static final double PLAYER_START_Y = WindowConstants.SCREEN_HEIGHT - (WindowConstants.SCREEN_HEIGHT * .40);
-    public static final double PLAYER_START_Y = 397;
+    public static final double PLAYER_START_Y = FLOOR;
 
 
 
