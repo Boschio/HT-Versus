@@ -1,14 +1,12 @@
 package player;
 
-import component.Animate;
-import component.Animation;
+import component.Animator;
 import component.Entity;
 import util.HitBox;
 import util.HurtBox;
 import util.io.KL;
 
 import java.awt.*;
-import java.util.Map;
 
 public class Fighter extends Entity {
     public State currentState = new IdleState();
@@ -23,7 +21,6 @@ public class Fighter extends Entity {
     public KL keyListener = KL.getKeyListener();
 
     // TESTING
-    public Animation[] animation;
     public final static String IDLE = "IDLE";
     public final static String WALKFORWARD = "WALKFORWARD";
     public final static String WALKBACKWARD = "WALKBACKWARD";
@@ -33,19 +30,20 @@ public class Fighter extends Entity {
     public String pose = IDLE;
     public boolean isMoving = false;
 
+    public int originPoint;
+
 
     //FIXME
-    protected final Animate animator;
+    protected final Animator animator;
 
     IdleState idleState = new IdleState();
     WalkForwardState WalkForwardState = new WalkForwardState();
     //END
 
-    public Fighter(String name, String[] pose, int x, int y, int w, int h){
+    public Fighter(String name, int x, int y, int w, int h){
         super(x, y, (int)(w*scale), (int)(w*scale));
 
-        this.animator = new Animate(0.150);
-
+        this.animator = new Animator(0.150);
     }
 
     public void changeState(State newState) {

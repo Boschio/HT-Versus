@@ -2,38 +2,32 @@ package component;
 
 import util.Rect;
 
-import java.awt.Image;
-import java.awt.Toolkit;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Animate {
-    private Map<String, AnimateTest> Animations = new HashMap<>();
-    private AnimateTest currentAnimation = null;
+public class Animator {
+    private Map<String, Animation> Animations = new HashMap<>();
+    private Animation currentAnimation = null;
     private ImageIcon currentFrame = null;
     private int currentFrameIndex = 0;
     private double defaultFrameTime = 0.15;
     private double frameTime = 0.15;
     private double lastFrame = 0;
 
+    public int framesLength = Animations.size();
 
-    public Animate(){
+    public Animator(){
     }
-    public Animate(double defaultFrameTime){
+    public Animator(double defaultFrameTime){
         this.defaultFrameTime    = defaultFrameTime;
         this.frameTime           = defaultFrameTime;
     }
 
     public void createAnimation(String AnimationName, String path, Rect[] rects){
 
-        Animations.put(AnimationName, new AnimateTest(path, rects));
+        Animations.put(AnimationName, new Animation(path, rects));
         if (currentAnimation == null){
             currentAnimation = Animations.get(AnimationName);
             currentFrame = currentAnimation.getFrame(currentFrameIndex);
@@ -42,7 +36,7 @@ public class Animate {
 
     public void createAnimation(String AnimationName, String path, Rect[] rects, int xOffset, int yOffset){
 
-        Animations.put(AnimationName, new AnimateTest(path, rects));
+        Animations.put(AnimationName, new Animation(path, rects));
         if (currentAnimation == null){
             currentAnimation = Animations.get(AnimationName);
             currentFrame = currentAnimation.getFrame(currentFrameIndex);
@@ -53,14 +47,14 @@ public class Animate {
 
     public void createAnimation(String animation_ID, String path, Rect[] rects, int xOffset, int yOffset, double scaleFactor){
 
-        Animations.put(animation_ID, new AnimateTest(path, rects, xOffset, yOffset, scaleFactor));
+        Animations.put(animation_ID, new Animation(path, rects, xOffset, yOffset, scaleFactor));
         if (currentAnimation == null){
             currentAnimation = Animations.get(animation_ID);
             currentFrame = currentAnimation.getFrame(currentFrameIndex);
         }
     }
 
-    public void addAnimation(AnimateTest animation, String animation_ID){
+    public void addAnimation(Animation animation, String animation_ID){
         Animations.put(animation_ID,animation);
         if (currentAnimation == null){
             currentAnimation = Animations.get(animation_ID);
@@ -193,9 +187,14 @@ public class Animate {
         }
     }
 
+    public int getCurrentFrameIndex() {
+        return this.currentFrameIndex;
+    }
+
     public void draw(Graphics g) {
 
     }
+
 }
 
 

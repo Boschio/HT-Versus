@@ -24,6 +24,7 @@ public class WalkBackwardState implements State {
     @Override
     public State update(Fighter fighter, double deltaTime) {
         fighter.x += fighter.vx * deltaTime;
+        fighter.x += fighter.vx * deltaTime;
 
         if (!fighter.keyListener.isKeyDown(KeyEvent.VK_A)) {
             return new IdleState();

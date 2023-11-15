@@ -22,7 +22,7 @@ public class JumpState implements State {
         fighter.y += fighter.vy * deltaTime;
         fighter.vy += fighter.ay * deltaTime;
 
-        if (fighter.y + FighterConstants.PLAYER_HEIGHT >= FighterConstants.FLOOR) {
+        if (fighter.animator.getCurrentFrame().getIconHeight() + fighter.y >= FighterConstants.FLOOR) {
             pushAbove(fighter, FighterConstants.FLOOR);
             stopFalling(fighter);
             return new IdleState();
@@ -42,7 +42,7 @@ public class JumpState implements State {
     }
 
     public void pushAbove(Fighter fighter, double floor) {
-        fighter.y = floor - FighterConstants.PLAYER_HEIGHT - 1;
+        fighter.y = floor - fighter.animator.getCurrentFrame().getIconHeight() - 1;
     }
 
 }

@@ -1,47 +1,60 @@
 package component;
 
-import java.awt.Image;
-import java.awt.Toolkit;
+import util.Rect;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
 
 public class Animation {
+    private ArrayList<ImageIcon> frames = new ArrayList<>();
+    public int xOffset = 0;
+    public int yOffset = 0;
+    public double scaleFactor = 3;
 
-    private Image[] image;
-    private int current = 0;
-
-    private int duration;
-    private int delay;
-
-    private int start = 0;
-
-    public Animation(String name, int count, int start, int duration, String type) {
-
-        this.start = start;
-        this.duration = duration;
-        delay = duration;
-
-        image = new Image[count];
-
-        for (int i=0;i<count;i++) {
-            image[i] = Toolkit.getDefaultToolkit().getImage("./src/images/Ryu/" + name + "_" + i + type);
-        }
-    }
-
-    public Image getCurrentImage() {
-        delay--;
-        if(delay == 0) {
-            current++;
-
-            if (current == image.length) {
-                current = start;
+    public Animation(String path, Rect rects[]){
+        try{
+            BufferedImage spriteSheet = ImageIO.read(new File(path));
+            for (Rect rect:rects) {
+                ImageIcon ImageIcon = new ImageIcon(spriteSheet.getSubimage(
+                        (int) rect.x,
+                        (int) rect.y,
+                        (int) rect.w,
+                        (int) rect.h));
+                frames.add(ImageIcon);
             }
-            delay = duration;
+        }catch(Exception e){
+            e.printStackTrace();
         }
 
-        return image[current];
     }
 
-    public Image getStaticImage() {
-        return image[0];
+    public Animation(String path, Rect rects[], int xOffset, int yOffset, double scaleFactor){
+        try{
+            BufferedImage spriteSheet = ImageIO.read(new File(path));
+            for (Rect rect:rects) {
+                ImageIcon ImageIcon = new ImageIcon(spriteSheet.getSubimage(
+                        (int) rect.x,
+                        (int) rect.y,
+                        (int) rect.w,
+                        (int) rect.h));
+                frames.add(ImageIcon);
+            }
+            this.xOffset = xOffset;
+            this.yOffset = yOffset;
+            this.scaleFactor = scaleFactor;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
+    public ImageIcon getFrame(int index){
+        return frames.get(index);
+    }
+
+    public int AnimationLength(){
+        return frames.size();
+    }
 }

@@ -1,39 +1,10 @@
 package player;
 
-import component.Animate;
-import component.AnimateTest;
+import component.Animation;
 import util.Rect;
-
-import java.util.HashMap;
 
 public class RyuConstants {
     public static final double HEALTH = 100;
-
-//    public static final int IDLE = 0;
-//    public static final int WALKFORWARD = 2;
-//    public static final int WALKBACKWARD = 3;
-//    public static final int JUMP = 5;
-//    public static final int FALLING = 6;
-//    public static final int LIGHTATTACK = 9;
-//
-//    public static int GetAnimationFrames(int action) {
-//        switch (action) {
-//            case IDLE:
-//                return 9;
-//            case WALKFORWARD:
-//                return 6;
-//            case WALKBACKWARD:
-//                return 6;
-//            case JUMP:
-//                return 9;
-//            case FALLING:
-//                return 2;
-//            case LIGHTATTACK:
-//                return 3;
-//            default:
-//                return 1;
-//        }
-//    }
 
     public final static String IDLE_PATH = "./src/images/Ryu/ryu_idle_walk.png";
     public final static Rect[] IDLE_SPRITES = {
@@ -48,7 +19,7 @@ public class RyuConstants {
             new Rect(562,6,66,94)
     };
 
-    public final static AnimateTest IDLE_ANIMATION = new AnimateTest(
+    public final static Animation IDLE_ANIMATION = new Animation(
             IDLE_PATH, IDLE_SPRITES//, -33, -90, 3
     );
 
@@ -63,7 +34,7 @@ public class RyuConstants {
             new Rect(357,107,56,93)
     };
 
-    public final static AnimateTest WALKFORWARD_ANIMATION = new AnimateTest(
+    public final static Animation WALKFORWARD_ANIMATION = new Animation(
             WALKFORWARD_PATH, WALKFORWARD_SPRITES
     );
 
@@ -77,11 +48,24 @@ public class RyuConstants {
             new Rect(351,207,63,93)
     };
 
-    public final static AnimateTest WALKBACKWARD_ANIMATION = new AnimateTest(
+    public final static Animation WALKBACKWARD_ANIMATION = new Animation(
             WALKBACKWARD_PATH, WALKBACKWARD_SPRITES
     );
 
-    public final static String ATTACK_PATH = "./src/images/Ryu/ryu_idle_walk.png";
+    public final static String ATTACK_PATH = "./src/images/Ryu/ryu_punch.png";
+//    public final static Rect[] ATTACK_SPRITES = {
+//            new Rect(0,18,74,94),
+//            new Rect(78,17,102,95),
+//            new Rect(184,18,74,94)
+//    };
+
+//    public final static Rect[] ATTACK_SPRITES = {
+//            new Rect(263,18,68,94),
+//            new Rect(335,18,90,94),
+//            new Rect(429,0,80,112),
+//            new Rect(513,18,90,94)
+//    };
+
     public final static Rect[] ATTACK_SPRITES = {
             new Rect(607,18,68,94),
             new Rect(680,18,74,94),
@@ -91,7 +75,7 @@ public class RyuConstants {
             new Rect(1036,18,68,94)
     };
 
-    public final static AnimateTest ATTACK_ANIMATION = new AnimateTest(
+    public final static Animation ATTACK_ANIMATION = new Animation(
             ATTACK_PATH, ATTACK_SPRITES
     );
 

@@ -18,7 +18,10 @@ public class AttackState implements State{
 
     @Override
     public State update(Fighter fighter, double deltaTime) {
-        HandleAttack(fighter);
+        while(fighter.animator.getCurrentFrameIndex() > 0) {
+            return null;
+        }
+//        HandleAttack(fighter);
         return new IdleState();
     }
 
