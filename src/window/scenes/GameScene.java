@@ -23,7 +23,7 @@ public class GameScene extends Scene{
 
     private HurtBox hurtTest = new HurtBox((int) FighterConstants.PLAYER2_START_X, (int) FighterConstants.PLAYER_START_Y, 200, 200);
 
-    Fighter ryu = new Ryu((int) FighterConstants.PLAYER1_START_X, (int) FighterConstants.PLAYER_START_Y, 80, 80);
+    Fighter ryu = new Ryu((int) FighterConstants.PLAYER1_START_X, (int) FighterConstants.PLAYER_START_Y-100, 80, 80);
 
     @Override
     public void update(double deltaTime) {
@@ -31,8 +31,8 @@ public class GameScene extends Scene{
         _displayInfo = String.format("%d FPS (%.3f)", _frameRate,deltaTime);
 
         ryu.update(deltaTime);
-//        _fighter1.update(_fighter1, deltaTime);
-//        _fighter2.update(_fighter2, deltaTime);
+//        _fighter1.update(deltaTime);
+//        _fighter2.update(deltaTime);
 
         if(ryu.isAttacking) {
             if(ryu.hitbox != null && ryu.hitbox.overlaps(hurtTest)) {
@@ -57,30 +57,5 @@ public class GameScene extends Scene{
         hurtTest.draw(g);
 //        _fighter1.draw(g);
         ryu.draw(g);
-//        if (ryu.isAttacking) {
-//            HitBox h = new HitBox((int) (ryu.x + FighterConstants.PLAYER_WIDTH),(int) ryu.y + 50,150,70);
-//            h.draw(g);
-//            if (h.overlaps(hurtTest)) {
-//                System.out.println("HIT!");
-//                hurtTest.setColor(Color.YELLOW);
-//            }
-//            ryu.isAttacking = false;
-//        }
-
-//        if (_fighter1.isAttacking) {
-//            HitBox h = new HitBox((int) (_fighter1.x + FighterConstants.PLAYER_WIDTH),(int) _fighter1.y + 50,150,70);
-//            h.draw(g);
-//            if (h.overlaps(hurtTest)) {
-//                System.out.println("HIT!");
-//                hurtTest.setColor(Color.YELLOW);
-//            }
-//            _fighter1.isAttacking = false;
-//        }
-//        _fighter2.draw(g);
-//        if (_fighter2.isAttacking) {
-//            HitBox h = new HitBox((int) (_fighter2.x + FighterConstants.PLAYER_WIDTH),(int) _fighter2.y + 50,150,70);
-//            h.draw(g);
-//            _fighter2.isAttacking = false;
-//        }
     }
 }

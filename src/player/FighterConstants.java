@@ -28,8 +28,6 @@ public class FighterConstants {
     public static final double PLAYER1_START_X = WindowConstants.SCREEN_WIDTH - (WindowConstants.SCREEN_WIDTH * .75) - PLAYER_WIDTH;
     public static final double PLAYER2_START_X = WindowConstants.SCREEN_WIDTH - (WindowConstants.SCREEN_WIDTH * .25);
 
-
-//    public static final double PLAYER_START_Y = WindowConstants.SCREEN_HEIGHT - (WindowConstants.SCREEN_HEIGHT * .40);
     public static final double PLAYER_START_Y = FLOOR;
 
 

@@ -26,7 +26,7 @@ public class JumpState extends State {
         if (fighter.animator.getCurrentFrame().getIconHeight() + fighter.y >= FighterConstants.FLOOR) {
             pushAbove(FighterConstants.FLOOR);
             stopFalling();
-//            return new IdleState();
+
             return fighter.idleState;
         }
         return null;
