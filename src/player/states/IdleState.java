@@ -29,30 +29,24 @@ public class IdleState extends State {
 
     public State update(double deltaTime) {
         if (keyListener.isKeyDown(KeyEvent.VK_A)) {
-//            return new WalkBackwardState();
             return fighter.walkBackwardState;
         }
         if (keyListener.isKeyDown(KeyEvent.VK_D)) {
-//            return new WalkForwardState();
             return fighter.walkForwardState;
         }
         if(fighter.keyListener.isKeyDown(KeyEvent.VK_W)){
-//            return new JumpState();
             return fighter.jumpState;
         }
         if(fighter.keyListener.isKeyDown(KeyEvent.VK_W) && fighter.keyListener.isKeyDown(KeyEvent.VK_D)){
-//            return new JumpForwardState();
+//            return fighter.jumpForwardState;
         }
         if(fighter.keyListener.isKeyDown(KeyEvent.VK_J)) {
-//            return new LightAttackState();
             return fighter.lightAttackState;
         }
         if(fighter.keyListener.isKeyDown(KeyEvent.VK_K)) {
-//            return new MediumAttackState();
             return fighter.mediumAttackState;
         }
         if(fighter.keyListener.isKeyDown(KeyEvent.VK_L)) {
-//            return new HeavyAttackState();
             return fighter.heavyAttackState;
         }
         return null;

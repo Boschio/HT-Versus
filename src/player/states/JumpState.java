@@ -19,7 +19,7 @@ public class JumpState extends State {
 
     public State update(double deltaTime) {
         fighter.pose = fighter.JUMP;
-//        fighter.x += fighter.vx * deltaTime;
+
         fighter.y += fighter.vy * deltaTime;
         fighter.vy += fighter.ay * deltaTime;
 
@@ -35,7 +35,6 @@ public class JumpState extends State {
     private void jump(double dy, double dx) {
         // y = a(x-h)2 + k, where h is the vertex or x^2 = -4ay
         fighter.vy -= dy;
-//        player.vx = dx;
     }
 
     public void stopFalling() {

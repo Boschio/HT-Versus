@@ -23,8 +23,7 @@ public class MediumAttackState extends State {
         while(fighter.animator.getCurrentFrameIndex() > 0) {
             return null;
         }
-//        HandleAttack(fighter);
-//        return new IdleState();
+
         return fighter.idleState;
     }
 

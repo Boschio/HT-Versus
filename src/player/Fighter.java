@@ -10,15 +10,6 @@ import util.io.KL;
 import java.awt.*;
 
 public class Fighter extends Entity {
-//    public IdleState idleState = new IdleState();
-//    public WalkForwardState walkForwardState = new WalkForwardState();
-//    public WalkBackwardState walkBackwardState = new WalkBackwardState();
-//    public JumpState jumpState = new JumpState();
-//    public LightAttackState lightAttackState = new LightAttackState();
-//    public MediumAttackState mediumAttackState = new MediumAttackState();
-//    public HeavyAttackState heavyAttackState = new HeavyAttackState();
-
-//    public State currentState = idleState;
 
     public HitBox hitbox;
     public HurtBox hurtbox;
