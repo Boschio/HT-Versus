@@ -1,6 +1,7 @@
 package player;
 
 import component.Animation;
+import util.HurtBox;
 import util.Rect;
 
 public class RyuConstants {
@@ -19,8 +20,20 @@ public class RyuConstants {
             new Rect(562,6,66,94)
     };
 
+    public final static HurtBox[] IDLE_HURTBOXES = {
+            new HurtBox(2,7,66,93),
+            new HurtBox(72,7,66,93),
+            new HurtBox(142,6,66,94),
+            new HurtBox(211,4,66,96),
+            new HurtBox(282,3,66,97),
+            new HurtBox(353,2,64,98),
+            new HurtBox(422,2,64,98),
+            new HurtBox(492,4,66,96),
+            new HurtBox(562,6,66,94)
+    };
+
     public final static Animation IDLE_ANIMATION = new Animation(
-            IDLE_PATH, IDLE_SPRITES//, -33, -90, 3
+            IDLE_PATH, IDLE_SPRITES, IDLE_HURTBOXES//, -33, -90, 3
     );
 
 
@@ -35,7 +48,7 @@ public class RyuConstants {
     };
 
     public final static Animation WALKFORWARD_ANIMATION = new Animation(
-            WALKFORWARD_PATH, WALKFORWARD_SPRITES
+            WALKFORWARD_PATH, WALKFORWARD_SPRITES, IDLE_HURTBOXES
     );
 
     public final static String WALKBACKWARD_PATH = "./src/images/Ryu/ryu_idle_walk.png";
@@ -49,7 +62,7 @@ public class RyuConstants {
     };
 
     public final static Animation WALKBACKWARD_ANIMATION = new Animation(
-            WALKBACKWARD_PATH, WALKBACKWARD_SPRITES
+            WALKBACKWARD_PATH, WALKBACKWARD_SPRITES, IDLE_HURTBOXES
     );
 
     public final static String ATTACK_PATH = "./src/images/Ryu/ryu_punch.png";
@@ -76,12 +89,13 @@ public class RyuConstants {
     };
 
     public final static Animation LIGHTATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, LIGHTATTACK_SPRITES
+            ATTACK_PATH, LIGHTATTACK_SPRITES, IDLE_HURTBOXES
     );
     public final static Animation MEDIUMATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, MEDIUMATTACK_SPRITES
-    );    public final static Animation HEAVYATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, HEAVYATTACK_SPRITES
+            ATTACK_PATH, MEDIUMATTACK_SPRITES, IDLE_HURTBOXES
+    );
+    public final static Animation HEAVYATTACK_ANIMATION = new Animation(
+            ATTACK_PATH, HEAVYATTACK_SPRITES, IDLE_HURTBOXES
     );
 
 

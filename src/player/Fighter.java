@@ -88,6 +88,7 @@ public class Fighter extends Entity {
 
         if(animator.hasAnimations()) {
             animator.RenderCurrentSprite(g, (int) x, (int) y);
+            animator.RenderCurrentHurtBox(g, (int) x, (int) y);
         }
 
         if (this.isAttacking) {

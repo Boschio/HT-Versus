@@ -1,5 +1,6 @@
 package component;
 
+import util.HurtBox;
 import util.Rect;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ public class Animator {
     private Map<String, Animation> Animations = new HashMap<>();
     private Animation currentAnimation = null;
     private ImageIcon currentFrame = null;
+    private HurtBox currentHurtBox = null;
     private int currentFrameIndex = 0;
     private double defaultFrameTime = 0.15;
     private double frameTime = 0.15;
@@ -25,21 +27,25 @@ public class Animator {
         this.frameTime           = defaultFrameTime;
     }
 
-    public void createAnimation(String AnimationName, String path, Rect[] rects){
+    public void createAnimation(String AnimationName, String path, Rect[] rects, HurtBox hurtBoxes[]){
 
-        Animations.put(AnimationName, new Animation(path, rects));
+        Animations.put(AnimationName, new Animation(path, rects, hurtBoxes));
         if (currentAnimation == null){
             currentAnimation = Animations.get(AnimationName);
             currentFrame = currentAnimation.getFrame(currentFrameIndex);
+
+            currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
         }
     }
 
-    public void createAnimation(String AnimationName, String path, Rect[] rects, int xOffset, int yOffset){
+    public void createAnimation(String AnimationName, String path, Rect[] rects, HurtBox hurtBoxes[], int xOffset, int yOffset){
 
-        Animations.put(AnimationName, new Animation(path, rects));
+        Animations.put(AnimationName, new Animation(path, rects, hurtBoxes));
         if (currentAnimation == null){
             currentAnimation = Animations.get(AnimationName);
             currentFrame = currentAnimation.getFrame(currentFrameIndex);
+
+            currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
         }
         Animations.get(AnimationName).xOffset = xOffset;
         Animations.get(AnimationName).yOffset = yOffset;
@@ -51,6 +57,8 @@ public class Animator {
         if (currentAnimation == null){
             currentAnimation = Animations.get(animation_ID);
             currentFrame = currentAnimation.getFrame(currentFrameIndex);
+
+            currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
         }
     }
 
@@ -59,6 +67,8 @@ public class Animator {
         if (currentAnimation == null){
             currentAnimation = Animations.get(animation_ID);
             currentFrame = currentAnimation.getFrame(currentFrameIndex);
+
+            currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
         }
     }
 
@@ -125,12 +135,25 @@ public class Animator {
                 (int) (currentFrame.getIconHeight() * currentAnimation.scaleFactor),
                 null
         );
-        g.setColor(Color.red);
+        g.setColor(Color.BLUE);
         g.drawRect((int)(x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2), (int)(y + currentAnimation.yOffset * currentAnimation.scaleFactor - h), w, h);
 
         g.setColor(Color.green);
         g.drawLine((int) (x-8), (int) y, (int) (x+7), (int) y);
         g.drawLine((int) (x), (int) (y-8), (int) (x), (int) (y+7));
+    }
+
+    public void RenderCurrentHurtBox(Graphics g, int x, int y) {
+        int w = (int) (currentFrame.getIconWidth() * currentAnimation.scaleFactor);
+        int h = (int) (currentFrame.getIconHeight() * currentAnimation.scaleFactor);
+
+        g.setColor(Color.RED);
+        g.drawRect(
+                (int) (currentHurtBox.x + currentAnimation.xOffset * currentAnimation.scaleFactor),
+                (int) (currentHurtBox.y + currentAnimation.yOffset * currentAnimation.scaleFactor),
+                (int) (currentHurtBox.w * currentAnimation.scaleFactor),
+                (int) (currentHurtBox.h * currentAnimation.scaleFactor)
+        );
     }
 
     public void RenderCurrentSpriteFlipVer(Graphics g,int x, int y){

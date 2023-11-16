@@ -1,5 +1,6 @@
 package component;
 
+import util.HurtBox;
 import util.Rect;
 
 import javax.imageio.ImageIO;
@@ -10,11 +11,12 @@ import java.util.ArrayList;
 
 public class Animation {
     private ArrayList<ImageIcon> frames = new ArrayList<>();
+    private ArrayList<HurtBox> hurtBoxes = new ArrayList<>();
     public int xOffset = 0;
     public int yOffset = 0;
     public double scaleFactor = 3;
 
-    public Animation(String path, Rect rects[]){
+    public Animation(String path, Rect rects[], HurtBox hurtBoxes[]){
         try{
             BufferedImage spriteSheet = ImageIO.read(new File(path));
             for (Rect rect:rects) {
@@ -25,6 +27,12 @@ public class Animation {
                         (int) rect.h));
                 frames.add(ImageIcon);
             }
+
+            for (HurtBox hurtbox: hurtBoxes) {
+
+                this.hurtBoxes.add(hurtbox);
+            }
+
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -52,6 +60,10 @@ public class Animation {
 
     public ImageIcon getFrame(int index){
         return frames.get(index);
+    }
+
+    public HurtBox getHurtBox(int index){
+        return hurtBoxes.get(index);
     }
 
     public int AnimationLength(){
