@@ -30,7 +30,7 @@ public class GameScene extends Scene{
         _frameRate = (int) (1/deltaTime);
         _displayInfo = String.format("%d FPS (%.3f)", _frameRate,deltaTime);
 
-        ryu.update(ryu, deltaTime);
+        ryu.update(deltaTime);
 //        _fighter1.update(_fighter1, deltaTime);
 //        _fighter2.update(_fighter2, deltaTime);
 
@@ -40,16 +40,9 @@ public class GameScene extends Scene{
             }
         }
 
-
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE)){
             Window.getWindow().changeState(WindowConstants.MENU_SCENE);
         }
-        try
-        {
-            Thread.sleep(15);
-        }
-        catch(Exception x) {}
-
     }
 
     @Override

@@ -8,6 +8,9 @@ public class Ryu extends Fighter {
         animator.addAnimation(RyuConstants.IDLE_ANIMATION, "IDLE");
         animator.addAnimation(RyuConstants.WALKFORWARD_ANIMATION, "WALKFORWARD");
         animator.addAnimation(RyuConstants.WALKBACKWARD_ANIMATION, "WALKBACKWARD");
-        animator.addAnimation(RyuConstants.ATTACK_ANIMATION, "ATTACK");
+        animator.addAnimation(RyuConstants.LIGHTATTACK_ANIMATION, "LIGHTATTACK");
+        animator.addAnimation(RyuConstants.MEDIUMATTACK_ANIMATION, "MEDIUMATTACK");
+        animator.addAnimation(RyuConstants.HEAVYATTACK_ANIMATION, "HEAVYATTACK");
+
     }
 }

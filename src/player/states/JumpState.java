@@ -1,47 +1,49 @@
-package player;
+package player.states;
 
+import player.Fighter;
+import player.FighterConstants;
 import util.io.KL;
 
-import java.awt.event.KeyEvent;
+public class JumpState extends State {
+    public JumpState(Fighter fighter) {
+        super(fighter);
+    }
 
-public class JumpState implements State {
-    @Override
-    public void enter(Fighter fighter) {
+    public void enter() {
         fighter.vy -= fighter.jumpHeight;
     }
 
-    @Override
     public State input(KL e) {
         return null;
     }
 
-    @Override
-    public State update(Fighter fighter, double deltaTime) {
+    public State update(double deltaTime) {
         fighter.pose = fighter.JUMP;
 //        fighter.x += fighter.vx * deltaTime;
         fighter.y += fighter.vy * deltaTime;
         fighter.vy += fighter.ay * deltaTime;
 
         if (fighter.animator.getCurrentFrame().getIconHeight() + fighter.y >= FighterConstants.FLOOR) {
-            pushAbove(fighter, FighterConstants.FLOOR);
-            stopFalling(fighter);
-            return new IdleState();
+            pushAbove(FighterConstants.FLOOR);
+            stopFalling();
+//            return new IdleState();
+            return fighter.idleState;
         }
         return null;
     }
 
-    private void jump(Fighter fighter, double dy, double dx) {
+    private void jump(double dy, double dx) {
         // y = a(x-h)2 + k, where h is the vertex or x^2 = -4ay
         fighter.vy -= dy;
 //        player.vx = dx;
     }
 
-    public void stopFalling(Fighter fighter) {
+    public void stopFalling() {
         fighter.vx = 0;
         fighter.vy = 0;
     }
 
-    public void pushAbove(Fighter fighter, double floor) {
+    public void pushAbove(double floor) {
         fighter.y = floor - fighter.animator.getCurrentFrame().getIconHeight() - 1;
     }
 

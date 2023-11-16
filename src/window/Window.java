@@ -147,6 +147,12 @@ public class Window extends JFrame implements Runnable {
 
                 update(deltaTime);
 
+//                try
+//                {
+//                    Thread.sleep(15);
+//                }
+//                catch(Exception x) {}
+
             }
 
         }catch(Exception e){

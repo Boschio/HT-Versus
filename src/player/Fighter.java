@@ -2,6 +2,7 @@ package player;
 
 import component.Animator;
 import component.Entity;
+import player.states.*;
 import util.HitBox;
 import util.HurtBox;
 import util.io.KL;
@@ -9,13 +10,21 @@ import util.io.KL;
 import java.awt.*;
 
 public class Fighter extends Entity {
-    public State currentState = new IdleState();
+//    public IdleState idleState = new IdleState();
+//    public WalkForwardState walkForwardState = new WalkForwardState();
+//    public WalkBackwardState walkBackwardState = new WalkBackwardState();
+//    public JumpState jumpState = new JumpState();
+//    public LightAttackState lightAttackState = new LightAttackState();
+//    public MediumAttackState mediumAttackState = new MediumAttackState();
+//    public HeavyAttackState heavyAttackState = new HeavyAttackState();
+
+//    public State currentState = idleState;
 
     public HitBox hitbox;
     public HurtBox hurtbox;
-    int jumpHeight = 650;
+    public int jumpHeight = 650;
     public final static double gravity = 1500;
-    double ay = gravity;
+    public double ay = gravity;
     public boolean isAttacking = false;
 
     public KL keyListener = KL.getKeyListener();
@@ -25,7 +34,10 @@ public class Fighter extends Entity {
     public final static String WALKFORWARD = "WALKFORWARD";
     public final static String WALKBACKWARD = "WALKBACKWARD";
     public final static String JUMP = "JUMP";
-    public final static String ATTACK = "ATTACK";
+    public final static String LIGHTATTACK = "LIGHTATTACK";
+    public final static String MEDIUMATTACK = "MEDIUMATTACK";
+    public final static String HEAVYATTACK = "HEAVYATTACK";
+
 
     public String pose = IDLE;
     public boolean isMoving = false;
@@ -34,25 +46,44 @@ public class Fighter extends Entity {
 
 
     //FIXME
-    protected final Animator animator;
+    public String name;
+    public final Animator animator;
+    public IdleState idleState;
+    public WalkForwardState walkForwardState;
+    public WalkBackwardState walkBackwardState;
+    public JumpState jumpState;
+    public LightAttackState lightAttackState;
+    public MediumAttackState mediumAttackState;
+    public HeavyAttackState heavyAttackState;
 
-    IdleState idleState = new IdleState();
-    WalkForwardState WalkForwardState = new WalkForwardState();
+    public State currentState;
+
     //END
 
     public Fighter(String name, int x, int y, int w, int h){
-        super(x, y, (int)(w*scale), (int)(w*scale));
+        super(x, y, (int)(w*scale), (int)(h*scale));
+
+        this.name = name;
 
         this.animator = new Animator(0.150);
+        this.idleState = new IdleState(this);
+        this.walkForwardState = new WalkForwardState(this);
+        this.walkBackwardState = new WalkBackwardState(this);
+        this.jumpState = new JumpState(this);
+        this.lightAttackState = new LightAttackState(this);
+        this.mediumAttackState = new MediumAttackState(this);
+        this.heavyAttackState = new HeavyAttackState(this);
+
+        this.currentState = idleState;
     }
 
     public void changeState(State newState) {
         currentState = newState;
-        currentState.enter(this);
+        currentState.enter();
     }
 
-    public void update(Fighter fighter, double deltaTime){
-        State newState = currentState.update(this, deltaTime);
+    public void update(double deltaTime){
+        State newState = currentState.update(deltaTime);
         if (newState != null) {
             changeState(newState);
         }

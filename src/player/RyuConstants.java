@@ -53,20 +53,20 @@ public class RyuConstants {
     );
 
     public final static String ATTACK_PATH = "./src/images/Ryu/ryu_punch.png";
-//    public final static Rect[] ATTACK_SPRITES = {
-//            new Rect(0,18,74,94),
-//            new Rect(78,17,102,95),
-//            new Rect(184,18,74,94)
-//    };
+    public final static Rect[] LIGHTATTACK_SPRITES = {
+            new Rect(0,18,74,94),
+            new Rect(78,17,102,95),
+            new Rect(184,18,74,94)
+    };
 
-//    public final static Rect[] ATTACK_SPRITES = {
-//            new Rect(263,18,68,94),
-//            new Rect(335,18,90,94),
-//            new Rect(429,0,80,112),
-//            new Rect(513,18,90,94)
-//    };
+    public final static Rect[] MEDIUMATTACK_SPRITES = {
+            new Rect(263,18,68,94),
+            new Rect(335,18,90,94),
+            new Rect(429,0,80,112),
+            new Rect(513,18,90,94)
+    };
 
-    public final static Rect[] ATTACK_SPRITES = {
+    public final static Rect[] HEAVYATTACK_SPRITES = {
             new Rect(607,18,68,94),
             new Rect(680,18,74,94),
             new Rect(758,21,77,91),
@@ -75,8 +75,14 @@ public class RyuConstants {
             new Rect(1036,18,68,94)
     };
 
-    public final static Animation ATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, ATTACK_SPRITES
+    public final static Animation LIGHTATTACK_ANIMATION = new Animation(
+            ATTACK_PATH, LIGHTATTACK_SPRITES
     );
+    public final static Animation MEDIUMATTACK_ANIMATION = new Animation(
+            ATTACK_PATH, MEDIUMATTACK_SPRITES
+    );    public final static Animation HEAVYATTACK_ANIMATION = new Animation(
+            ATTACK_PATH, HEAVYATTACK_SPRITES
+    );
+
 
 }

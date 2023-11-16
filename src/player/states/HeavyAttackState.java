@@ -1,0 +1,34 @@
+package player.states;
+
+import player.Fighter;
+import util.io.KL;
+
+public class HeavyAttackState extends State {
+    public HeavyAttackState(Fighter fighter) {
+        super(fighter);
+    }
+
+    public void enter() {
+        fighter.pose = fighter.HEAVYATTACK;
+        fighter.animator.changeAnimationTo(fighter.pose);
+
+        fighter.isAttacking = true;
+    }
+
+    public State input(KL e) {
+        return null;
+    }
+
+    public State update(double deltaTime) {
+        while(fighter.animator.getCurrentFrameIndex() > 0) {
+            return null;
+        }
+//        HandleAttack(fighter);
+//        return new IdleState();
+        return fighter.idleState;
+    }
+
+    private void HandleAttack(){
+        fighter.isAttacking = true;
+    }
+}
