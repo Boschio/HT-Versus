@@ -124,36 +124,31 @@ public class Animator {
         currentAnimation.yOffset = yOffset;
     }
 
-    public void RenderCurrentSprite(Graphics g,int x, int y){
+    public void RenderCurrentSprite(Graphics g,int _x, int _y){
         int w = (int) (currentFrame.getIconWidth() * currentAnimation.scaleFactor);
         int h = (int) (currentFrame.getIconHeight() * currentAnimation.scaleFactor);
-        g.drawImage(
-                currentFrame.getImage(),
-                (int) (x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2),
-                (int) (y + currentAnimation.yOffset * currentAnimation.scaleFactor - h),
-                (int) (currentFrame.getIconWidth() * currentAnimation.scaleFactor),
-                (int) (currentFrame.getIconHeight() * currentAnimation.scaleFactor),
-                null
-        );
+
+        int x = (int) (_x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
+        int y = (int) (_y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
+
+        g.drawImage(currentFrame.getImage(),x,y,w,h,null);
         g.setColor(Color.BLUE);
-        g.drawRect((int)(x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2), (int)(y + currentAnimation.yOffset * currentAnimation.scaleFactor - h), w, h);
+        g.drawRect(x, y, w, h);
 
         g.setColor(Color.green);
-        g.drawLine((int) (x-8), (int) y, (int) (x+7), (int) y);
-        g.drawLine((int) (x), (int) (y-8), (int) (x), (int) (y+7));
+        g.drawLine((int) (_x-8), (int) _y, (int) (_x+7), (int) _y);
+        g.drawLine((int) (_x), (int) (_y-8), (int) (_x), (int) (_y+7));
     }
 
-    public void RenderCurrentHurtBox(Graphics g, int x, int y) {
-        int w = (int) (currentFrame.getIconWidth() * currentAnimation.scaleFactor);
-        int h = (int) (currentFrame.getIconHeight() * currentAnimation.scaleFactor);
+    public void RenderCurrentHurtBox(Graphics g, int _x, int _y) {
+        int w = (int) (currentHurtBox.w * currentAnimation.scaleFactor);
+        int h = (int) (currentHurtBox.h * currentAnimation.scaleFactor);
+
+        int x = (int) (currentHurtBox.x + _x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
+        int y = (int) (currentHurtBox.y + _y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
 
         g.setColor(Color.RED);
-        g.drawRect(
-                (int) (currentHurtBox.x + currentAnimation.xOffset * currentAnimation.scaleFactor),
-                (int) (currentHurtBox.y + currentAnimation.yOffset * currentAnimation.scaleFactor),
-                (int) (currentHurtBox.w * currentAnimation.scaleFactor),
-                (int) (currentHurtBox.h * currentAnimation.scaleFactor)
-        );
+        g.drawRect(x, y, w, h);
     }
 
     public void RenderCurrentSpriteFlipVer(Graphics g,int x, int y){
@@ -205,6 +200,7 @@ public class Animator {
 
                 currentFrameIndex = arrayOverFlow ? 0 : currentFrameIndex + 1;
                 currentFrame = currentAnimation.getFrame(currentFrameIndex);
+                currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
                 lastFrame = 0;
             }
         }
@@ -212,6 +208,25 @@ public class Animator {
 
     public int getCurrentFrameIndex() {
         return this.currentFrameIndex;
+    }
+    public void debugSetCurrentFrameIndex(int increment) {
+        if (increment == 1) {
+            boolean arrayOverFlow = currentFrameIndex + 1 > currentAnimation.AnimationLength() - 1 ;
+            currentFrameIndex = arrayOverFlow ? 0 : currentFrameIndex + 1;
+            lastFrame = 0;
+        } else {
+            boolean arrayUnderFlow = currentFrameIndex - 1 < 0;
+            currentFrameIndex = arrayUnderFlow ? currentAnimation.AnimationLength() - 1 : currentFrameIndex - 1;
+            lastFrame = currentAnimation.AnimationLength() - 1;
+        }
+
+
+        currentFrame = currentAnimation.getFrame(currentFrameIndex);
+    }
+
+    public void debugChangeAnimation(String animationName) {
+        this.changeAnimationTo(animationName);
+        currentFrame = currentAnimation.getFrame(currentFrameIndex);
     }
 
     public void draw(Graphics g) {

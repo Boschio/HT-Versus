@@ -1,6 +1,9 @@
 package window.scenes;
 
-import util.Rect;
+import player.Fighter;
+import player.FighterConstants;
+import player.Ryu;
+import util.HurtBox;
 import util.io.KL;
 import util.io.ML;
 import window.Window;
@@ -13,38 +16,90 @@ import java.util.LinkedList;
 
 public class EditorScene extends Scene {
 
-    Rect addRect = new Rect(Window.getWindow().getWidth()/2, Window.getWindow().getHeight()/2, 30,30);
-    LinkedList<Rect> rectList = new LinkedList<>();
+    HurtBox addHurt= new HurtBox(25, 50, 60,60);
+    LinkedList<HurtBox> rectList = new LinkedList<>();
 
     ML mouseListener = ML.getMouseListener();
     private int mx = (int) mouseListener.getX();
     private int my = (int) mouseListener.getY();
+
+    Fighter ryu = new Ryu((int) FighterConstants.PLAYER1_START_X, (int) FighterConstants.PLAYER_START_Y-100, 80, 80);
+    boolean keyDown = false;
+    boolean mouseDown = false;
+    int x = 80;
+    int y = 30;
 
     @Override
     public void update(double deltaTime) {
         int nx = (int) mouseListener.getX();
         int ny = (int) mouseListener.getY();
 
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_W)){
+            ryu.animator.debugChangeAnimation(ryu.JUMP);
+        }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_A)){
+            ryu.animator.debugChangeAnimation(ryu.WALKBACKWARD);
+        }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_S)){
+            ryu.animator.debugChangeAnimation(ryu.IDLE);
+        }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_D)){
+            ryu.animator.debugChangeAnimation(ryu.WALKFORWARD);
+        }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_J)){
+            ryu.animator.debugChangeAnimation(ryu.LIGHTATTACK);
+        }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_K)){
+            ryu.animator.debugChangeAnimation(ryu.MEDIUMATTACK);
+        }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_L)){
+            ryu.animator.debugChangeAnimation(ryu.HEAVYATTACK);
+        }
+
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_LEFT) && keyDown == false) {
+            keyDown = true;
+            ryu.animator.debugSetCurrentFrameIndex(-1);
+        }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_RIGHT) && keyDown == false) {
+            keyDown = true;
+            ryu.animator.debugSetCurrentFrameIndex(+1);
+        }
+
 
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE)){
             Window.getWindow().changeState(WindowConstants.MENU_SCENE);
         }
 
-        if (mouseListener.isMouseInsideRect(addRect) && mouseListener.isPressed(MouseEvent.BUTTON1)){
-            rectList.push(new Rect( 50, 50,30 ,30));
+        if (mouseListener.isMouseInsideRect(addHurt) && mouseListener.isPressed(MouseEvent.BUTTON1) && mouseDown == false){
+            mouseDown = true;
+
+            rectList.push(new HurtBox(x+=20, y+=20,60 ,60));
         }
 
+        for (HurtBox hBox: rectList) {
 
+            if (mouseListener.isMouseDragging() && mouseListener.isMouseInsideRect(hBox)) {
+               hBox.moveBy((nx - mx), (ny - my));
+            }
+            if (mouseListener.isMouseDragging() && mouseListener.isMouseInsideRect(hBox.resizer)) {
+                hBox.resizeBy((nx - mx), (ny - my));
+            }
 
-        for (Rect rect: rectList) {
+        }
 
-            if (mouseListener.isMouseDragging() && mouseListener.isMouseInsideRect(rect)) {
-               rect.moveBy((nx - mx), (ny - my));
+        if (KL.getKeyListener().isKeyDown(KeyEvent.VK_P) && keyDown == false) {
+            keyDown = true;
+            for (HurtBox hBox: rectList) {
+                System.out.println(hBox.toString());
             }
         }
 
-
-
+        if (!KL.getKeyListener().isKeyDown(KeyEvent.VK_P) && !KL.getKeyListener().isKeyDown(KeyEvent.VK_LEFT) && !KL.getKeyListener().isKeyDown(KeyEvent.VK_RIGHT)) {
+            keyDown = false;
+        }
+        if (!ML.getMouseListener().isPressed(MouseEvent.BUTTON1)) {
+            mouseDown = false;
+        }
 
         mx = nx;
         my = ny;
@@ -53,14 +108,15 @@ public class EditorScene extends Scene {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.WHITE);
-        g.fillRect(0,0, WindowConstants.SCREEN_WIDTH, WindowConstants.SCREEN_HEIGHT );
+        g.fillRect(0,0, WindowConstants.SCREEN_WIDTH, WindowConstants.SCREEN_HEIGHT);
 
-        g.setColor(Color.green);
-        g.fillRect((int)addRect.x, (int)addRect.y, (int)addRect.w, (int)addRect.h);
+        ryu.draw(g);
 
-        g.setColor(Color.blue);
-        for (Rect rectangle : rectList) {
-            g.fillRect((int)rectangle.x, (int)rectangle.y, (int)rectangle.w, (int)rectangle.h);
+        g.setColor(Color.GREEN);
+        g.fillRect((int)addHurt.x, (int)addHurt.y, (int)addHurt.w, (int)addHurt.h);
+
+        for (HurtBox hBox : rectList) {
+            hBox.draw(g);
         }
 
 

@@ -2,7 +2,6 @@ package window.scenes;
 
 import player.Fighter;
 import player.FighterConstants;
-//import player.Ryu;
 import player.Ryu;
 import util.HurtBox;
 import util.io.KL;

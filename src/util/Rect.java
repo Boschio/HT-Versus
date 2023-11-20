@@ -18,7 +18,7 @@ public class Rect {
 
     Color c = Color.BLACK;
 
-    boolean held = false;
+    public boolean held = false;
 
     public Rect(int x, int y, int w, int h) {
         this.x = x;
@@ -47,17 +47,18 @@ public class Rect {
         h += dh;
     }
 
+    public void moveBy(int dx, int dy)
+    {
+        x += dx;
+        y += dy;
+    }
+
+
     public void move() {
         x += vx;
         y += vy;
 
         vy += ay;
-    }
-
-    public void moveBy(int dx, int dy)
-    {
-        x += dx;
-        y += dy;
     }
 
     public void jump(int dy) {
@@ -218,9 +219,14 @@ public class Rect {
                 (this.y + this.h >= r.y));
     }
 
-    public void draw(Graphics pen) {
-        pen.setColor(c);
-        pen.drawRect((int) x, (int) y, (int) w, (int) h);
+    public void draw(Graphics g) {
+        g.setColor(c);
+        g.drawRect((int) x, (int) y, (int) w, (int) h);
+    }
+
+    public void fillDraw(Graphics g) {
+        g.setColor(c);
+        g.fillRect((int) x, (int) y, (int) w, (int) h);
     }
 
 }
