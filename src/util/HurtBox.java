@@ -37,7 +37,9 @@ public class HurtBox extends Rect {
         resizer.moveBy(dx, dy);
     }
     public String toString() {
-        return "new HurtBox(" + x + ", " + y + ", " + w + ", " + h + ");";
+//        return "new HurtBox(" + (int)x + ", " + (int)y + ", " + (int)w/3 + ", " + (int)h/3 + ");";
+        return "new HurtBox(" + 0 + ", " + 0 + ", " + (int)w/3 + ", " + (int)h/3 + "),";
+
     }
 
     public void draw(Graphics g) {

@@ -209,6 +209,9 @@ public class Animator {
     public int getCurrentFrameIndex() {
         return this.currentFrameIndex;
     }
+    public int getTotalFrames() {
+        return this.currentAnimation.AnimationLength();
+    }
     public void debugSetCurrentFrameIndex(int increment) {
         if (increment == 1) {
             boolean arrayOverFlow = currentFrameIndex + 1 > currentAnimation.AnimationLength() - 1 ;

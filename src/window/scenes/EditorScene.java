@@ -16,6 +16,8 @@ import java.util.LinkedList;
 
 public class EditorScene extends Scene {
 
+    private String _debugInfo = "";
+    private String _debugInfo2 = "";
     HurtBox addHurt= new HurtBox(25, 50, 60,60);
     LinkedList<HurtBox> rectList = new LinkedList<>();
 
@@ -31,6 +33,10 @@ public class EditorScene extends Scene {
 
     @Override
     public void update(double deltaTime) {
+        _debugInfo = String.format("Current Frame: %d", ryu.animator.getCurrentFrameIndex()+1);
+        _debugInfo2 = String.format("Total Frames: %d", ryu.animator.getTotalFrames());
+
+
         int nx = (int) mouseListener.getX();
         int ny = (int) mouseListener.getY();
 
@@ -119,6 +125,11 @@ public class EditorScene extends Scene {
             hBox.draw(g);
         }
 
+        g.setColor(Color.BLACK);
+        Font myFont = new Font ("Courier New", 1, 17);
+        g.setFont(myFont);
+        g.drawString(_debugInfo,WindowConstants.SCREEN_WIDTH-300, (int) (WindowConstants.INSET_SIZE*1.5));
+        g.drawString(_debugInfo2,WindowConstants.SCREEN_WIDTH-300, (int) (WindowConstants.INSET_SIZE*1.5)+18);
 
     }
 

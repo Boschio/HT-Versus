@@ -21,15 +21,15 @@ public class RyuConstants {
     };
 
     public final static HurtBox[] IDLE_HURTBOXES = {
-            new HurtBox(0,-120,40,40),
-            new HurtBox(0,-120,40,40),
-            new HurtBox(0,-120,40,41),
-            new HurtBox(0,-120,40,43),
-            new HurtBox(0,-120,40,45),
-            new HurtBox(0,-120,40,46),
-            new HurtBox(0,-120,40,46),
-            new HurtBox(0,-120,40,44),
-            new HurtBox(0,-120,40,41)
+            new HurtBox(0,0,55, 93),
+            new HurtBox(0,0,55, 93),
+            new HurtBox(0,0,56, 94),
+            new HurtBox(0,0,56,96),
+            new HurtBox(0,0,56,96),
+            new HurtBox(0,0,56,98),
+            new HurtBox(0,0,56,98),
+            new HurtBox(0,0,57,96),
+            new HurtBox(0,0,58,94)
     };
 
     public final static Animation IDLE_ANIMATION = new Animation(
