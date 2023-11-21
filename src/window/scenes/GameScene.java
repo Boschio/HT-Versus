@@ -20,7 +20,7 @@ public class GameScene extends Scene{
 //    private Fighter _fighter1 = new Fighter((int) FighterConstants.PLAYER1_START_X, (int) FighterConstants.PLAYER_START_Y);
 //    private Fighter _fighter2 = new Fighter((int) FighterConstants.PLAYER2_START_X, (int) FighterConstants.PLAYER_START_Y);
 
-    private HurtBox hurtTest = new HurtBox((int) FighterConstants.PLAYER2_START_X, (int) FighterConstants.PLAYER_START_Y, 200, 200);
+    private HurtBox hurtTest = new HurtBox((int) FighterConstants.PLAYER2_START_X, (int) FighterConstants.PLAYER_START_Y-300, 200, 400);
 
     Fighter ryu = new Ryu((int) FighterConstants.PLAYER1_START_X, (int) FighterConstants.PLAYER_START_Y-100, 80, 80);
 

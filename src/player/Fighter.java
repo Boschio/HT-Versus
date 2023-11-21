@@ -88,15 +88,20 @@ public class Fighter extends Entity {
 
         if(animator.hasAnimations()) {
             animator.RenderCurrentSprite(g, (int) x, (int) y);
-            animator.RenderCurrentHurtBox(g, (int) x, (int) y);
+            if (animator.getCurrentHurtBox() != null) {
+                animator.RenderCurrentHurtBox(g, (int) x, (int) y);
+            }
+            if (animator.getCurrentHitBox() != null) {
+                animator.RenderCurrentHitBox(g, (int) x, (int) y);
+            }
         }
 
-        if (this.isAttacking) {
-            this.hitbox = new HitBox((int) (this.x + FighterConstants.PLAYER_WIDTH),(int) this.y + 50,150,70);
-            hitbox.draw(g);
-
-            this.isAttacking = false;
-        }
+//        if (this.isAttacking) {
+//            this.hitbox = new HitBox((int) (this.x + FighterConstants.PLAYER_WIDTH),(int) this.y + 50,150,70);
+//            hitbox.draw(g);
+//
+//            this.isAttacking = false;
+//        }
     }
 
 }

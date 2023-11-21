@@ -3,6 +3,7 @@ package window.scenes;
 import player.Fighter;
 import player.FighterConstants;
 import player.Ryu;
+import util.HitBox;
 import util.HurtBox;
 import util.io.KL;
 import util.io.ML;
@@ -19,7 +20,9 @@ public class EditorScene extends Scene {
     private String _debugInfo = "";
     private String _debugInfo2 = "";
     HurtBox addHurt= new HurtBox(25, 50, 60,60);
-    LinkedList<HurtBox> rectList = new LinkedList<>();
+    HitBox addHit= new HitBox(95, 50, 60,60);
+    LinkedList<HurtBox> hurtBoxes = new LinkedList<>();
+    LinkedList<HitBox> hitBoxes = new LinkedList<>();
 
     ML mouseListener = ML.getMouseListener();
     private int mx = (int) mouseListener.getX();
@@ -28,7 +31,7 @@ public class EditorScene extends Scene {
     Fighter ryu = new Ryu((int) FighterConstants.PLAYER1_START_X, (int) FighterConstants.PLAYER_START_Y-100, 80, 80);
     boolean keyDown = false;
     boolean mouseDown = false;
-    int x = 80;
+    int x = 180;
     int y = 30;
 
     @Override
@@ -79,10 +82,10 @@ public class EditorScene extends Scene {
         if (mouseListener.isMouseInsideRect(addHurt) && mouseListener.isPressed(MouseEvent.BUTTON1) && mouseDown == false){
             mouseDown = true;
 
-            rectList.push(new HurtBox(x+=20, y+=20,60 ,60));
+            hurtBoxes.push(new HurtBox(x+=20, y+=20,60 ,60));
         }
 
-        for (HurtBox hBox: rectList) {
+        for (HurtBox hBox: hurtBoxes) {
 
             if (mouseListener.isMouseDragging() && mouseListener.isMouseInsideRect(hBox)) {
                hBox.moveBy((nx - mx), (ny - my));
@@ -93,10 +96,30 @@ public class EditorScene extends Scene {
 
         }
 
+        if (mouseListener.isMouseInsideRect(addHit) && mouseListener.isPressed(MouseEvent.BUTTON1) && mouseDown == false){
+            mouseDown = true;
+
+            hitBoxes.push(new HitBox(x+=20, y+=20,60 ,60));
+        }
+
+        for (HitBox hitBox: hitBoxes) {
+
+            if (mouseListener.isMouseDragging() && mouseListener.isMouseInsideRect(hitBox)) {
+                hitBox.moveBy((nx - mx), (ny - my));
+            }
+            if (mouseListener.isMouseDragging() && mouseListener.isMouseInsideRect(hitBox.resizer)) {
+                hitBox.resizeBy((nx - mx), (ny - my));
+            }
+
+        }
+
         if (KL.getKeyListener().isKeyDown(KeyEvent.VK_P) && keyDown == false) {
             keyDown = true;
-            for (HurtBox hBox: rectList) {
-                System.out.println(hBox.toString());
+            for (HurtBox hurtBox: hurtBoxes) {
+                System.out.println(hurtBox.toString());
+            }
+            for (HitBox hitBox: hitBoxes) {
+                System.out.println(hitBox.toString());
             }
         }
 
@@ -121,7 +144,14 @@ public class EditorScene extends Scene {
         g.setColor(Color.GREEN);
         g.fillRect((int)addHurt.x, (int)addHurt.y, (int)addHurt.w, (int)addHurt.h);
 
-        for (HurtBox hBox : rectList) {
+        for (HurtBox hBox : hurtBoxes) {
+            hBox.draw(g);
+        }
+
+        g.setColor(Color.RED);
+        g.fillRect((int)addHit.x, (int)addHit.y, (int)addHit.w, (int)addHit.h);
+
+        for (HitBox hBox : hitBoxes) {
             hBox.draw(g);
         }
 

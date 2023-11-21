@@ -1,6 +1,7 @@
 package player;
 
 import component.Animation;
+import util.HitBox;
 import util.HurtBox;
 import util.Rect;
 
@@ -72,6 +73,22 @@ public class RyuConstants {
             new Rect(184,18,74,94)
     };
 
+    public final static HurtBox[] LIGHTATTACK_HURTBOXES = {
+            new HurtBox(0,0,74,94),
+            new HurtBox(0,0,102,95),
+            new HurtBox(0,0,74,94)
+    };
+
+    public final static HitBox[] LIGHTATTACK_HITBOXES = {
+            new HitBox(0,0,0,0),
+            new HitBox(0, 0, 54, 14),
+            new HitBox(0,0,1000,1000)
+    };
+
+    public final static Animation LIGHTATTACK_ANIMATION = new Animation(
+            ATTACK_PATH, LIGHTATTACK_SPRITES, LIGHTATTACK_HURTBOXES, LIGHTATTACK_HITBOXES
+    );
+
     public final static Rect[] MEDIUMATTACK_SPRITES = {
             new Rect(263,18,68,94),
             new Rect(335,18,90,94),
@@ -88,9 +105,6 @@ public class RyuConstants {
             new Rect(1036,18,68,94)
     };
 
-    public final static Animation LIGHTATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, LIGHTATTACK_SPRITES, IDLE_HURTBOXES
-    );
     public final static Animation MEDIUMATTACK_ANIMATION = new Animation(
             ATTACK_PATH, MEDIUMATTACK_SPRITES, IDLE_HURTBOXES
     );

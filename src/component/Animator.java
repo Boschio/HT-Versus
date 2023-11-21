@@ -1,5 +1,6 @@
 package component;
 
+import util.HitBox;
 import util.HurtBox;
 import util.Rect;
 
@@ -13,6 +14,7 @@ public class Animator {
     private Animation currentAnimation = null;
     private ImageIcon currentFrame = null;
     private HurtBox currentHurtBox = null;
+    private HitBox currentHitBox = null;
     private int currentFrameIndex = 0;
     private double defaultFrameTime = 0.15;
     private double frameTime = 0.15;
@@ -35,6 +37,18 @@ public class Animator {
             currentFrame = currentAnimation.getFrame(currentFrameIndex);
 
             currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
+        }
+    }
+
+    public void createAnimation(String AnimationName, String path, Rect[] rects, HurtBox hurtBoxes[], HitBox hitBoxes[]){
+
+        Animations.put(AnimationName, new Animation(path, rects, hurtBoxes, hitBoxes));
+        if (currentAnimation == null){
+            currentAnimation = Animations.get(AnimationName);
+            currentFrame = currentAnimation.getFrame(currentFrameIndex);
+
+            currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
+            currentHitBox = currentAnimation.getHitBox(currentFrameIndex);
         }
     }
 
@@ -68,7 +82,12 @@ public class Animator {
             currentAnimation = Animations.get(animation_ID);
             currentFrame = currentAnimation.getFrame(currentFrameIndex);
 
-            currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
+            if (currentHurtBox != null) {
+                currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
+            }
+            if (currentHitBox != null) {
+                currentHitBox = currentAnimation.getHitBox(currentFrameIndex);
+            }
         }
     }
 
@@ -114,6 +133,12 @@ public class Animator {
     public ImageIcon getCurrentFrame() {
         return currentFrame;
     }
+    public HurtBox getCurrentHurtBox(){
+        return (currentHurtBox);
+    }
+    public HitBox getCurrentHitBox(){
+        return (currentHitBox);
+    }
 
     public boolean hasAnimations(){
         return (!Animations.isEmpty());
@@ -146,6 +171,17 @@ public class Animator {
 
         int x = (int) (currentHurtBox.x + _x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
         int y = (int) (currentHurtBox.y + _y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
+
+        g.setColor(Color.GREEN);
+        g.drawRect(x, y, w, h);
+    }
+
+    public void RenderCurrentHitBox(Graphics g, int _x, int _y) {
+        int w = (int) (currentHitBox.w * currentAnimation.scaleFactor);
+        int h = (int) (currentHitBox.h * currentAnimation.scaleFactor);
+
+        int x = (int) (currentHitBox.x + _x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
+        int y = (int) (currentHitBox.y + _y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
 
         g.setColor(Color.RED);
         g.drawRect(x, y, w, h);
@@ -200,7 +236,13 @@ public class Animator {
 
                 currentFrameIndex = arrayOverFlow ? 0 : currentFrameIndex + 1;
                 currentFrame = currentAnimation.getFrame(currentFrameIndex);
-                currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
+                if (currentHurtBox != null) {
+                    currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
+                }
+                if (currentHitBox != null) {
+                    currentHitBox = currentAnimation.getHitBox(currentFrameIndex);
+                }
+
                 lastFrame = 0;
             }
         }
