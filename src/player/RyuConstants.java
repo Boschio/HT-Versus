@@ -81,19 +81,36 @@ public class RyuConstants {
 
     public final static HitBox[] LIGHTATTACK_HITBOXES = {
             new HitBox(0,0,0,0),
-            new HitBox(0, 0, 54, 14),
-            new HitBox(0,0,1000,1000)
+            new HitBox(80, -210, 54, 17),
+            new HitBox(0, 0, 0, 0)
     };
 
     public final static Animation LIGHTATTACK_ANIMATION = new Animation(
             ATTACK_PATH, LIGHTATTACK_SPRITES, LIGHTATTACK_HURTBOXES, LIGHTATTACK_HITBOXES
     );
+//    public final static Animation LIGHTATTACK_ANIMATION = new Animation(
+//            ATTACK_PATH, LIGHTATTACK_SPRITES, LIGHTATTACK_HURTBOXES
+//    );
 
     public final static Rect[] MEDIUMATTACK_SPRITES = {
             new Rect(263,18,68,94),
             new Rect(335,18,90,94),
             new Rect(429,0,80,112),
             new Rect(513,18,90,94)
+    };
+
+    public final static HurtBox[] MEDIUMATTACK_HURTBOXES = {
+            new HurtBox(0,0,68,94),
+            new HurtBox(0,0,90,94),
+            new HurtBox(0,0,80,112),
+            new HurtBox(0,0,90,94)
+    };
+
+    public final static HitBox[] MEDIUMATTACK_HITBOXES = {
+            new HitBox(0,0,0,0),
+            new HitBox(90, -166, 38, 33),
+            new HitBox(87, -188, 35, 54),
+            new HitBox(0,0,0,0)
     };
 
     public final static Rect[] HEAVYATTACK_SPRITES = {
@@ -105,11 +122,30 @@ public class RyuConstants {
             new Rect(1036,18,68,94)
     };
 
+    public final static HurtBox[] HEAVYATTACK_HURTBOXES = {
+            new HurtBox(0,0,68,94),
+            new HurtBox(0,0,74,94),
+            new HurtBox(0,0,77,91),
+            new HurtBox(0,0,112,91),
+            new HurtBox(0,0,77,91),
+            new HurtBox(0,0,68,94)
+    };
+
+    public final static HitBox[] HEAVYATTACK_HITBOXES = {
+            new HitBox(0,0,0,0),
+            new HitBox(0,0,0,0),
+            new HitBox(0,0,0,0),
+            new HitBox(86, -193, 64, 17),
+            new HitBox(0,0,0,0),
+            new HitBox(0,0,0,0)
+
+    };
+
     public final static Animation MEDIUMATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, MEDIUMATTACK_SPRITES, IDLE_HURTBOXES
+            ATTACK_PATH, MEDIUMATTACK_SPRITES, MEDIUMATTACK_HURTBOXES, MEDIUMATTACK_HITBOXES
     );
     public final static Animation HEAVYATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, HEAVYATTACK_SPRITES, IDLE_HURTBOXES
+            ATTACK_PATH, HEAVYATTACK_SPRITES, HEAVYATTACK_HURTBOXES, HEAVYATTACK_HITBOXES
     );
 
 

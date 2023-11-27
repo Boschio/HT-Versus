@@ -1,5 +1,7 @@
 package util;
 
+import player.FighterConstants;
+
 import java.awt.*;
 
 public class HurtBox extends Rect {

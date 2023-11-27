@@ -1,5 +1,7 @@
 package util;
 
+import player.FighterConstants;
+
 import java.awt.*;
 
 public class HitBox extends Rect {
@@ -38,9 +40,15 @@ public class HitBox extends Rect {
         resizer.moveBy(dx, dy);
     }
     public String toString() {
-//        return "new HitBox(" + (int)x + ", " + (int)y + ", " + (int)w/3 + ", " + (int)h/3 + ");";
-        return "new HitBox(" + 0 + ", " + 0 + ", " + (int)w/3 + ", " + (int)h/3 + "),";
+//        return "new HitBox(" + 0 + ", " + 0 + ", " + (int)w/3 + ", " + (int)h/3 + "),";
+        return "new HitBox(" + x + ", " + y + ", " + (int)w + ", " + (int)h + "),";
 
+    }
+
+    public String debugString() {
+        int originX = (int) -(FighterConstants.PLAYER1_START_X - x - w/2);
+        int originY = (int) -(FighterConstants.PLAYER_START_Y-100 - y - h);
+        return "new HitBox(" + (int)originX + ", " + (int)originY + ", " + (int)w/3 + ", " + (int)h/3 + "),";
     }
 
     public void draw(Graphics g) {

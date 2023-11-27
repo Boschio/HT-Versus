@@ -16,9 +16,6 @@ import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 
 public class EditorScene extends Scene {
-
-    private String _debugInfo = "";
-    private String _debugInfo2 = "";
     HurtBox addHurt= new HurtBox(25, 50, 60,60);
     HitBox addHit= new HitBox(95, 50, 60,60);
     LinkedList<HurtBox> hurtBoxes = new LinkedList<>();
@@ -36,10 +33,6 @@ public class EditorScene extends Scene {
 
     @Override
     public void update(double deltaTime) {
-        _debugInfo = String.format("Current Frame: %d", ryu.animator.getCurrentFrameIndex()+1);
-        _debugInfo2 = String.format("Total Frames: %d", ryu.animator.getTotalFrames());
-
-
         int nx = (int) mouseListener.getX();
         int ny = (int) mouseListener.getY();
 
@@ -119,7 +112,7 @@ public class EditorScene extends Scene {
                 System.out.println(hurtBox.toString());
             }
             for (HitBox hitBox: hitBoxes) {
-                System.out.println(hitBox.toString());
+                System.out.println(hitBox.debugString());
             }
         }
 
@@ -155,12 +148,32 @@ public class EditorScene extends Scene {
             hBox.draw(g);
         }
 
+        debugInfo(g);
+    }
+
+    public void debugInfo(Graphics g) {
+
         g.setColor(Color.BLACK);
         Font myFont = new Font ("Courier New", 1, 17);
         g.setFont(myFont);
-        g.drawString(_debugInfo,WindowConstants.SCREEN_WIDTH-300, (int) (WindowConstants.INSET_SIZE*1.5));
-        g.drawString(_debugInfo2,WindowConstants.SCREEN_WIDTH-300, (int) (WindowConstants.INSET_SIZE*1.5)+18);
 
+        g.drawString(String.format("Current Frame: %d", ryu.animator.getCurrentFrameIndex()+1),WindowConstants.SCREEN_WIDTH-300, (int) (WindowConstants.INSET_SIZE*1.5));
+        g.drawString(String.format("Total Frames: %d", ryu.animator.getTotalFrames()),WindowConstants.SCREEN_WIDTH-300, (int) (WindowConstants.INSET_SIZE*1.5)+18);
+
+        int hurtBoxInsetGap = 0;
+        for (HurtBox hurtBox: hurtBoxes) {
+            int insetOffset = 18;
+
+            g.drawString(hurtBox.toString(),WindowConstants.SCREEN_WIDTH-1000, (int) (WindowConstants.INSET_SIZE*1.5)+hurtBoxInsetGap);
+            hurtBoxInsetGap += insetOffset;
+        }
+        int hitBoxInsetGap = 0;
+        for (HitBox hitBox: hitBoxes) {
+            int insetOffset = 18;
+
+            g.drawString("|  " + hitBox.debugString(),WindowConstants.SCREEN_WIDTH-700, (int) (WindowConstants.INSET_SIZE*1.5)+hitBoxInsetGap);
+            hitBoxInsetGap += insetOffset;
+        }
     }
 
 }

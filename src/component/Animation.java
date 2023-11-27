@@ -101,6 +101,10 @@ public class Animation {
         return hitBoxes.get(index);
     }
 
+    public int getHitBoxesLength() {
+        return hitBoxes.size();
+    }
+
     public int AnimationLength(){
         return frames.size();
     }

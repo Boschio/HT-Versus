@@ -80,7 +80,7 @@ public class Fighter extends Entity {
         }
         animator.update(deltaTime);
 
-        System.out.println("Current State: " + currentState.toString());
+//        System.out.println("Current State: " + currentState.toString());
     }
 
     public void draw(Graphics g){
@@ -96,12 +96,11 @@ public class Fighter extends Entity {
             }
         }
 
-//        if (this.isAttacking) {
-//            this.hitbox = new HitBox((int) (this.x + FighterConstants.PLAYER_WIDTH),(int) this.y + 50,150,70);
-//            hitbox.draw(g);
-//
-//            this.isAttacking = false;
-//        }
+        if (this.isAttacking && this.animator.getCurrentFrameIndex() < this.animator.getCurrentAnimation().getHitBoxesLength()) {
+
+        } else {
+            this.isAttacking = false;
+        }
     }
 
 }

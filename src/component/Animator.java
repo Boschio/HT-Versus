@@ -122,6 +122,9 @@ public class Animator {
         this.setFrameTime(frameTime);
     }
 
+    public Animation getCurrentAnimation() {
+        return this.currentAnimation;
+    }
     public double getFrameTime() {
         return frameTime;
     }
@@ -236,11 +239,12 @@ public class Animator {
 
                 currentFrameIndex = arrayOverFlow ? 0 : currentFrameIndex + 1;
                 currentFrame = currentAnimation.getFrame(currentFrameIndex);
-                if (currentHurtBox != null) {
+//                if (currentHurtBox != null) {
                     currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
-                }
-                if (currentHitBox != null) {
+//                }
+                if (currentFrameIndex < currentAnimation.getHitBoxesLength()) {
                     currentHitBox = currentAnimation.getHitBox(currentFrameIndex);
+//                    System.out.println(currentAnimation.getHitBox(currentFrameIndex).toString());
                 }
 
                 lastFrame = 0;
