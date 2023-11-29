@@ -8,11 +8,10 @@ import util.HurtBox;
 import util.io.KL;
 
 import java.awt.*;
+import java.util.Dictionary;
+import java.util.HashMap;
 
 public class Fighter extends Entity {
-
-    public HitBox hitbox;
-    public HurtBox hurtbox;
     public int jumpHeight = 650;
     public final static double gravity = 1500;
     public double ay = gravity;
@@ -35,10 +34,6 @@ public class Fighter extends Entity {
     public boolean isMoving = false;
     public boolean isCrouching = false;
 
-    public int originPoint;
-
-
-    //FIXME
     public String name;
     public final Animator animator;
     public IdleState idleState;
@@ -49,10 +44,10 @@ public class Fighter extends Entity {
     public LightAttackState lightAttackState;
     public MediumAttackState mediumAttackState;
     public HeavyAttackState heavyAttackState;
-
     public State currentState;
 
-    //END
+    public HashMap<String, Move> MoveList;
+
 
     public Fighter(String name, int x, int y, int w, int h){
         super(x, y, (int)(w*scale), (int)(h*scale));
@@ -70,6 +65,9 @@ public class Fighter extends Entity {
         this.heavyAttackState = new HeavyAttackState(this);
 
         this.currentState = idleState;
+
+
+
     }
 
     public void changeState(State newState) {

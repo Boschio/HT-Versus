@@ -13,5 +13,8 @@ public class Ryu extends Fighter {
         animator.addAnimation(RyuConstants.MEDIUMATTACK_ANIMATION, "MEDIUMATTACK");
         animator.addAnimation(RyuConstants.HEAVYATTACK_ANIMATION, "HEAVYATTACK");
 
+
+        MoveList.put("5L", RyuConstants.LIGHTATTACK);
+
     }
 }

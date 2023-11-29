@@ -33,8 +33,10 @@ public class RyuConstants {
             new HurtBox(0,0,58,94)
     };
 
+    public final static int[] IDLE_FRAMEHOLD = {3,3,2,2,2,2,2,3,3};
+
     public final static Animation IDLE_ANIMATION = new Animation(
-            IDLE_PATH, IDLE_SPRITES, IDLE_HURTBOXES//, -33, -90, 3
+            IDLE_PATH, IDLE_SPRITES, IDLE_HURTBOXES, IDLE_FRAMEHOLD
     );
 
     public final static String CROUCHING_PATH = "./src/images/Ryu/ryu_crouching.png";
@@ -102,13 +104,19 @@ public class RyuConstants {
             new HitBox(0, 0, 0, 0)
     };
 
-    public final static Animation LIGHTATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, LIGHTATTACK_SPRITES, LIGHTATTACK_HURTBOXES, LIGHTATTACK_HITBOXES
-    );
-//    public final static Animation LIGHTATTACK_ANIMATION = new Animation(
-//            ATTACK_PATH, LIGHTATTACK_SPRITES, LIGHTATTACK_HURTBOXES
-//    );
+    public final static int[] LIGHTATTACK_FRAMEHOLD = {3,4,1};
 
+    public final static Animation LIGHTATTACK_ANIMATION = new Animation(
+            ATTACK_PATH, LIGHTATTACK_SPRITES, LIGHTATTACK_HURTBOXES, LIGHTATTACK_HITBOXES, LIGHTATTACK_FRAMEHOLD
+    );
+
+    // FIXME Need to decouple hit/hurtboxes from Animation
+    public final static Move LIGHTATTACK = new Move(
+            LIGHTATTACK_ANIMATION,
+            LIGHTATTACK_HURTBOXES,
+            LIGHTATTACK_HITBOXES,
+            new boolean[]{false,false,false},
+            new int[]{0,10,0});
     public final static Rect[] MEDIUMATTACK_SPRITES = {
             new Rect(263,18,68,94),
             new Rect(335,18,90,94),
@@ -129,6 +137,12 @@ public class RyuConstants {
             new HitBox(87, -188, 35, 54),
             new HitBox(0,0,0,0)
     };
+
+    public final static int[] MEDIUMATTACK_FRAMEHOLD = {3,3,6,3};
+
+    public final static Animation MEDIUMATTACK_ANIMATION = new Animation(
+            ATTACK_PATH, MEDIUMATTACK_SPRITES, MEDIUMATTACK_HURTBOXES, MEDIUMATTACK_HITBOXES, MEDIUMATTACK_FRAMEHOLD
+    );
 
     public final static Rect[] HEAVYATTACK_SPRITES = {
             new Rect(607,18,68,94),
@@ -158,11 +172,10 @@ public class RyuConstants {
 
     };
 
-    public final static Animation MEDIUMATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, MEDIUMATTACK_SPRITES, MEDIUMATTACK_HURTBOXES, MEDIUMATTACK_HITBOXES
-    );
+    public final static int[] HEAVYATTACK_FRAMEHOLD = {3,3,2,6,2,2};
+
     public final static Animation HEAVYATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, HEAVYATTACK_SPRITES, HEAVYATTACK_HURTBOXES, HEAVYATTACK_HITBOXES
+            ATTACK_PATH, HEAVYATTACK_SPRITES, HEAVYATTACK_HURTBOXES, HEAVYATTACK_HITBOXES, HEAVYATTACK_FRAMEHOLD
     );
 
 

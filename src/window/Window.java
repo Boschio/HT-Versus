@@ -97,6 +97,7 @@ public class Window extends JFrame implements Runnable {
      * </p>
      * */
     private void update(double deltaTime) {
+
         currentScene.update(deltaTime);
 
 
@@ -144,14 +145,10 @@ public class Window extends JFrame implements Runnable {
                 double deltaTime = time - lastFrameTime;
                 lastFrameTime = time;
 
+                Time.update(deltaTime);
+                System.out.println("Frame: " + Time.frame);
 
                 update(deltaTime);
-
-//                try
-//                {
-//                    Thread.sleep(15);
-//                }
-//                catch(Exception x) {}
 
             }
 

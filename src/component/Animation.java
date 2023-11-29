@@ -14,6 +14,7 @@ public class Animation {
     private ArrayList<ImageIcon> frames = new ArrayList<>();
     private ArrayList<HurtBox> hurtBoxes = new ArrayList<>();
     private ArrayList<HitBox> hitBoxes = new ArrayList<>();
+    public int[] frameHold;
 
 
     public int xOffset = 0;
@@ -36,7 +37,17 @@ public class Animation {
 
                 this.hurtBoxes.add(hurtbox);
             }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
+    }
+
+    public Animation(String path, Rect rects[], HurtBox hurtBoxes[], int[] frameHold){
+        this(path, rects,hurtBoxes);
+
+        try {
+            this.frameHold = frameHold;
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -65,6 +76,16 @@ public class Animation {
                 this.hitBoxes.add(hitbox);
             }
 
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public Animation(String path, Rect rects[], HurtBox hurtBoxes[], HitBox hitBoxes[], int[] frameHold){
+        this(path, rects,hurtBoxes,hitBoxes);
+        try{
+            this.frameHold = frameHold;
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -105,8 +126,15 @@ public class Animation {
         return hitBoxes.size();
     }
 
-    public int AnimationLength(){
+    public int getAnimationLength(){
         return frames.size();
+    }
+    public int getFrameHoldLength(){
+        int total = 0;
+        for (int frame: frameHold) {
+            total += frame;
+        }
+        return total;
     }
 
 

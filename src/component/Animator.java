@@ -3,6 +3,7 @@ package component;
 import util.HitBox;
 import util.HurtBox;
 import util.Rect;
+import util.Time;
 
 import javax.swing.*;
 import java.awt.*;
@@ -231,23 +232,18 @@ public class Animator {
 
 
     public void update(double deltaTime) {
-        lastFrame += deltaTime;
-
         if (currentAnimation!=null){
-            if(lastFrame>frameTime){
-                boolean arrayOverFlow = currentFrameIndex + 1 > currentAnimation.AnimationLength() - 1 ;
+            if(lastFrame < Time.frame){
+                lastFrame = currentAnimation.frameHold == null ? Time.frame + 3 : Time.frame + currentAnimation.frameHold[currentFrameIndex];
+                boolean arrayOverFlow = currentFrameIndex + 1 > currentAnimation.getAnimationLength() - 1 ;
 
                 currentFrameIndex = arrayOverFlow ? 0 : currentFrameIndex + 1;
                 currentFrame = currentAnimation.getFrame(currentFrameIndex);
-//                if (currentHurtBox != null) {
-                    currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
-//                }
+
+                currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
                 if (currentFrameIndex < currentAnimation.getHitBoxesLength()) {
                     currentHitBox = currentAnimation.getHitBox(currentFrameIndex);
-//                    System.out.println(currentAnimation.getHitBox(currentFrameIndex).toString());
                 }
-
-                lastFrame = 0;
             }
         }
     }
@@ -256,17 +252,17 @@ public class Animator {
         return this.currentFrameIndex;
     }
     public int getTotalFrames() {
-        return this.currentAnimation.AnimationLength();
+        return this.currentAnimation.getAnimationLength();
     }
     public void debugSetCurrentFrameIndex(int increment) {
         if (increment == 1) {
-            boolean arrayOverFlow = currentFrameIndex + 1 > currentAnimation.AnimationLength() - 1 ;
+            boolean arrayOverFlow = currentFrameIndex + 1 > currentAnimation.getAnimationLength() - 1 ;
             currentFrameIndex = arrayOverFlow ? 0 : currentFrameIndex + 1;
             lastFrame = 0;
         } else {
             boolean arrayUnderFlow = currentFrameIndex - 1 < 0;
-            currentFrameIndex = arrayUnderFlow ? currentAnimation.AnimationLength() - 1 : currentFrameIndex - 1;
-            lastFrame = currentAnimation.AnimationLength() - 1;
+            currentFrameIndex = arrayUnderFlow ? currentAnimation.getAnimationLength() - 1 : currentFrameIndex - 1;
+            lastFrame = currentAnimation.getAnimationLength() - 1;
         }
 
 
