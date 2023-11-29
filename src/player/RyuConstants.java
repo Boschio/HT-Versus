@@ -37,6 +37,23 @@ public class RyuConstants {
             IDLE_PATH, IDLE_SPRITES, IDLE_HURTBOXES//, -33, -90, 3
     );
 
+    public final static String CROUCHING_PATH = "./src/images/Ryu/ryu_crouching.png";
+
+    public final static Rect[] CROUCHING_SPRITES = {
+            new Rect(0,0,63,89),
+            new Rect(67,17,62,72),
+            new Rect(133,24,62,65)
+    };
+
+    public final static HurtBox[] CROUCHING_HURTBOXES = {
+            new HurtBox(0,0,62,65),
+            new HurtBox(0,0,62,65),
+            new HurtBox(0,0,62,65)
+    };
+    public final static Animation CROUCHING_ANIMATION = new Animation(
+            CROUCHING_PATH, CROUCHING_SPRITES, CROUCHING_HURTBOXES
+    );
+
 
     public final static String WALKFORWARD_PATH = "./src/images/Ryu/ryu_idle_walk.png";
     public final static Rect[] WALKFORWARD_SPRITES = {

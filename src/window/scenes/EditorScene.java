@@ -36,6 +36,9 @@ public class EditorScene extends Scene {
         int nx = (int) mouseListener.getX();
         int ny = (int) mouseListener.getY();
 
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_Q)){
+            ryu.animator.debugChangeAnimation(ryu.IDLE);
+        }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_W)){
             ryu.animator.debugChangeAnimation(ryu.JUMP);
         }
@@ -43,7 +46,7 @@ public class EditorScene extends Scene {
             ryu.animator.debugChangeAnimation(ryu.WALKBACKWARD);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_S)){
-            ryu.animator.debugChangeAnimation(ryu.IDLE);
+            ryu.animator.debugChangeAnimation(ryu.CROUCHING);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_D)){
             ryu.animator.debugChangeAnimation(ryu.WALKFORWARD);

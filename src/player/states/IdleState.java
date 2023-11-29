@@ -17,7 +17,7 @@ public class IdleState extends State {
         fighter.pose = fighter.IDLE;
         fighter.vx = 0.0;
 
-        fighter.animator.changeAnimationTo(Fighter.IDLE);
+        fighter.animator.changeAnimationTo(fighter.pose);
     }
 
     public State input(KL e) {
@@ -28,6 +28,9 @@ public class IdleState extends State {
     }
 
     public State update(double deltaTime) {
+        if (fighter.keyListener.isKeyDown(KeyEvent.VK_S)) {
+            return fighter.crouchingState;
+        }
         if (keyListener.isKeyDown(KeyEvent.VK_A)) {
             return fighter.walkBackwardState;
         }

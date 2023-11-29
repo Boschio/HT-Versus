@@ -29,6 +29,9 @@ public class WalkForwardState extends State {
         if (!fighter.keyListener.isKeyDown(KeyEvent.VK_D)) {
             return fighter.idleState;
         }
+        if (fighter.keyListener.isKeyDown(KeyEvent.VK_S)) {
+            return fighter.crouchingState;
+        }
         if (fighter.keyListener.isKeyDown(KeyEvent.VK_A)) {
             return fighter.walkBackwardState;
         }

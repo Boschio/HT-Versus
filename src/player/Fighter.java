@@ -22,6 +22,7 @@ public class Fighter extends Entity {
 
     // TESTING
     public final static String IDLE = "IDLE";
+    public final static String CROUCHING = "CROUCHING";
     public final static String WALKFORWARD = "WALKFORWARD";
     public final static String WALKBACKWARD = "WALKBACKWARD";
     public final static String JUMP = "JUMP";
@@ -32,6 +33,7 @@ public class Fighter extends Entity {
 
     public String pose = IDLE;
     public boolean isMoving = false;
+    public boolean isCrouching = false;
 
     public int originPoint;
 
@@ -40,6 +42,7 @@ public class Fighter extends Entity {
     public String name;
     public final Animator animator;
     public IdleState idleState;
+    public CrouchingState crouchingState;
     public WalkForwardState walkForwardState;
     public WalkBackwardState walkBackwardState;
     public JumpState jumpState;
@@ -58,6 +61,7 @@ public class Fighter extends Entity {
 
         this.animator = new Animator(0.150);
         this.idleState = new IdleState(this);
+        this.crouchingState = new CrouchingState(this);
         this.walkForwardState = new WalkForwardState(this);
         this.walkBackwardState = new WalkBackwardState(this);
         this.jumpState = new JumpState(this);
