@@ -19,6 +19,10 @@ public class Time {
       */
      public static double getTime(){return (System.nanoTime() - timeStarted) * 1E-9;}
 
+     public static void setDebugSpeed(double d) {
+          timeBetweenTicks = 1.0/d;
+     }
+
      public static void incrementFrame() {
           frame++;
      }

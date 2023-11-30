@@ -6,7 +6,7 @@ import util.HurtBox;
 import util.Rect;
 
 public class RyuConstants {
-    public static final double HEALTH = 100;
+    public static final double MAX_HEALTH = 100;
 
     public final static String IDLE_PATH = "./src/images/Ryu/ryu_idle_walk.png";
     public final static Rect[] IDLE_SPRITES = {

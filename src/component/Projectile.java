@@ -8,7 +8,7 @@ public class Projectile extends Entity {
     public final Animator animator;
 
     public Projectile(Entity owner, int x, int y, int w, int h) {
-        super(x, y, (int)(w*scale), (int)(h*scale));
+        super(x, y, (int)(w*scale), (int)(h*scale), 5);
         this.owner = owner;
         this.animator = new Animator(0.150);
     }

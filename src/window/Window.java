@@ -146,7 +146,7 @@ public class Window extends JFrame implements Runnable {
                 lastFrameTime = time;
 
                 Time.update(deltaTime);
-                System.out.println("Frame: " + Time.frame);
+//                System.out.println("Frame: " + Time.frame);
 
                 update(deltaTime);
 

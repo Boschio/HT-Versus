@@ -3,12 +3,9 @@ package player;
 import component.Animator;
 import component.Entity;
 import player.states.*;
-import util.HitBox;
-import util.HurtBox;
 import util.io.KL;
 
 import java.awt.*;
-import java.util.Dictionary;
 import java.util.HashMap;
 
 public class Fighter extends Entity {
@@ -53,8 +50,8 @@ public class Fighter extends Entity {
     public HashMap<String, Move> MoveList;
 
 
-    public Fighter(String name, int x, int y, int w, int h){
-        super(x, y, (int)(w*scale), (int)(h*scale));
+    public Fighter(String name, int x, int y, int w, int h, double maxHealth){
+        super(x, y, (int)(w*scale), (int)(h*scale), maxHealth);
 
         this.name = name;
 
@@ -69,9 +66,6 @@ public class Fighter extends Entity {
         this.heavyAttackState = new HeavyAttackState(this);
 
         this.currentState = idleState;
-
-
-
     }
 
     public void changeState(State newState) {

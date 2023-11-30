@@ -17,22 +17,46 @@ public class Entity {
 
     static final double G = 0.4; // Gravity
 
+    private double maxHealth;
+    private double currHealth;
+
+    private boolean toBeDestroyed = false;
+
     Color c = Color.BLACK;
 
     public static double scale = 2;
 
-    public Entity(int x, int y, int w, int h) {
+    public Entity(int x, int y, int w, int h, double maxHealth) {
         this.x = x;
         this.y = y;
 
         // Need to make sure h and w are not negative
         this.w = w;
         this.h = h;
+
+        this.maxHealth = maxHealth;
+        this.currHealth = maxHealth;
     }
 
-    public Entity(int x, int y, int w, int h, Color c) {
-        this(x, y, w, h);
-        setColor(c);
+//    public Entity(int x, int y, int w, int h, Color c) {
+//        this(x, y, w, h);
+//        setColor(c);
+//    }
+
+    public void takeDamage(double d){
+        currHealth -= d;
+
+        if(currHealth <= 0){
+            this.destroy();
+        }
+    }
+
+    public void destroy() {
+        toBeDestroyed = true;
+    }
+
+    public boolean isToBeDestroyed(){
+        return toBeDestroyed;
     }
 
     public void setColor(Color c) {

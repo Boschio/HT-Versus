@@ -2,7 +2,7 @@ package player;
 
 public class Ryu extends Fighter {
     public Ryu(int x, int y, int w, int h) {
-        super("Ryu", x, y, w, h);
+        super("Ryu", x, y, w, h, RyuConstants.MAX_HEALTH);
         scale = 3.5;
 
         animator.addAnimation(RyuConstants.IDLE_ANIMATION, "IDLE");
