@@ -57,6 +57,9 @@ public class EditorScene extends Scene {
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_K)){
             ryu.animator.debugChangeAnimation(ryu.MEDIUMATTACK);
         }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_COMMA)){
+            ryu.animator.debugChangeAnimation(ryu.CROUCHMEDIUMATTACK);
+        }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_L)){
             ryu.animator.debugChangeAnimation(ryu.HEAVYATTACK);
         }

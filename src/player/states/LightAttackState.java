@@ -3,13 +3,20 @@ package player.states;
 import player.Fighter;
 import util.io.KL;
 
+import java.awt.event.KeyEvent;
+
 public class LightAttackState extends State {
     public LightAttackState(Fighter fighter) {
         super(fighter);
     }
 
     public void enter() {
-        fighter.pose = fighter.LIGHTATTACK;
+        if (fighter.isCrouching && fighter.keyListener.isKeyDown(KeyEvent.VK_S)) {
+            fighter.pose = fighter.CROUCHLIGHTATTACK;
+        } else {
+            fighter.pose = fighter.LIGHTATTACK;
+        }
+
         fighter.animator.changeAnimationTo(fighter.pose);
 
         fighter.isAttacking = true;
@@ -22,6 +29,9 @@ public class LightAttackState extends State {
     public State update(double deltaTime) {
         while(fighter.animator.getCurrentFrameIndex() > 0) {
             return null;
+        }
+        if (fighter.isCrouching) {
+            return fighter.crouchingState;
         }
 
         return fighter.idleState;

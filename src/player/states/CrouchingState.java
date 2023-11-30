@@ -28,7 +28,6 @@ public class CrouchingState extends State {
 
     public State update(double deltaTime) {
         if (!fighter.keyListener.isKeyDown(KeyEvent.VK_S)) {
-            fighter.isCrouching = false;
             return fighter.idleState;
         }
         if(fighter.keyListener.isKeyDown(KeyEvent.VK_J)) {

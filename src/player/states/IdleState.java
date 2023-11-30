@@ -14,6 +14,7 @@ public class IdleState extends State {
 
     public void enter() {
         fighter.isMoving = false;
+        fighter.isCrouching = false;
         fighter.pose = fighter.IDLE;
         fighter.vx = 0.0;
 
