@@ -153,88 +153,80 @@ public class Animator {
         currentAnimation.yOffset = yOffset;
     }
 
-    public void RenderCurrentSprite(Graphics g,int _x, int _y){
+    public void RenderCurrentSprite(Graphics g,int originX, int originY){
         int w = (int) (currentFrame.getIconWidth() * currentAnimation.scaleFactor);
         int h = (int) (currentFrame.getIconHeight() * currentAnimation.scaleFactor);
 
-        int x = (int) (_x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
-        int y = (int) (_y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
+        int x = (int) (originX + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
+        int y = (int) (originY + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
 
         g.drawImage(currentFrame.getImage(),x,y,w,h,null);
         g.setColor(Color.BLUE);
         g.drawRect(x, y, w, h);
 
         g.setColor(Color.green);
-        g.drawLine((int) (_x-8), (int) _y, (int) (_x+7), (int) _y);
-        g.drawLine((int) (_x), (int) (_y-8), (int) (_x), (int) (_y+7));
+        g.drawLine((int) (originX-8), (int) originY, (int) (originX+7), (int) originY);
+        g.drawLine((int) (originX), (int) (originY-8), (int) (originX), (int) (originY+7));
     }
 
-    public void RenderCurrentHurtBox(Graphics g, int _x, int _y) {
+    public void RenderCurrentHurtBox(Graphics g, int originX, int originY) {
         int w = (int) (currentHurtBox.w * currentAnimation.scaleFactor);
         int h = (int) (currentHurtBox.h * currentAnimation.scaleFactor);
 
-        int x = (int) (currentHurtBox.x + _x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
-        int y = (int) (currentHurtBox.y + _y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
+        int x = (int) (currentHurtBox.x + originX + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
+        int y = (int) (currentHurtBox.y + originY + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
 
         g.setColor(Color.GREEN);
         g.drawRect(x, y, w, h);
     }
 
-    public void RenderCurrentHitBox(Graphics g, int _x, int _y) {
+    public void RenderCurrentHitBox(Graphics g, int originX, int originY) {
         int w = (int) (currentHitBox.w * currentAnimation.scaleFactor);
         int h = (int) (currentHitBox.h * currentAnimation.scaleFactor);
 
-        int x = (int) (currentHitBox.x + _x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
-        int y = (int) (currentHitBox.y + _y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
-
-        if (w != 0)
-            System.out.println("x,y,w,h: " + x + "," + y + "," + w + "," + h);
+        int x = (int) (originX + currentHitBox.x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
+        int y = (int) (originY + currentHitBox.y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
 
         g.setColor(Color.RED);
         g.drawRect(x, y, w, h);
     }
 
-    public void RenderCurrentSpriteFlipVer(Graphics g,int _x, int _y){
+    public void RenderCurrentSpriteFlipVer(Graphics g,int originX, int originY){
         int w = (int) (-currentFrame.getIconWidth() * currentAnimation.scaleFactor);
         int h = (int) (currentFrame.getIconHeight() * currentAnimation.scaleFactor);
 
-        int x = (int) (_x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
-        int y = (int) (_y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
+        int x = (int) (originX + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
+        int y = (int) (originY + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
 
         g.drawImage(currentFrame.getImage(),x,y,w,h,null);
         g.setColor(Color.BLUE);
         g.drawRect(x, y, w, h);
 
         g.setColor(Color.green);
-        g.drawLine((int) (_x-8), (int) _y, (int) (_x+7), (int) _y);
-        g.drawLine((int) (_x), (int) (_y-8), (int) (_x), (int) (_y+7));
+        g.drawLine((int) (originX-8), (int) originY, (int) (originX+7), (int) originY);
+        g.drawLine((int) (originX), (int) (originY-8), (int) (originX), (int) (originY+7));
     }
 
-    public void RenderCurrentHurtBoxFlip(Graphics g, int _x, int _y) {
+    public void RenderCurrentHurtBoxFlip(Graphics g, int originX, int originY) {
         int w = (int) (currentHurtBox.w * currentAnimation.scaleFactor);
         int h = (int) (currentHurtBox.h * currentAnimation.scaleFactor);
 
-        int x = (int) (currentHurtBox.x + _x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
-        int y = (int) (currentHurtBox.y + _y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
+        int x = (int) (originX - currentHurtBox.x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
+        int y = (int) (originY + currentHurtBox.y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
 
         g.setColor(Color.GREEN);
         g.drawRect(x, y, w, h);
     }
 
-    public void RenderCurrentHitBoxFlip(Graphics g, int _x, int _y) {
+    public void RenderCurrentHitBoxFlip(Graphics g, int originX, int originY) {
         int w = (int) (currentHitBox.w * currentAnimation.scaleFactor);
         int h = (int) (currentHitBox.h * currentAnimation.scaleFactor);
 
-        int x = (int) (currentHitBox.x + _x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
-        int y = (int) (currentHitBox.y + _y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
-
-        if (w != 0)
-            System.out.println("x,y,w,h: " + x + "," + y + "," + w + "," + h);
+        int x = (int) (originX - currentHitBox.x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
+        int y = (int) (originY + currentHitBox.y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
 
         g.setColor(Color.RED);
         g.drawRect(x, y, w, h);
-        g.drawLine(x,y-100,x,y+100);
-
     }
 
 //    public void RenderCurrentSpriteFlipHor(Graphics g,int x, int y){

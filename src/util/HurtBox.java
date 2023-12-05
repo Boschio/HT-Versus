@@ -17,6 +17,8 @@ public class HurtBox extends Rect {
 
     public boolean overlaps(Rect hitbox)
     {
+        if (this.w  == 0 || this.h == 0) return false;
+
         return (this.x     <= hitbox.x + hitbox.w) &&
                 (this.x + this.w >= hitbox.x) &&
                 (this.y     <= hitbox.y + hitbox.h) &&

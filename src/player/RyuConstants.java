@@ -186,8 +186,8 @@ public class RyuConstants {
 
     public final static HitBox[] CROUCHMEDIUMATTACK_HITBOXES = {
             new HitBox(0,0,0,0),
-            new HitBox(90, -166, 38, 33),
-            new HitBox(87, -188, 35, 54),
+            new HitBox(190, -166, 38, 33),
+            new HitBox(187, -188, 35, 54),
             new HitBox(0,0,0,0)
     };
 

@@ -98,11 +98,11 @@ public class Fighter extends Entity {
         int w = (int) (animator.getCurrentHurtBox().w * animator.getCurrentAnimation().scaleFactor);
         int h = (int) (animator.getCurrentHurtBox().h * animator.getCurrentAnimation().scaleFactor);
 
-        int x = (int) (animator.getCurrentHurtBox().x + this.x + animator.getCurrentAnimation().xOffset * animator.getCurrentAnimation().scaleFactor - w/2);
-        int y = (int) (animator.getCurrentHurtBox().y + this.y + animator.getCurrentAnimation().yOffset * animator.getCurrentAnimation().scaleFactor - h);
+        int x = (int) (this.x + animator.getCurrentHurtBox().x + animator.getCurrentAnimation().xOffset * animator.getCurrentAnimation().scaleFactor - w/2);
+        int y = (int) (this.y + animator.getCurrentHurtBox().y + animator.getCurrentAnimation().yOffset * animator.getCurrentAnimation().scaleFactor - h);
 
         if (isFacingLeft) {
-//            w = -w;
+            x = (int) (this.x - animator.getCurrentHurtBox().x + animator.getCurrentAnimation().xOffset * animator.getCurrentAnimation().scaleFactor - w/2);
         }
 
         return new HurtBox(x,y,w,h);
@@ -112,11 +112,12 @@ public class Fighter extends Entity {
         int w = (int) (animator.getCurrentHitBox().w * animator.getCurrentAnimation().scaleFactor);
         int h = (int) (animator.getCurrentHitBox().h * animator.getCurrentAnimation().scaleFactor);
 
-        int x = (int) (animator.getCurrentHitBox().x + this.x + animator.getCurrentAnimation().xOffset * animator.getCurrentAnimation().scaleFactor - w/2);
-        int y = (int) (animator.getCurrentHitBox().y + this.y + animator.getCurrentAnimation().yOffset * animator.getCurrentAnimation().scaleFactor - h);
+        int x = (int) (this.x + animator.getCurrentHitBox().x + animator.getCurrentAnimation().xOffset * animator.getCurrentAnimation().scaleFactor - w/2);
+        int y = (int) (this.y + animator.getCurrentHitBox().y + animator.getCurrentAnimation().yOffset * animator.getCurrentAnimation().scaleFactor - h);
+
 
         if (isFacingLeft) {
-//            w = -w;
+            x = (int) (this.x - animator.getCurrentHitBox().x + animator.getCurrentAnimation().xOffset * animator.getCurrentAnimation().scaleFactor - w/2);
         }
 
         return new HitBox(x,y,w,h);

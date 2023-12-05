@@ -2,8 +2,7 @@ package window.scenes;
 
 import player.FighterConstants;
 import player.Player;
-import util.HitBox;
-import util.HurtBox;
+
 import util.Time;
 import util.io.KL;
 import window.WindowConstants;
@@ -37,13 +36,13 @@ public class GameScene extends Scene{
     }
 
     private void playerUpdate(double deltaTime) {
-//        if (player1.x < player2.x) {
-//            player1.isFacingLeft = false;
-//            player2.isFacingLeft = true;
-//        } else {
-//            player1.isFacingLeft = true;
-//            player2.isFacingLeft = false;
-//        }
+        if (player1.x < player2.x) {
+            player1.isFacingLeft = false;
+            player2.isFacingLeft = true;
+        } else {
+            player1.isFacingLeft = true;
+            player2.isFacingLeft = false;
+        }
         player1.update(deltaTime);
         player2.update(deltaTime);
     }
@@ -84,13 +83,6 @@ public class GameScene extends Scene{
 
         }
 
-        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_X)) {
-            if (!player1.isFacingLeft)
-                player1.isFacingLeft = true;
-            else
-                player1.isFacingLeft = false;
-        }
-
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE)){
 //            Window.getWindow().changeState(WindowConstants.MENU_SCENE);
             isPaused = !isPaused;
@@ -118,8 +110,8 @@ public class GameScene extends Scene{
         Font myFont = new Font ("Courier New", 1, 17);
         g.setFont(myFont);
 
-        g.drawString(String.format("player1 hitbox tip position: %2f", player1.animator.getCurrentHitBox() != null ? player1.getHitBox().x + player1.getHitBox().h : -999),WindowConstants.SCREEN_WIDTH-1000, (int) (WindowConstants.INSET_SIZE*1.5));
-        g.drawString(String.format("player2 hurtbox back position: %2f", player2.animator.getCurrentHurtBox() != null ? player2.getHurtBox().x + player2.getHurtBox().w : -999),WindowConstants.SCREEN_WIDTH-500, (int) (WindowConstants.INSET_SIZE*1.5));
+        g.drawString(String.format("player1 x position: %2f", player1.x),WindowConstants.SCREEN_WIDTH-1000, (int) (WindowConstants.INSET_SIZE*1.5));
+        g.drawString(String.format("player2 x position: %2f", player2.x),WindowConstants.SCREEN_WIDTH-500, (int) (WindowConstants.INSET_SIZE*1.5));
 
     }
 }
