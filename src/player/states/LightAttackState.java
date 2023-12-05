@@ -3,15 +3,13 @@ package player.states;
 import player.Fighter;
 import util.io.KL;
 
-import java.awt.event.KeyEvent;
-
 public class LightAttackState extends State {
     public LightAttackState(Fighter fighter) {
         super(fighter);
     }
 
     public void enter() {
-        if (fighter.isCrouching && fighter.keyListener.isKeyDown(KeyEvent.VK_S)) {
+        if (fighter.isCrouching && fighter.controls.keyListener.isKeyDown(fighter.controls.CROUCH)) {
             fighter.pose = fighter.CROUCHLIGHTATTACK;
         } else {
             fighter.pose = fighter.LIGHTATTACK;

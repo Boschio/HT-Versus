@@ -3,10 +3,7 @@ package window;
 import util.Time;
 import util.io.KL;
 import util.io.ML;
-import window.scenes.EditorScene;
-import window.scenes.GameScene;
-import window.scenes.MenuScene;
-import window.scenes.Scene;
+import window.scenes.*;
 
 
 import javax.swing.*;
@@ -78,6 +75,9 @@ public class Window extends JFrame implements Runnable {
                     break;
                 case 2:
                     currentScene = new EditorScene();
+                    break;
+                case 3:
+                    currentScene = new CharacterSelectScene();
                     break;
                 default:
                     System.out.println("Unknown window.scenes.Scene");

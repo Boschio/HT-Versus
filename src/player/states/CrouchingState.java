@@ -3,11 +3,7 @@ package player.states;
 import player.Fighter;
 import util.io.KL;
 
-import java.awt.event.KeyEvent;
-
 public class CrouchingState extends State {
-    private KL keyListener = KL.getKeyListener();
-
     public CrouchingState(Fighter fighter) {
         super(fighter);
     }
@@ -27,16 +23,16 @@ public class CrouchingState extends State {
     }
 
     public State update(double deltaTime) {
-        if (!fighter.keyListener.isKeyDown(KeyEvent.VK_S)) {
+        if (!fighter.controls.keyListener.isKeyDown(fighter.controls.CROUCH)) {
             return fighter.idleState;
         }
-        if(fighter.keyListener.isKeyDown(KeyEvent.VK_J)) {
+        if(fighter.controls.keyListener.isKeyDown(fighter.controls.L_ATTACK)) {
             return fighter.lightAttackState;
         }
-        if(fighter.keyListener.isKeyDown(KeyEvent.VK_K)) {
+        if(fighter.controls.keyListener.isKeyDown(fighter.controls.M_ATTACK)) {
             return fighter.mediumAttackState;
         }
-        if(fighter.keyListener.isKeyDown(KeyEvent.VK_L)) {
+        if(fighter.controls.keyListener.isKeyDown(fighter.controls.H_ATTACK)) {
             return fighter.heavyAttackState;
         }
         return fighter.crouchingState;

@@ -1,5 +1,6 @@
 package player;
 
+import component.Animation;
 import window.WindowConstants;
 
 import java.awt.*;
@@ -14,10 +15,52 @@ public class FighterConstants {
 
     public static final double SCALE = 2.0;
 
-    public enum direction {
+    public enum Direction {
         LEFT,
         RIGHT
     }
+
+    public enum Characters {
+        Ryu(0), Ken(1);
+        final int value;
+        Characters(int value) {
+            this.value = value;
+        }
+    }
+
+    static Animation[] IDLE_ANIMATIONS = {
+            RyuConstants.IDLE_ANIMATION
+    };
+    static Animation[] CROUCHING_ANIMATIONS = {
+            RyuConstants.CROUCHING_ANIMATION
+    };
+    static Animation[] WALKBACKWARD_ANIMATIONS = {
+            RyuConstants.WALKBACKWARD_ANIMATION
+    };
+    static Animation[] WALKFORWARD_ANIMATIONS = {
+            RyuConstants.WALKFORWARD_ANIMATION
+    };
+    static Animation[] LIGHTATTACK_ANIMATIONS = {
+            RyuConstants.LIGHTATTACK_ANIMATION
+    };
+    static Animation[] MEDIUMATTACK_ANIMATIONS = {
+            RyuConstants.MEDIUMATTACK_ANIMATION
+    };
+    static Animation[] HEAVYATTACK_ANIMATIONS = {
+            RyuConstants.HEAVYATTACK_ANIMATION
+    };
+    static Animation[] CROUCHLIGHTATTACK_ANIMATIONS = {
+            RyuConstants.CROUCHLIGHTATTACK_ANIMATION
+    };
+    static Animation[] CROUCHMEDIUMATTACK_ANIMATIONS = {
+            RyuConstants.CROUCHMEDIUMATTACK_ANIMATION
+    };
+    static Animation[] CROUCHHEAVYATTACK_ANIMATIONS = {
+            RyuConstants.CROUCHHEAVYATTACK_ANIMATION
+    };
+    static Animation[] SWEEP_ANIMATIONS = {
+            RyuConstants.SWEEP_ANIMATION
+    };
 
     public enum PlayerState {
         IDLE, STANDING, CROUCHING, JUMP_UP, JUMP_FORWARD, JUMP_BACKWARD, WALK_FORWARD, WALK_BACKWARD, ATTACKING

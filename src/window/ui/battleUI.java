@@ -1,10 +1,10 @@
-package window;
+package window.ui;
 
 import component.Component;
 
 import java.awt.*;
 
-public class UI extends Component {
+public class battleUI extends Component {
 
 
 

@@ -1,12 +1,13 @@
 package window.scenes;
 
-import player.Fighter;
 import player.FighterConstants;
-import player.Ryu;
+import player.Player;
+import util.HitBox;
+import util.HurtBox;
 import util.Time;
 import util.io.KL;
-import window.Window;
 import window.WindowConstants;
+import window.ui.pauseScreen;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -17,8 +18,11 @@ public class GameScene extends Scene{
     private int _frameRate = 0;
     private String _displayInfo = "";
 
-    Fighter ryu = new Ryu((int) FighterConstants.PLAYER1_START_X, (int) FighterConstants.PLAYER_START_Y-100, 80, 80);
-    Fighter ryu2 = new Ryu((int) FighterConstants.PLAYER1_START_X+250, (int) FighterConstants.PLAYER_START_Y-100, 80, 80);
+    private pauseScreen pauseScreen = new pauseScreen();
+    private boolean isPaused = false;
+
+    Player player1 = new Player(1, FighterConstants.Characters.Ryu);
+    Player player2 = new Player(2, FighterConstants.Characters.Ryu);
 
     private static void debugGameSpeed() {
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_1)) {
@@ -33,19 +37,32 @@ public class GameScene extends Scene{
     }
 
     private void playerUpdate(double deltaTime) {
-        ryu.update(deltaTime);
-        ryu2.update(deltaTime);
+        if (player1.x < player2.x) {
+            player1.isFacingLeft = false;
+            player2.isFacingLeft = true;
+        } else {
+            player1.isFacingLeft = true;
+            player2.isFacingLeft = false;
+        }
+        player1.update(deltaTime);
+        player2.update(deltaTime);
     }
 
     private void hitDetection() {
-        if(ryu.isAttacking && ryu.animator.getCurrentHitBox() != null) {
-            if(ryu.animator.getCurrentHitBox().overlaps(ryu2.animator.getCurrentHurtBox())) {
-                System.out.println("HIT!");
-                ryu2.takeDamage(10);
+        if(player1.isAttacking && player1.animator.getCurrentHitBox() != null) {
+            if(player1.getHitBox().overlaps(player2.getHurtBox())) {
+                System.out.println("P2 HIT!");
+                player2.takeDamage(10);
+            }
+        }
+        if(player2.isAttacking && player2.animator.getCurrentHitBox() != null) {
+            if(player2.getHitBox().overlaps(player1.getHurtBox())) {
+                System.out.println("P1 HIT!");
+                player1.takeDamage(10);
             }
         }
 
-        if (ryu2.isToBeDestroyed()) {
+        if (player2.isToBeDestroyed()) {
 //            Window.getWindow().changeState(WindowConstants.MENU_SCENE);
         }
     }
@@ -55,14 +72,23 @@ public class GameScene extends Scene{
         _frameRate = (int) (1/deltaTime);
         _displayInfo = String.format("%d FPS (%.3f)", _frameRate,deltaTime);
 
-        debugGameSpeed();
+        if (isPaused) {
 
-        playerUpdate(deltaTime);
+        } else {
+            debugGameSpeed();
 
-        hitDetection();
+            playerUpdate(deltaTime);
+
+            hitDetection();
+
+
+        }
+
+
 
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE)){
-            Window.getWindow().changeState(WindowConstants.MENU_SCENE);
+//            Window.getWindow().changeState(WindowConstants.MENU_SCENE);
+            isPaused = !isPaused;
         }
     }
 
@@ -73,7 +99,22 @@ public class GameScene extends Scene{
         g.setColor(Color.RED);
         g.drawString(_displayInfo,10, (int) (WindowConstants.INSET_SIZE*1.5));
 
-        ryu.draw(g);
-        ryu2.draw(g);
+        player1.draw(g);
+        player2.draw(g);
+        if (isPaused) {
+            pauseScreen.draw(g);
+        }
+
+        debugInfo(g);
+    }
+
+    public void debugInfo(Graphics g) {
+        g.setColor(Color.BLACK);
+        Font myFont = new Font ("Courier New", 1, 17);
+        g.setFont(myFont);
+
+        g.drawString(String.format("player1 hitbox tip position: %2f", player1.animator.getCurrentHitBox() != null ? player1.getHitBox().x + player1.getHitBox().h : -999),WindowConstants.SCREEN_WIDTH-1000, (int) (WindowConstants.INSET_SIZE*1.5));
+        g.drawString(String.format("player2 hurtbox back position: %2f", player2.animator.getCurrentHurtBox() != null ? player2.getHurtBox().x + player2.getHurtBox().w : -999),WindowConstants.SCREEN_WIDTH-500, (int) (WindowConstants.INSET_SIZE*1.5));
+
     }
 }

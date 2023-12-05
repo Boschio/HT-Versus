@@ -3,15 +3,13 @@ package player.states;
 import player.Fighter;
 import util.io.KL;
 
-import java.awt.event.KeyEvent;
-
 public class MediumAttackState extends State {
     public MediumAttackState(Fighter fighter) {
         super(fighter);
     }
 
     public void enter() {
-        if (fighter.isCrouching && fighter.keyListener.isKeyDown(KeyEvent.VK_S)) {
+        if (fighter.isCrouching && fighter.controls.keyListener.isKeyDown(fighter.controls.CROUCH)) {
             fighter.pose = fighter.CROUCHMEDIUMATTACK;
         } else {
             fighter.pose = fighter.MEDIUMATTACK;

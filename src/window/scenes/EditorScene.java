@@ -1,8 +1,7 @@
 package window.scenes;
 
-import player.Fighter;
 import player.FighterConstants;
-import player.Ryu;
+import player.Player;
 import util.HitBox;
 import util.HurtBox;
 import util.io.KL;
@@ -25,7 +24,7 @@ public class EditorScene extends Scene {
     private int mx = (int) mouseListener.getX();
     private int my = (int) mouseListener.getY();
 
-    Fighter ryu = new Ryu((int) FighterConstants.PLAYER1_START_X, (int) FighterConstants.PLAYER_START_Y-100, 80, 80);
+    Player player1 = new Player(1, FighterConstants.Characters.Ryu);
     boolean keyDown = false;
     boolean mouseDown = false;
     int x = 180;
@@ -37,40 +36,40 @@ public class EditorScene extends Scene {
         int ny = (int) mouseListener.getY();
 
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_Q)){
-            ryu.animator.debugChangeAnimation(ryu.IDLE);
+            player1.animator.debugChangeAnimation(player1.IDLE);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_W)){
-            ryu.animator.debugChangeAnimation(ryu.JUMP);
+            player1.animator.debugChangeAnimation(player1.JUMP);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_A)){
-            ryu.animator.debugChangeAnimation(ryu.WALKBACKWARD);
+            player1.animator.debugChangeAnimation(player1.WALKBACKWARD);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_S)){
-            ryu.animator.debugChangeAnimation(ryu.CROUCHING);
+            player1.animator.debugChangeAnimation(player1.CROUCHING);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_D)){
-            ryu.animator.debugChangeAnimation(ryu.WALKFORWARD);
+            player1.animator.debugChangeAnimation(player1.WALKFORWARD);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_J)){
-            ryu.animator.debugChangeAnimation(ryu.LIGHTATTACK);
+            player1.animator.debugChangeAnimation(player1.LIGHTATTACK);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_K)){
-            ryu.animator.debugChangeAnimation(ryu.MEDIUMATTACK);
+            player1.animator.debugChangeAnimation(player1.MEDIUMATTACK);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_COMMA)){
-            ryu.animator.debugChangeAnimation(ryu.CROUCHMEDIUMATTACK);
+            player1.animator.debugChangeAnimation(player1.CROUCHMEDIUMATTACK);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_L)){
-            ryu.animator.debugChangeAnimation(ryu.HEAVYATTACK);
+            player1.animator.debugChangeAnimation(player1.HEAVYATTACK);
         }
 
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_LEFT) && keyDown == false) {
             keyDown = true;
-            ryu.animator.debugSetCurrentFrameIndex(-1);
+            player1.animator.debugSetCurrentFrameIndex(-1);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_RIGHT) && keyDown == false) {
             keyDown = true;
-            ryu.animator.debugSetCurrentFrameIndex(+1);
+            player1.animator.debugSetCurrentFrameIndex(+1);
         }
 
 
@@ -138,7 +137,7 @@ public class EditorScene extends Scene {
         g.setColor(Color.WHITE);
         g.fillRect(0,0, WindowConstants.SCREEN_WIDTH, WindowConstants.SCREEN_HEIGHT);
 
-        ryu.draw(g);
+        player1.draw(g);
 
         g.setColor(Color.GREEN);
         g.fillRect((int)addHurt.x, (int)addHurt.y, (int)addHurt.w, (int)addHurt.h);
@@ -163,8 +162,8 @@ public class EditorScene extends Scene {
         Font myFont = new Font ("Courier New", 1, 17);
         g.setFont(myFont);
 
-        g.drawString(String.format("Current Frame: %d", ryu.animator.getCurrentFrameIndex()+1),WindowConstants.SCREEN_WIDTH-300, (int) (WindowConstants.INSET_SIZE*1.5));
-        g.drawString(String.format("Total Frames: %d", ryu.animator.getTotalFrames()),WindowConstants.SCREEN_WIDTH-300, (int) (WindowConstants.INSET_SIZE*1.5)+18);
+        g.drawString(String.format("Current Frame: %d", player1.animator.getCurrentFrameIndex()+1),WindowConstants.SCREEN_WIDTH-300, (int) (WindowConstants.INSET_SIZE*1.5));
+        g.drawString(String.format("Total Frames: %d", player1.animator.getTotalFrames()),WindowConstants.SCREEN_WIDTH-300, (int) (WindowConstants.INSET_SIZE*1.5)+18);
 
         int hurtBoxInsetGap = 0;
         for (HurtBox hurtBox: hurtBoxes) {

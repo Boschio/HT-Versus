@@ -3,10 +3,7 @@ package player.states;
 import player.Fighter;
 import util.io.KL;
 
-import java.awt.event.KeyEvent;
-
 public class IdleState extends State {
-    private KL keyListener = KL.getKeyListener();
 
     public IdleState(Fighter fighter) {
         super(fighter);
@@ -29,28 +26,28 @@ public class IdleState extends State {
     }
 
     public State update(double deltaTime) {
-        if (fighter.keyListener.isKeyDown(KeyEvent.VK_S)) {
+        if (fighter.controls.keyListener.isKeyDown(fighter.controls.CROUCH)) {
             return fighter.crouchingState;
         }
-        if (keyListener.isKeyDown(KeyEvent.VK_A)) {
+        if (fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT)) {
             return fighter.walkBackwardState;
         }
-        if (keyListener.isKeyDown(KeyEvent.VK_D)) {
+        if (fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)) {
             return fighter.walkForwardState;
         }
-        if(fighter.keyListener.isKeyDown(KeyEvent.VK_W)){
+        if(fighter.controls.keyListener.isKeyDown(fighter.controls.JUMP)){
             return fighter.jumpState;
         }
-        if(fighter.keyListener.isKeyDown(KeyEvent.VK_W) && fighter.keyListener.isKeyDown(KeyEvent.VK_D)){
+        if(fighter.controls.keyListener.isKeyDown(fighter.controls.JUMP) && fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)){
 //            return fighter.jumpForwardState;
         }
-        if(fighter.keyListener.isKeyDown(KeyEvent.VK_J)) {
+        if(fighter.controls.keyListener.isKeyDown(fighter.controls.L_ATTACK)) {
             return fighter.lightAttackState;
         }
-        if(fighter.keyListener.isKeyDown(KeyEvent.VK_K)) {
+        if(fighter.controls.keyListener.isKeyDown(fighter.controls.M_ATTACK)) {
             return fighter.mediumAttackState;
         }
-        if(fighter.keyListener.isKeyDown(KeyEvent.VK_L)) {
+        if(fighter.controls.keyListener.isKeyDown(fighter.controls.H_ATTACK)) {
             return fighter.heavyAttackState;
         }
         return null;

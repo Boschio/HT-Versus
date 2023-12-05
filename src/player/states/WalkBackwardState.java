@@ -3,8 +3,6 @@ package player.states;
 import player.Fighter;
 import util.io.KL;
 
-import java.awt.event.KeyEvent;
-
 public class WalkBackwardState extends State {
     public WalkBackwardState(Fighter fighter) {
         super(fighter);
@@ -26,22 +24,22 @@ public class WalkBackwardState extends State {
     public State update(double deltaTime) {
         fighter.x += fighter.vx * deltaTime;
 
-        if (!fighter.keyListener.isKeyDown(KeyEvent.VK_A)) {
+        if (!fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT)) {
             return fighter.idleState;
         }
-        if (fighter.keyListener.isKeyDown(KeyEvent.VK_S)) {
+        if (fighter.controls.keyListener.isKeyDown(fighter.controls.CROUCH)) {
             return fighter.crouchingState;
         }
-        if (fighter.keyListener.isKeyDown(KeyEvent.VK_D)) {
+        if (fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)) {
             return fighter.walkForwardState;
         }
-        if(fighter.keyListener.isKeyDown(KeyEvent.VK_J)) {
+        if(fighter.controls.keyListener.isKeyDown(fighter.controls.L_ATTACK)) {
             return fighter.lightAttackState;
         }
-        if(fighter.keyListener.isKeyDown(KeyEvent.VK_K)) {
+        if(fighter.controls.keyListener.isKeyDown(fighter.controls.M_ATTACK)) {
             return fighter.mediumAttackState;
         }
-        if(fighter.keyListener.isKeyDown(KeyEvent.VK_L)) {
+        if(fighter.controls.keyListener.isKeyDown(fighter.controls.H_ATTACK)) {
             return fighter.heavyAttackState;
         }
         return null;

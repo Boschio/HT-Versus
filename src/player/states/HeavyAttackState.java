@@ -3,17 +3,15 @@ package player.states;
 import player.Fighter;
 import util.io.KL;
 
-import java.awt.event.KeyEvent;
-
 public class HeavyAttackState extends State {
     public HeavyAttackState(Fighter fighter) {
         super(fighter);
     }
 
     public void enter() {
-        if (fighter.isCrouching && fighter.keyListener.isKeyDown(KeyEvent.VK_A)) {
+        if (fighter.isCrouching && fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT)) {
             fighter.pose = fighter.SWEEP;
-        } else if (fighter.isCrouching && !fighter.keyListener.isKeyDown(KeyEvent.VK_A)){
+        } else if (fighter.isCrouching && !fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT)){
             fighter.pose = fighter.CROUCHHEAVYATTACK;
         } else {
             fighter.pose = fighter.HEAVYATTACK;

@@ -187,43 +187,77 @@ public class Animator {
         int x = (int) (currentHitBox.x + _x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
         int y = (int) (currentHitBox.y + _y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
 
+//        System.out.println("w: " + w);
+//        System.out.println(("x: ") + x);
+//        System.out.println(("x+w: ") + (x+w));
+
         g.setColor(Color.RED);
         g.drawRect(x, y, w, h);
     }
 
-    public void RenderCurrentSpriteFlipVer(Graphics g,int x, int y){
-        g.drawImage(
-                currentFrame.getImage(),
-                (int) (x + currentAnimation.xOffset + currentFrame.getIconWidth() * currentAnimation.scaleFactor),
-                (int) (y + currentAnimation.yOffset),
-                (int) (-currentFrame.getIconWidth() * currentAnimation.scaleFactor),
-                (int) (currentFrame.getIconHeight() * currentAnimation.scaleFactor),
-                null
-        );
+    public void RenderCurrentSpriteFlipVer(Graphics g,int _x, int _y){
+        int w = (int) (-currentFrame.getIconWidth() * currentAnimation.scaleFactor);
+        int h = (int) (currentFrame.getIconHeight() * currentAnimation.scaleFactor);
+
+        int x = (int) (_x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
+        int y = (int) (_y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
+
+        g.drawImage(currentFrame.getImage(),x,y,w,h,null);
+        g.setColor(Color.BLUE);
+        g.drawRect(x, y, w, h);
+
+        g.setColor(Color.green);
+        g.drawLine((int) (_x-8), (int) _y, (int) (_x+7), (int) _y);
+        g.drawLine((int) (_x), (int) (_y-8), (int) (_x), (int) (_y+7));
     }
 
+    public void RenderCurrentHurtBoxFlip(Graphics g, int _x, int _y) {
+        int w = (int) (currentHurtBox.w * currentAnimation.scaleFactor);
+        int h = (int) (currentHurtBox.h * currentAnimation.scaleFactor);
 
-    public void RenderCurrentSpriteFlipHor(Graphics g,int x, int y){
-        g.drawImage(
-                currentFrame.getImage(),
-                (int) (x + currentAnimation.xOffset),
-                (int) (y + currentAnimation.yOffset + currentFrame.getIconHeight() * currentAnimation.scaleFactor),
-                (int) (currentFrame.getIconWidth() * currentAnimation.scaleFactor),
-                (int) (-currentFrame.getIconHeight() * currentAnimation.scaleFactor),
-                null
-        );
+        int x = (int) (currentHurtBox.x + _x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
+        int y = (int) (currentHurtBox.y + _y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
+
+        g.setColor(Color.GREEN);
+        g.drawRect(x, y, w, h);
     }
 
-    public void RenderCurrentSpriteFlipBoth(Graphics g,int x, int y){
-        g.drawImage(
-                currentFrame.getImage(),
-                (int) (x + currentAnimation.xOffset + currentFrame.getIconWidth() * currentAnimation.scaleFactor),
-                (int) (y + currentAnimation.yOffset + currentFrame.getIconHeight() * currentAnimation.scaleFactor),
-                (int) (-currentFrame.getIconWidth() * currentAnimation.scaleFactor),
-                (int) (-currentFrame.getIconHeight() * currentAnimation.scaleFactor),
-                null
-        );
+    public void RenderCurrentHitBoxFlip(Graphics g, int _x, int _y) {
+        int w = (int) (currentHitBox.w * currentAnimation.scaleFactor);
+        int h = (int) (currentHitBox.h * currentAnimation.scaleFactor);
+
+        int x = (int) (currentHitBox.x + _x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
+        int y = (int) (currentHitBox.y + _y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
+
+//        System.out.println("w: " + w);
+//        System.out.println(("x: ") + x);
+//        System.out.println(("x+w: ") + (x+w));
+
+        g.setColor(Color.RED);
+        g.drawRect(x, y, w, h);
     }
+
+//    public void RenderCurrentSpriteFlipHor(Graphics g,int x, int y){
+//        g.drawImage(
+//                currentFrame.getImage(),
+//                (int) (x + currentAnimation.xOffset),
+//                (int) (y + currentAnimation.yOffset + currentFrame.getIconHeight() * currentAnimation.scaleFactor),
+//                (int) (currentFrame.getIconWidth() * currentAnimation.scaleFactor),
+//                (int) (-currentFrame.getIconHeight() * currentAnimation.scaleFactor),
+//                null
+//        );
+//    }
+//
+//    public void RenderCurrentSpriteFlipBoth(Graphics g,int x, int y){
+//        g.drawImage(
+//                currentFrame.getImage(),
+//                (int) (x + currentAnimation.xOffset + currentFrame.getIconWidth() * currentAnimation.scaleFactor),
+//                (int) (y + currentAnimation.yOffset + currentFrame.getIconHeight() * currentAnimation.scaleFactor),
+//                (int) (-currentFrame.getIconWidth() * currentAnimation.scaleFactor),
+//                (int) (-currentFrame.getIconHeight() * currentAnimation.scaleFactor),
+//                null
+//        );
+//    }
 
 
     public void init() {
@@ -243,6 +277,8 @@ public class Animator {
                 currentHurtBox = currentAnimation.getHurtBox(currentFrameIndex);
                 if (currentFrameIndex < currentAnimation.getHitBoxesLength()) {
                     currentHitBox = currentAnimation.getHitBox(currentFrameIndex);
+                } else {
+                    currentHitBox = null;
                 }
             }
         }

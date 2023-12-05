@@ -16,5 +16,7 @@ public class WindowConstants {
     public static final int GAME_SCENE = 1;
     public static final int EDITOR_SCENE = 2;
 
+    public static final int CSS_SCENE = 3;
+
 
 }

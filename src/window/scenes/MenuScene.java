@@ -17,6 +17,9 @@ public class MenuScene extends Scene{
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE)){
             Window.getWindow().changeState(WindowConstants.GAME_SCENE);
         }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_SPACE)){
+            Window.getWindow().changeState(WindowConstants.CSS_SCENE);
+        }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_F1)){
             Window.getWindow().changeState(WindowConstants.EDITOR_SCENE);
         }
