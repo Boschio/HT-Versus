@@ -37,13 +37,13 @@ public class GameScene extends Scene{
     }
 
     private void playerUpdate(double deltaTime) {
-        if (player1.x < player2.x) {
-            player1.isFacingLeft = false;
-            player2.isFacingLeft = true;
-        } else {
-            player1.isFacingLeft = true;
-            player2.isFacingLeft = false;
-        }
+//        if (player1.x < player2.x) {
+//            player1.isFacingLeft = false;
+//            player2.isFacingLeft = true;
+//        } else {
+//            player1.isFacingLeft = true;
+//            player2.isFacingLeft = false;
+//        }
         player1.update(deltaTime);
         player2.update(deltaTime);
     }
@@ -84,7 +84,12 @@ public class GameScene extends Scene{
 
         }
 
-
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_X)) {
+            if (!player1.isFacingLeft)
+                player1.isFacingLeft = true;
+            else
+                player1.isFacingLeft = false;
+        }
 
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE)){
 //            Window.getWindow().changeState(WindowConstants.MENU_SCENE);

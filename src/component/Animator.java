@@ -187,9 +187,8 @@ public class Animator {
         int x = (int) (currentHitBox.x + _x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
         int y = (int) (currentHitBox.y + _y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
 
-//        System.out.println("w: " + w);
-//        System.out.println(("x: ") + x);
-//        System.out.println(("x+w: ") + (x+w));
+        if (w != 0)
+            System.out.println("x,y,w,h: " + x + "," + y + "," + w + "," + h);
 
         g.setColor(Color.RED);
         g.drawRect(x, y, w, h);
@@ -229,12 +228,13 @@ public class Animator {
         int x = (int) (currentHitBox.x + _x + currentAnimation.xOffset * currentAnimation.scaleFactor - w/2);
         int y = (int) (currentHitBox.y + _y + currentAnimation.yOffset * currentAnimation.scaleFactor - h);
 
-//        System.out.println("w: " + w);
-//        System.out.println(("x: ") + x);
-//        System.out.println(("x+w: ") + (x+w));
+        if (w != 0)
+            System.out.println("x,y,w,h: " + x + "," + y + "," + w + "," + h);
 
         g.setColor(Color.RED);
         g.drawRect(x, y, w, h);
+        g.drawLine(x,y-100,x,y+100);
+
     }
 
 //    public void RenderCurrentSpriteFlipHor(Graphics g,int x, int y){
