@@ -127,7 +127,7 @@ public class RyuConstants {
 
     public final static HurtBox[] CROUCHLIGHTATTACK_HURTBOXES = {
             new HurtBox(0,0,72,66),
-            new HurtBox(0,0,199,66),
+            new HurtBox(0,0,99,66),
             new HurtBox(0,0,72,66)
     };
 
