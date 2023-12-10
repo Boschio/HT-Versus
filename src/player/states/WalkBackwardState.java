@@ -9,8 +9,8 @@ public class WalkBackwardState extends State {
     }
 
     public void enter() {
-        fighter.pose = fighter.WALKBACKWARD;
-        fighter.animator.changeAnimationTo(fighter.pose);
+        fighter.currAction = fighter.WALKBACKWARD;
+        fighter.animator.changeAnimationTo(fighter.currAction);
 
         fighter.isMoving = true;
 

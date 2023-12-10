@@ -12,10 +12,10 @@ public class IdleState extends State {
     public void enter() {
         fighter.isMoving = false;
         fighter.isCrouching = false;
-        fighter.pose = fighter.IDLE;
+        fighter.currAction = fighter.IDLE;
         fighter.vx = 0.0;
 
-        fighter.animator.changeAnimationTo(fighter.pose);
+        fighter.animator.changeAnimationTo(fighter.currAction);
     }
 
     public State input(KL e) {
@@ -27,29 +27,29 @@ public class IdleState extends State {
 
     public State update(double deltaTime) {
         if (fighter.controls.keyListener.isKeyDown(fighter.controls.CROUCH)) {
-            return fighter.crouchingState;
+            return fighter.stateManager.crouchingState;
         }
         if (fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT)) {
-            return fighter.walkBackwardState;
+            return fighter.stateManager.walkBackwardState;
         }
         if (fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)) {
-            return fighter.walkForwardState;
+            return fighter.stateManager.walkForwardState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.JUMP)){
-            return fighter.jumpState;
+            return fighter.stateManager.jumpState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.JUMP) && fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)){
-//            return fighter.jumpForwardState;
+//            return fighter.stateManager.jumpForwardState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.L_ATTACK)) {
-            return fighter.lightAttackState;
+            return fighter.stateManager.attackState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.M_ATTACK)) {
-            return fighter.mediumAttackState;
+            return fighter.stateManager.attackState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.H_ATTACK)) {
-            return fighter.heavyAttackState;
+            return fighter.stateManager.attackState;
         }
-        return null;
+        return this;
     }
 }

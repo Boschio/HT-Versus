@@ -15,10 +15,6 @@ public class FighterConstants {
 
     public static final double SCALE = 2.0;
 
-    public enum Direction {
-        LEFT,
-        RIGHT
-    }
 
     public enum Characters {
         Ryu(0), Ken(1);
@@ -40,31 +36,50 @@ public class FighterConstants {
     static Animation[] WALKFORWARD_ANIMATIONS = {
             RyuConstants.WALKFORWARD_ANIMATION
     };
-    static Animation[] LIGHTATTACK_ANIMATIONS = {
-            RyuConstants.LIGHTATTACK_ANIMATION
+    static Animation[] L_ATTACK_ANIMATIONS = {
+            RyuConstants.L_ATTACK_ANIMATION
     };
-    static Animation[] MEDIUMATTACK_ANIMATIONS = {
-            RyuConstants.MEDIUMATTACK_ANIMATION
+    static Animation[] M_ATTACK_ANIMATIONS = {
+            RyuConstants.M_ATTACK_ANIMATION
     };
-    static Animation[] HEAVYATTACK_ANIMATIONS = {
-            RyuConstants.HEAVYATTACK_ANIMATION
+    static Animation[] H_ATTACK_ANIMATIONS = {
+            RyuConstants.H_ATTACK_ANIMATION
     };
-    static Animation[] CROUCHLIGHTATTACK_ANIMATIONS = {
-            RyuConstants.CROUCHLIGHTATTACK_ANIMATION
+    static Animation[] CROUCH_L_ATTACK_ANIMATIONS = {
+            RyuConstants.CROUCH_L_ATTACK_ANIMATION
     };
-    static Animation[] CROUCHMEDIUMATTACK_ANIMATIONS = {
-            RyuConstants.CROUCHMEDIUMATTACK_ANIMATION
+    static Animation[] CROUCH_M_ATTACK_ANIMATIONS = {
+            RyuConstants.CROUCH_M_ATTACK_ANIMATION
     };
-    static Animation[] CROUCHHEAVYATTACK_ANIMATIONS = {
-            RyuConstants.CROUCHHEAVYATTACK_ANIMATION
+    static Animation[] CROUCH_H_ATTACK_ANIMATIONS = {
+            RyuConstants.CROUCH_H_ATTACK_ANIMATION
     };
     static Animation[] SWEEP_ANIMATIONS = {
             RyuConstants.SWEEP_ANIMATION
     };
 
-    public enum PlayerState {
-        IDLE, STANDING, CROUCHING, JUMP_UP, JUMP_FORWARD, JUMP_BACKWARD, WALK_FORWARD, WALK_BACKWARD, ATTACKING
-    }
+
+    static Move[] L_ATTACKS = {
+            RyuConstants.L_ATTACK
+    };
+    static Move[] M_ATTACKS = {
+            RyuConstants.M_ATTACK
+    };
+    static Move[] H_ATTACKS = {
+            RyuConstants.H_ATTACK
+    };
+    static Move[] CROUCH_L_ATTACKS = {
+            RyuConstants.CROUCH_L_ATTACK
+    };
+    static Move[] CROUCH_M_ATTACKS = {
+            RyuConstants.CROUCH_M_ATTACK
+    };
+    static Move[] CROUCH_H_ATTACKS = {
+            RyuConstants.CROUCH_H_ATTACK
+    };
+    static Move[] SWEEPS = {
+            RyuConstants.SWEEP
+    };
 
     public static final double FLOOR = WindowConstants.SCREEN_HEIGHT - (WindowConstants.SCREEN_HEIGHT * .10);
 

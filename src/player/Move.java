@@ -22,6 +22,14 @@ public class Move {
     int[] blockStun;
     BlockType[] blockTypes;
 
+    // FIXME Only using this constructor before refactoring
+    public Move(Animation animation, boolean[] cancellableFrames, int[] damage) {
+        this.animation = animation;
+        this.moveLength = animation.getFrameHoldLength();
+        this.cancellableFrames = cancellableFrames;
+        this.damage = damage;
+    }
+
     public Move(Animation animation, HurtBox[] hurtBoxes, HitBox[] hitBoxes, boolean[] cancellableFrames, int[] damage) {
         this.animation = animation;
         this.moveLength = animation.getFrameHoldLength();

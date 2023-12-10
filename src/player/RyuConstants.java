@@ -86,118 +86,142 @@ public class RyuConstants {
     );
 
     public final static String ATTACK_PATH = "./src/images/Ryu/ryu_punch.png";
-    public final static String CROUCHATTACK_PATH = "./src/images/Ryu/ryu_crouch_attacks.png";
-    public final static Rect[] LIGHTATTACK_SPRITES = {
+    public final static String CROUCH_ATTACK_PATH = "./src/images/Ryu/ryu_crouch_attacks.png";
+    public final static Rect[] L_ATTACK_SPRITES = {
             new Rect(0,18,74,94),
             new Rect(78,17,102,95),
             new Rect(184,18,74,94)
     };
 
-    public final static HurtBox[] LIGHTATTACK_HURTBOXES = {
+    public final static HurtBox[] L_ATTACK_HURTBOXES = {
             new HurtBox(0,0,74,94),
             new HurtBox(0,0,102,95),
             new HurtBox(0,0,74,94)
     };
 
-    public final static HitBox[] LIGHTATTACK_HITBOXES = {
+    public final static HitBox[] L_ATTACK_HITBOXES = {
             new HitBox(0,0,0,0),
             new HitBox(80, -210, 54, 17),
             new HitBox(0, 0, 0, 0)
     };
 
-    public final static int[] LIGHTATTACK_FRAMEHOLD = {3,4,1};
+    public final static int[] L_ATTACK_FRAMEHOLD = {3,4,1};
 
-    public final static Animation LIGHTATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, LIGHTATTACK_SPRITES, LIGHTATTACK_HURTBOXES, LIGHTATTACK_HITBOXES, LIGHTATTACK_FRAMEHOLD
+    public final static Animation L_ATTACK_ANIMATION = new Animation(
+            ATTACK_PATH, L_ATTACK_SPRITES, L_ATTACK_HURTBOXES, L_ATTACK_HITBOXES, L_ATTACK_FRAMEHOLD
     );
 
     // FIXME Need to decouple hit/hurtboxes from Animation
-    public final static Move LIGHTATTACK = new Move(
-            LIGHTATTACK_ANIMATION,
-            LIGHTATTACK_HURTBOXES,
-            LIGHTATTACK_HITBOXES,
+//    public final static Move L_ATTACK = new Move(
+//            L_ATTACK_ANIMATION,
+//            L_ATTACK_HURTBOXES,
+//            L_ATTACK_HITBOXES,
+//            new boolean[]{false,false,false},
+//            new int[]{0,10,0}
+//    );
+    public final static Move L_ATTACK = new Move(
+            L_ATTACK_ANIMATION,
             new boolean[]{false,false,false},
-            new int[]{0,10,0});
+            new int[]{0,10,0}
+    );
 
-    public final static Rect[] CROUCHLIGHTATTACK_SPRITES = {
+    public final static Rect[] CROUCH_L_ATTACK_SPRITES = {
             new Rect(0,61,72,66),
             new Rect(76,61,99,66),
             new Rect(179,61,72,66)
     };
 
-    public final static HurtBox[] CROUCHLIGHTATTACK_HURTBOXES = {
+    public final static HurtBox[] CROUCH_L_ATTACK_HURTBOXES = {
             new HurtBox(0,0,72,66),
-            new HurtBox(0,0,99,66),
+            new HurtBox(0,0,199,66),
             new HurtBox(0,0,72,66)
     };
 
-    public final static HitBox[] CROUCHLIGHTATTACK_HITBOXES = {
+    public final static HitBox[] CROUCH_L_ATTACK_HITBOXES = {
             new HitBox(0,0,0,0),
             new HitBox(80, -210, 54, 17),
             new HitBox(0, 0, 0, 0)
     };
 
-    public final static int[] CROUCHLIGHTATTACK_FRAMEHOLD = {3,4,1};
+    public final static int[] CROUCH_L_ATTACK_FRAMEHOLD = {3,4,1};
 
-    public final static Animation CROUCHLIGHTATTACK_ANIMATION = new Animation(
-            CROUCHATTACK_PATH, CROUCHLIGHTATTACK_SPRITES, CROUCHLIGHTATTACK_HURTBOXES, CROUCHLIGHTATTACK_HITBOXES, CROUCHLIGHTATTACK_FRAMEHOLD
+    public final static Animation CROUCH_L_ATTACK_ANIMATION = new Animation(
+            CROUCH_ATTACK_PATH, CROUCH_L_ATTACK_SPRITES, CROUCH_L_ATTACK_HURTBOXES, CROUCH_L_ATTACK_HITBOXES, CROUCH_L_ATTACK_FRAMEHOLD
     );
 
-    public final static Rect[] MEDIUMATTACK_SPRITES = {
+    public final static Move CROUCH_L_ATTACK = new Move(
+            CROUCH_L_ATTACK_ANIMATION,
+            new boolean[]{false,false,false},
+            new int[]{0,10,0}
+    );
+
+    public final static Rect[] M_ATTACK_SPRITES = {
             new Rect(263,18,68,94),
             new Rect(335,18,90,94),
             new Rect(429,0,80,112),
             new Rect(513,18,90,94)
     };
 
-    public final static HurtBox[] MEDIUMATTACK_HURTBOXES = {
+    public final static HurtBox[] M_ATTACK_HURTBOXES = {
             new HurtBox(0,0,68,94),
             new HurtBox(0,0,90,94),
             new HurtBox(0,0,80,112),
             new HurtBox(0,0,90,94)
     };
 
-    public final static HitBox[] MEDIUMATTACK_HITBOXES = {
+    public final static HitBox[] M_ATTACK_HITBOXES = {
             new HitBox(0,0,0,0),
             new HitBox(90, -166, 38, 33),
             new HitBox(87, -188, 35, 54),
             new HitBox(0,0,0,0)
     };
 
-    public final static int[] MEDIUMATTACK_FRAMEHOLD = {3,3,6,3};
+    public final static int[] M_ATTACK_FRAMEHOLD = {3,3,6,3};
 
-    public final static Animation MEDIUMATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, MEDIUMATTACK_SPRITES, MEDIUMATTACK_HURTBOXES, MEDIUMATTACK_HITBOXES, MEDIUMATTACK_FRAMEHOLD
+    public final static Animation M_ATTACK_ANIMATION = new Animation(
+            ATTACK_PATH, M_ATTACK_SPRITES, M_ATTACK_HURTBOXES, M_ATTACK_HITBOXES, M_ATTACK_FRAMEHOLD
     );
 
-    public final static Rect[] CROUCHMEDIUMATTACK_SPRITES = {
+    public final static Move M_ATTACK = new Move(
+            M_ATTACK_ANIMATION,
+            new boolean[]{false,false,false,false},
+            new int[]{0,10,8,0}
+    );
+
+    public final static Rect[] CROUCH_M_ATTACK_SPRITES = {
             new Rect(274,132,76,65),
             new Rect(354,138,93,59),
             new Rect(451,144,135,53),
             new Rect(590,132,76,65)
     };
 
-    public final static HurtBox[] CROUCHMEDIUMATTACK_HURTBOXES = {
+    public final static HurtBox[] CROUCH_M_ATTACK_HURTBOXES = {
             new HurtBox(0,0,76,65),
             new HurtBox(0,0,93,59),
             new HurtBox(0,0,135,53),
             new HurtBox(0,0,76,65)
     };
 
-    public final static HitBox[] CROUCHMEDIUMATTACK_HITBOXES = {
+    public final static HitBox[] CROUCH_M_ATTACK_HITBOXES = {
             new HitBox(0,0,0,0),
             new HitBox(190, -166, 38, 33),
             new HitBox(187, -188, 35, 54),
             new HitBox(0,0,0,0)
     };
 
-    public final static int[] CROUCHMEDIUMATTACK_FRAMEHOLD = {3,3,6,3};
+    public final static int[] CROUCH_M_ATTACK_FRAMEHOLD = {3,3,6,3};
 
-    public final static Animation CROUCHMEDIUMATTACK_ANIMATION = new Animation(
-            CROUCHATTACK_PATH, CROUCHMEDIUMATTACK_SPRITES, CROUCHMEDIUMATTACK_HURTBOXES, CROUCHMEDIUMATTACK_HITBOXES, CROUCHMEDIUMATTACK_FRAMEHOLD
+    public final static Animation CROUCH_M_ATTACK_ANIMATION = new Animation(
+            CROUCH_ATTACK_PATH, CROUCH_M_ATTACK_SPRITES, CROUCH_M_ATTACK_HURTBOXES, CROUCH_M_ATTACK_HITBOXES, CROUCH_M_ATTACK_FRAMEHOLD
     );
 
-    public final static Rect[] HEAVYATTACK_SPRITES = {
+    public final static Move CROUCH_M_ATTACK = new Move(
+            CROUCH_M_ATTACK_ANIMATION,
+            new boolean[]{false,false,false,false},
+            new int[]{0,10,8,0}
+    );
+
+    public final static Rect[] H_ATTACK_SPRITES = {
             new Rect(607,18,68,94),
             new Rect(680,18,74,94),
             new Rect(758,21,77,91),
@@ -206,7 +230,7 @@ public class RyuConstants {
             new Rect(1036,18,68,94)
     };
 
-    public final static HurtBox[] HEAVYATTACK_HURTBOXES = {
+    public final static HurtBox[] H_ATTACK_HURTBOXES = {
             new HurtBox(0,0,68,94),
             new HurtBox(0,0,74,94),
             new HurtBox(0,0,77,91),
@@ -215,7 +239,7 @@ public class RyuConstants {
             new HurtBox(0,0,68,94)
     };
 
-    public final static HitBox[] HEAVYATTACK_HITBOXES = {
+    public final static HitBox[] H_ATTACK_HITBOXES = {
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0),
@@ -225,13 +249,19 @@ public class RyuConstants {
 
     };
 
-    public final static int[] HEAVYATTACK_FRAMEHOLD = {3,3,2,6,2,2};
+    public final static int[] H_ATTACK_FRAMEHOLD = {3,3,2,6,2,2};
 
-    public final static Animation HEAVYATTACK_ANIMATION = new Animation(
-            ATTACK_PATH, HEAVYATTACK_SPRITES, HEAVYATTACK_HURTBOXES, HEAVYATTACK_HITBOXES, HEAVYATTACK_FRAMEHOLD
+    public final static Animation H_ATTACK_ANIMATION = new Animation(
+            ATTACK_PATH, H_ATTACK_SPRITES, H_ATTACK_HURTBOXES, H_ATTACK_HITBOXES, H_ATTACK_FRAMEHOLD
     );
 
-    public final static Rect[] CROUCHHEAVYATTACK_SPRITES = {
+    public final static Move H_ATTACK = new Move(
+            H_ATTACK_ANIMATION,
+            new boolean[]{false,false,false,false,false,false},
+            new int[]{0,0,0,14,0,0}
+    );
+
+    public final static Rect[] CROUCH_H_ATTACK_SPRITES = {
             new Rect(565,53,67,74),
             new Rect(636,36,83,91),
             new Rect(723,0,60,127),
@@ -239,7 +269,7 @@ public class RyuConstants {
             new Rect(874,53,67,74)
     };
 
-    public final static HurtBox[] CROUCHHEAVYATTACK_HURTBOXES = {
+    public final static HurtBox[] CROUCH_H_ATTACK_HURTBOXES = {
             new HurtBox(0,0,67,74),
             new HurtBox(0,0,83,91),
             new HurtBox(0,0,60,127),
@@ -247,7 +277,7 @@ public class RyuConstants {
             new HurtBox(0,0,67,74)
     };
 
-    public final static HitBox[] CROUCHHEAVYATTACK_HITBOXES = {
+    public final static HitBox[] CROUCH_H_ATTACK_HITBOXES = {
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0),
@@ -257,10 +287,16 @@ public class RyuConstants {
 
     };
 
-    public final static int[] CROUCHHEAVYATTACK_FRAMEHOLD = {3,3,2,6,2};
+    public final static int[] CROUCH_H_ATTACK_FRAMEHOLD = {3,3,2,6,2,2};
 
-    public final static Animation CROUCHHEAVYATTACK_ANIMATION = new Animation(
-            CROUCHATTACK_PATH, CROUCHHEAVYATTACK_SPRITES, CROUCHHEAVYATTACK_HURTBOXES, CROUCHHEAVYATTACK_HITBOXES, CROUCHHEAVYATTACK_FRAMEHOLD
+    public final static Animation CROUCH_H_ATTACK_ANIMATION = new Animation(
+            CROUCH_ATTACK_PATH, CROUCH_H_ATTACK_SPRITES, CROUCH_H_ATTACK_HURTBOXES, CROUCH_H_ATTACK_HITBOXES, CROUCH_H_ATTACK_FRAMEHOLD
+    );
+
+    public final static Move CROUCH_H_ATTACK = new Move(
+            CROUCH_H_ATTACK_ANIMATION,
+            new boolean[]{false,false,false,false,false,false},
+            new int[]{0,0,0,14,0,0}
     );
 
     public final static Rect[] SWEEP_SPRITES = {
@@ -294,7 +330,13 @@ public class RyuConstants {
     public final static int[] SWEEP_FRAMEHOLD = {3,3,2,6,2,2};
 
     public final static Animation SWEEP_ANIMATION = new Animation(
-            CROUCHATTACK_PATH, SWEEP_SPRITES, SWEEP_HURTBOXES, SWEEP_HITBOXES, SWEEP_FRAMEHOLD
+            CROUCH_ATTACK_PATH, SWEEP_SPRITES, SWEEP_HURTBOXES, SWEEP_HITBOXES, SWEEP_FRAMEHOLD
+    );
+
+    public final static Move SWEEP = new Move(
+            SWEEP_ANIMATION,
+            new boolean[]{false,false,false,false,false,false},
+            new int[]{0,0,0,14,0,0}
     );
 
 

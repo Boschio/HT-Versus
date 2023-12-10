@@ -11,10 +11,10 @@ public class CrouchingState extends State {
     public void enter() {
 //        fighter.isMoving = false;
         fighter.isCrouching = true;
-        fighter.pose = fighter.CROUCHING;
+        fighter.currAction = fighter.CROUCHING;
 //        fighter.vx = 0.0;
 
-        fighter.animator.changeAnimationTo(fighter.pose);
+        fighter.animator.changeAnimationTo(fighter.currAction);
     }
 
     public State input(KL e) {

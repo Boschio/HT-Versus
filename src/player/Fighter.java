@@ -7,6 +7,8 @@ import util.HitBox;
 import util.HurtBox;
 import util.io.PlayerControls;
 
+import static player.FighterConstants.*;
+
 import java.awt.*;
 import java.util.HashMap;
 
@@ -25,30 +27,32 @@ public class Fighter extends Entity {
     public final static String WALKFORWARD = "WALKFORWARD";
     public final static String WALKBACKWARD = "WALKBACKWARD";
     public final static String JUMP = "JUMP";
-    public final static String LIGHTATTACK = "LIGHTATTACK";
-    public final static String CROUCHLIGHTATTACK = "CROUCHLIGHTATTACK";
-    public final static String MEDIUMATTACK = "MEDIUMATTACK";
-    public final static String CROUCHMEDIUMATTACK = "CROUCHMEDIUMATTACK";
-    public final static String HEAVYATTACK = "HEAVYATTACK";
-    public final static String CROUCHHEAVYATTACK = "CROUCHHEAVYATTACK";
-    public final static String SWEEP = "SWEEP";
+    public final static String L_ATTACK = "5L";
+    public final static String CROUCH_L_ATTACK = "2L";
+    public final static String M_ATTACK = "5M";
+    public final static String CROUCH_M_ATTACK = "2M";
+    public final static String H_ATTACK = "5H";
+    public final static String CROUCH_H_ATTACK = "2H";
+    public final static String SWEEP = "1H";
 
 
-    public String pose = IDLE;
+    public String currAction = IDLE;
     public boolean isMoving = false;
     public boolean isCrouching = false;
 
     public final Animator animator;
 
-    public IdleState idleState;
-    public CrouchingState crouchingState;
-    public WalkForwardState walkForwardState;
-    public WalkBackwardState walkBackwardState;
-    public JumpState jumpState;
-    public LightAttackState lightAttackState;
-    public MediumAttackState mediumAttackState;
-    public HeavyAttackState heavyAttackState;
-    public State currentState;
+//    public IdleState idleState;
+//    public CrouchingState crouchingState;
+//    public WalkForwardState walkForwardState;
+//    public WalkBackwardState walkBackwardState;
+//    public JumpState jumpState;
+//    public LightAttackState lightAttackState;
+//    public MediumAttackState mediumAttackState;
+//    public HeavyAttackState heavyAttackState;
+//    public State currentState;
+
+    public StateManager stateManager;
 
     public HashMap<String, Move> MoveList;
 
@@ -59,29 +63,39 @@ public class Fighter extends Entity {
         this.controls = new PlayerControls(playerNum);
 
         this.animator = new Animator(0.150);
-        this.idleState = new IdleState(this);
-        this.crouchingState = new CrouchingState(this);
-        this.walkForwardState = new WalkForwardState(this);
-        this.walkBackwardState = new WalkBackwardState(this);
-        this.jumpState = new JumpState(this);
-        this.lightAttackState = new LightAttackState(this);
-        this.mediumAttackState = new MediumAttackState(this);
-        this.heavyAttackState = new HeavyAttackState(this);
+//        this.idleState = new IdleState(this);
+//        this.crouchingState = new CrouchingState(this);
+//        this.walkForwardState = new WalkForwardState(this);
+//        this.walkBackwardState = new WalkBackwardState(this);
+//        this.jumpState = new JumpState(this);
+//        this.lightAttackState = new LightAttackState(this);
+//        this.mediumAttackState = new MediumAttackState(this);
+//        this.heavyAttackState = new HeavyAttackState(this);
+//
+//        this.currentState = idleState;
 
-        this.currentState = idleState;
+        stateManager = new StateManager(this);
 
-        animator.addAnimation(FighterConstants.IDLE_ANIMATIONS[character.value], "IDLE");
-        animator.addAnimation(FighterConstants.CROUCHING_ANIMATIONS[character.value], "CROUCHING");
-        animator.addAnimation(FighterConstants.WALKFORWARD_ANIMATIONS[character.value], "WALKFORWARD");
-        animator.addAnimation(FighterConstants.WALKBACKWARD_ANIMATIONS[character.value], "WALKBACKWARD");
-        animator.addAnimation(FighterConstants.LIGHTATTACK_ANIMATIONS[character.value], "LIGHTATTACK");
-        animator.addAnimation(FighterConstants.MEDIUMATTACK_ANIMATIONS[character.value], "MEDIUMATTACK");
-        animator.addAnimation(FighterConstants.HEAVYATTACK_ANIMATIONS[character.value], "HEAVYATTACK");
+        animator.addAnimation(IDLE_ANIMATIONS[character.ordinal()], IDLE);
+        animator.addAnimation(CROUCHING_ANIMATIONS[character.ordinal()], CROUCHING);
+        animator.addAnimation(WALKFORWARD_ANIMATIONS[character.ordinal()], WALKFORWARD);
+        animator.addAnimation(WALKBACKWARD_ANIMATIONS[character.ordinal()], WALKBACKWARD);
+        animator.addAnimation(L_ATTACK_ANIMATIONS[character.ordinal()], L_ATTACK);
+        animator.addAnimation(M_ATTACK_ANIMATIONS[character.ordinal()], M_ATTACK);
+        animator.addAnimation(H_ATTACK_ANIMATIONS[character.ordinal()], H_ATTACK);
 
-        animator.addAnimation(FighterConstants.CROUCHLIGHTATTACK_ANIMATIONS[character.value], "CROUCHLIGHTATTACK");
-        animator.addAnimation(FighterConstants.CROUCHMEDIUMATTACK_ANIMATIONS[character.value], "CROUCHMEDIUMATTACK");
-        animator.addAnimation(FighterConstants.CROUCHHEAVYATTACK_ANIMATIONS[character.value], "CROUCHHEAVYATTACK");
-        animator.addAnimation(FighterConstants.SWEEP_ANIMATIONS[character.value], "SWEEP");
+        animator.addAnimation(CROUCH_L_ATTACK_ANIMATIONS[character.ordinal()], CROUCH_L_ATTACK);
+        animator.addAnimation(CROUCH_M_ATTACK_ANIMATIONS[character.ordinal()], CROUCH_M_ATTACK);
+        animator.addAnimation(CROUCH_H_ATTACK_ANIMATIONS[character.ordinal()], CROUCH_H_ATTACK);
+        animator.addAnimation(SWEEP_ANIMATIONS[character.ordinal()], SWEEP);
+
+        MoveList.put(L_ATTACK, L_ATTACKS[character.ordinal()]);
+        MoveList.put(M_ATTACK, M_ATTACKS[character.ordinal()]);
+        MoveList.put(H_ATTACK, H_ATTACKS[character.ordinal()]);
+        MoveList.put(CROUCH_L_ATTACK, CROUCH_L_ATTACKS[character.ordinal()]);
+        MoveList.put(CROUCH_M_ATTACK, CROUCH_M_ATTACKS[character.ordinal()]);
+        MoveList.put(CROUCH_H_ATTACK, CROUCH_H_ATTACKS[character.ordinal()]);
+        MoveList.put(SWEEP, SWEEPS[character.ordinal()]);
 
         if (playerNum == 2) {
             isFacingLeft = true;
@@ -89,10 +103,10 @@ public class Fighter extends Entity {
 
     }
 
-    public void changeState(State newState) {
-        currentState = newState;
-        currentState.enter();
-    }
+//    public void changeState(State newState) {
+//        currentState = newState;
+//        currentState.enter();
+//    }
 
     public HurtBox getHurtBox() {
         int w = (int) (animator.getCurrentHurtBox().w * animator.getCurrentAnimation().scaleFactor);
@@ -124,10 +138,11 @@ public class Fighter extends Entity {
     }
 
     public void update(double deltaTime){
-        State newState = currentState.update(deltaTime);
-        if (newState != null) {
-            changeState(newState);
-        }
+//        State newState = currentState.update(deltaTime);
+//        if (newState != null) {
+//            changeState(newState);
+//        }
+        stateManager.update(deltaTime);
         animator.update(deltaTime);
 
 //        System.out.println("Current State: " + currentState.toString());

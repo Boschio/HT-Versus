@@ -35,3 +35,66 @@
 //        fighter.isAttacking = true;
 //    }
 //}
+
+package player.states;
+
+import player.Fighter;
+import util.io.KL;
+
+public class AttackState extends State{
+
+    public AttackState(Fighter fighter) {
+        super(fighter);
+    }
+
+    public void enter(Object props) {
+        fighter.isAttacking = true;
+        fighter.stateManager.stateLock = true;
+
+        fighter.MoveList.get(fighter.currAction);
+
+        if (fighter.isCrouching && fighter.controls.keyListener.isKeyDown(fighter.controls.CROUCH)) {
+            if (fighter.controls.keyListener.isKeyDown(fighter.controls.L_ATTACK)) {
+                fighter.currAction = fighter.CROUCH_L_ATTACK;
+            }
+            if (fighter.controls.keyListener.isKeyDown(fighter.controls.M_ATTACK)) {
+                fighter.currAction = fighter.CROUCH_M_ATTACK;
+            }
+            if (!fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT) && fighter.controls.keyListener.isKeyDown(fighter.controls.H_ATTACK)) {
+                fighter.currAction = fighter.CROUCH_H_ATTACK;
+            }
+            if (fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT) && fighter.controls.keyListener.isKeyDown(fighter.controls.H_ATTACK)) {
+                fighter.currAction = fighter.SWEEP;
+            }
+        } else {
+            if (fighter.controls.keyListener.isKeyDown(fighter.controls.L_ATTACK)) {
+                fighter.currAction = fighter.L_ATTACK;
+            }
+            if (fighter.controls.keyListener.isKeyDown(fighter.controls.M_ATTACK)) {
+                fighter.currAction = fighter.M_ATTACK;
+            }
+            if (fighter.controls.keyListener.isKeyDown(fighter.controls.H_ATTACK)) {
+                fighter.currAction = fighter.H_ATTACK;
+            }
+
+        }
+        fighter.animator.changeAnimationTo(fighter.currAction);
+    }
+
+    public State input(KL e) {
+        return null;
+    }
+
+    public State update(double deltaTime) {
+        if (fighter.animator.getCurrentFrameIndex() == fighter.animator.getCurrentAnimation().getAnimationLength()-1) {
+            fighter.stateManager.stateLock = false;
+            fighter.isKeyPressed = false;
+            fighter.isAttacking = false;
+            fighter.stateManager.changeState(fighter.stateManager.idleState);
+        }
+    }
+
+    private void HandleAttack(Fighter fighter){
+        fighter.isAttacking = true;
+    }
+}

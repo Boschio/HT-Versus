@@ -18,7 +18,7 @@ public class JumpState extends State {
     }
 
     public State update(double deltaTime) {
-        fighter.pose = fighter.JUMP;
+        fighter.currAction = fighter.JUMP;
 
         fighter.y += fighter.vy * deltaTime;
         fighter.vy += fighter.ay * deltaTime;

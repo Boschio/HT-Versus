@@ -51,16 +51,16 @@ public class EditorScene extends Scene {
             player1.animator.debugChangeAnimation(player1.WALKFORWARD);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_J)){
-            player1.animator.debugChangeAnimation(player1.LIGHTATTACK);
+            player1.animator.debugChangeAnimation(player1.L_ATTACK);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_K)){
-            player1.animator.debugChangeAnimation(player1.MEDIUMATTACK);
+            player1.animator.debugChangeAnimation(player1.M_ATTACK);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_COMMA)){
-            player1.animator.debugChangeAnimation(player1.CROUCHMEDIUMATTACK);
+            player1.animator.debugChangeAnimation(player1.CROUCH_M_ATTACK);
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_L)){
-            player1.animator.debugChangeAnimation(player1.HEAVYATTACK);
+            player1.animator.debugChangeAnimation(player1.H_ATTACK);
         }
 
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_LEFT) && keyDown == false) {
