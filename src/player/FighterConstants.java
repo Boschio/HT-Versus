@@ -58,6 +58,10 @@ public class FighterConstants {
             RyuConstants.SWEEP_ANIMATION
     };
 
+    static Animation[] SHORYUKEN_ANIMATIONS = {
+            RyuConstants.SHORYUKEN_ANIMATION
+    };
+
 
     static Move[] L_ATTACKS = {
             RyuConstants.L_ATTACK
@@ -79,6 +83,10 @@ public class FighterConstants {
     };
     static Move[] SWEEPS = {
             RyuConstants.SWEEP
+    };
+
+    static Move[] SHORYUKENS = {
+            RyuConstants.SHORYUKEN
     };
 
     public static final double FLOOR = WindowConstants.SCREEN_HEIGHT - (WindowConstants.SCREEN_HEIGHT * .10);

@@ -14,28 +14,27 @@ public class CrouchingState extends State {
         fighter.currAction = fighter.CROUCHING;
 //        fighter.vx = 0.0;
 
-        fighter.animator.changeAnimationTo(fighter.currAction);
-    }
-
-    public State input(KL e) {
-
-        return null;
+//        if (fighter.prevState != fighter.currentState) {
+            fighter.animator.changeAnimationTo(fighter.currAction);
+//        }
     }
 
     public State update(double deltaTime) {
+
         if (!fighter.controls.keyListener.isKeyDown(fighter.controls.CROUCH)) {
             return fighter.idleState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.L_ATTACK)) {
-            return fighter.lightAttackState;
+            return fighter.attackState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.M_ATTACK)) {
-            return fighter.mediumAttackState;
+            return fighter.attackState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.H_ATTACK)) {
-            return fighter.heavyAttackState;
+            return fighter.attackState;
         }
-        return fighter.crouchingState;
+
+        return null;
     }
 
 }

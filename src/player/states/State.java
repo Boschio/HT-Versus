@@ -18,7 +18,7 @@ public abstract class State {
     }
 
     public State update(double deltaTime) {
-        return null;
+        return this;
     }
 
 //    State physicsProcess(double deltaTime);

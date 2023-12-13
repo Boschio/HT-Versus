@@ -1,7 +1,5 @@
 package util.io;
 
-import player.states.State;
-
 import java.awt.event.KeyEvent;
 
 public class PlayerControls {
@@ -16,6 +14,17 @@ public class PlayerControls {
     public int M_ATTACK;
     public int H_ATTACK;
 
+    public int S_ATTACK;
+
+//    public int JUMP = KeyEvent.VK_W;
+//    public int LEFT = KeyEvent.VK_A;
+//    public int CROUCH = KeyEvent.VK_S;
+//    public int RIGHT = KeyEvent.VK_D;
+//
+//    public int L_ATTACK = KeyEvent.VK_J;
+//    public int M_ATTACK = KeyEvent.VK_K;
+//    public int H_ATTACK = KeyEvent.VK_L;
+
     public PlayerControls(int playerNum) {
         switch (playerNum) {
             case 1:
@@ -27,6 +36,8 @@ public class PlayerControls {
                 L_ATTACK = KeyEvent.VK_J;
                 M_ATTACK = KeyEvent.VK_K;
                 H_ATTACK = KeyEvent.VK_L;
+                S_ATTACK = KeyEvent.VK_SEMICOLON;
+
                 break;
             case 2:
                 JUMP = KeyEvent.VK_UP;
@@ -34,9 +45,10 @@ public class PlayerControls {
                 CROUCH = KeyEvent.VK_DOWN;
                 RIGHT = KeyEvent.VK_RIGHT;
 
-                L_ATTACK = KeyEvent.VK_I;
-                M_ATTACK = KeyEvent.VK_O;
-                H_ATTACK = KeyEvent.VK_P;
+                L_ATTACK = KeyEvent.VK_U;
+                M_ATTACK = KeyEvent.VK_I;
+                H_ATTACK = KeyEvent.VK_O;
+                S_ATTACK = KeyEvent.VK_P;
                 break;
 
         }

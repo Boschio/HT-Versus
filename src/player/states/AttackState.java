@@ -1,6 +1,6 @@
 //package player.states;
 //
-//import player.FighterOld;
+//import player.Fighter;
 //import util.io.KL;
 //
 //public class AttackState extends State{
@@ -41,17 +41,15 @@ package player.states;
 import player.Fighter;
 import util.io.KL;
 
-public class AttackState extends State{
+public class AttackState extends State {
 
     public AttackState(Fighter fighter) {
         super(fighter);
     }
 
-    public void enter(Object props) {
+    public void enter() {
         fighter.isAttacking = true;
-        fighter.stateManager.stateLock = true;
-
-        fighter.MoveList.get(fighter.currAction);
+//        fighter.stateManager.stateLock = true;
 
         if (fighter.isCrouching && fighter.controls.keyListener.isKeyDown(fighter.controls.CROUCH)) {
             if (fighter.controls.keyListener.isKeyDown(fighter.controls.L_ATTACK)) {
@@ -78,20 +76,20 @@ public class AttackState extends State{
             }
 
         }
-        fighter.animator.changeAnimationTo(fighter.currAction);
-    }
 
-    public State input(KL e) {
-        return null;
+        fighter.MoveList.get(fighter.currAction);
+        fighter.animator.changeAnimationTo(fighter.currAction);
+
     }
 
     public State update(double deltaTime) {
-        if (fighter.animator.getCurrentFrameIndex() == fighter.animator.getCurrentAnimation().getAnimationLength()-1) {
-            fighter.stateManager.stateLock = false;
-            fighter.isKeyPressed = false;
-            fighter.isAttacking = false;
-            fighter.stateManager.changeState(fighter.stateManager.idleState);
+        if(fighter.animator.getCurrentFrameIndex() >= fighter.animator.getCurrentAnimation().getAnimationLength()-1) {
+            return fighter.idleState;
         }
+        if(fighter.controls.keyListener.isKeyHeld())
+            return null;
+//        HandleAttack(fighter);
+        return null;
     }
 
     private void HandleAttack(Fighter fighter){

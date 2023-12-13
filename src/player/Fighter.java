@@ -13,14 +13,23 @@ import java.awt.*;
 import java.util.HashMap;
 
 public class Fighter extends Entity {
+
+    public enum states {
+        idle, crouching, walkforward, walkbackward, jump, attack, specialattack
+    }
+
+//    public States currentState;
     public int jumpHeight = 650;
     public final static double gravity = 1500;
     public double ay = gravity;
     public boolean isAttacking = false;
+    public boolean isMoving = false;
+    public boolean isCrouching = false;
 
     public boolean isFacingLeft = false;
 
     public PlayerControls controls;
+    public InputBuffer inputBuffer;
 
     public final static String IDLE = "IDLE";
     public final static String CROUCHING = "CROUCHING";
@@ -35,24 +44,25 @@ public class Fighter extends Entity {
     public final static String CROUCH_H_ATTACK = "2H";
     public final static String SWEEP = "1H";
 
+    public final static String S_ATTACK = "5S";
+
+
 
     public String currAction = IDLE;
-    public boolean isMoving = false;
-    public boolean isCrouching = false;
 
     public final Animator animator;
 
-//    public IdleState idleState;
-//    public CrouchingState crouchingState;
-//    public WalkForwardState walkForwardState;
-//    public WalkBackwardState walkBackwardState;
-//    public JumpState jumpState;
-//    public LightAttackState lightAttackState;
-//    public MediumAttackState mediumAttackState;
-//    public HeavyAttackState heavyAttackState;
-//    public State currentState;
+    public IdleState idleState;
+    public CrouchingState crouchingState;
+    public WalkForwardState walkForwardState;
+    public WalkBackwardState walkBackwardState;
+    public JumpState jumpState;
+    public AttackState attackState;
+    public SpecialAttackState specialAttackState;
 
-    public StateManager stateManager;
+
+
+    public State currentState;
 
     public HashMap<String, Move> MoveList;
 
@@ -61,20 +71,20 @@ public class Fighter extends Entity {
         super((int) (playerNum == 1 ? FighterConstants.PLAYER1_START_X : FighterConstants.PLAYER2_START_X), (int) FighterConstants.PLAYER_START_Y-100, 80, 80, 100);
 
         this.controls = new PlayerControls(playerNum);
+        this.inputBuffer = new InputBuffer();
 
         this.animator = new Animator(0.150);
-//        this.idleState = new IdleState(this);
-//        this.crouchingState = new CrouchingState(this);
-//        this.walkForwardState = new WalkForwardState(this);
-//        this.walkBackwardState = new WalkBackwardState(this);
-//        this.jumpState = new JumpState(this);
-//        this.lightAttackState = new LightAttackState(this);
-//        this.mediumAttackState = new MediumAttackState(this);
-//        this.heavyAttackState = new HeavyAttackState(this);
-//
-//        this.currentState = idleState;
+        this.idleState = new IdleState(this);
+        this.crouchingState = new CrouchingState(this);
+        this.walkForwardState = new WalkForwardState(this);
+        this.walkBackwardState = new WalkBackwardState(this);
+        this.jumpState = new JumpState(this);
+        this.attackState = new AttackState(this);
+        this.specialAttackState = new SpecialAttackState(this);
 
-        stateManager = new StateManager(this);
+        this.MoveList = new HashMap<>();
+
+        this.currentState = idleState;
 
         animator.addAnimation(IDLE_ANIMATIONS[character.ordinal()], IDLE);
         animator.addAnimation(CROUCHING_ANIMATIONS[character.ordinal()], CROUCHING);
@@ -88,6 +98,7 @@ public class Fighter extends Entity {
         animator.addAnimation(CROUCH_M_ATTACK_ANIMATIONS[character.ordinal()], CROUCH_M_ATTACK);
         animator.addAnimation(CROUCH_H_ATTACK_ANIMATIONS[character.ordinal()], CROUCH_H_ATTACK);
         animator.addAnimation(SWEEP_ANIMATIONS[character.ordinal()], SWEEP);
+        animator.addAnimation(SHORYUKEN_ANIMATIONS[character.ordinal()],S_ATTACK);
 
         MoveList.put(L_ATTACK, L_ATTACKS[character.ordinal()]);
         MoveList.put(M_ATTACK, M_ATTACKS[character.ordinal()]);
@@ -96,17 +107,13 @@ public class Fighter extends Entity {
         MoveList.put(CROUCH_M_ATTACK, CROUCH_M_ATTACKS[character.ordinal()]);
         MoveList.put(CROUCH_H_ATTACK, CROUCH_H_ATTACKS[character.ordinal()]);
         MoveList.put(SWEEP, SWEEPS[character.ordinal()]);
+        MoveList.put(S_ATTACK, SHORYUKENS[character.ordinal()]);
 
         if (playerNum == 2) {
             isFacingLeft = true;
         }
 
     }
-
-//    public void changeState(State newState) {
-//        currentState = newState;
-//        currentState.enter();
-//    }
 
     public HurtBox getHurtBox() {
         int w = (int) (animator.getCurrentHurtBox().w * animator.getCurrentAnimation().scaleFactor);
@@ -137,15 +144,25 @@ public class Fighter extends Entity {
         return new HitBox(x,y,w,h);
     }
 
-    public void update(double deltaTime){
-//        State newState = currentState.update(deltaTime);
-//        if (newState != null) {
-//            changeState(newState);
-//        }
-        stateManager.update(deltaTime);
-        animator.update(deltaTime);
+    public void changeState(State newState) {
+        currentState = newState;
+        currentState.enter();
+    }
 
-//        System.out.println("Current State: " + currentState.toString());
+    public void update(double deltaTime){
+        inputBuffer.addInput(currAction);
+
+//        boolean hasSequence = inputBuffer.isInputSequence(CROUCHING,WALKFORWARD,L_ATTACK);
+        if (inputBuffer.isInputSequence(CROUCHING,WALKFORWARD,L_ATTACK)) {
+            System.out.println("Input buffer has sequence!");
+        }
+
+        State newState = currentState.update(deltaTime);
+        if (newState != null) {
+            changeState(newState);
+        }
+
+        animator.update(deltaTime);
     }
 
     public void draw(Graphics g){

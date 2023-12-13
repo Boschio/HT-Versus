@@ -6,17 +6,18 @@ import java.awt.event.KeyListener;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class KL extends KeyAdapter implements KeyListener
-{
+public class KL extends KeyAdapter implements KeyListener {
     /**stores the state of keys being pressed*/
     private Dictionary<Integer,Boolean> keyPressedDictionary = new Hashtable<>();
 
     private static KL keyListener = null;
+    public int currKeyPressed = -1;
+
 
 
     /**
      * <p>
-     * Creates singleton Instance of the util.io.KL class to be used across the entire program
+     * Creates singleton Instance of the util.io.KeyListener class to be used across the entire program
      *</p>
      * @return      The Singleton instance
      */
@@ -27,26 +28,31 @@ public class KL extends KeyAdapter implements KeyListener
         return KL.keyListener;
     }
 
+
     /**
      * <p>
      *sets the entry of the keyEvent in the dictionary to true when the key is pressed
      *</p>
-    */
+     */
     @Override
     public void keyPressed(KeyEvent e){
-
+        currKeyPressed = e.getKeyCode();
         keyPressedDictionary.put(e.getKeyCode(),true);
-
     }
 
     /**
      * <p>
      * sets the entry of the keyEvent in the dictionary to false when the key is released
      * </p>
-    */
+     */
     @Override
     public void keyReleased(KeyEvent e) {
+        currKeyPressed = -1;
         keyPressedDictionary.put(e.getKeyCode(),false);
+    }
+
+    public boolean isKeyHeld() {
+        return currKeyPressed == -1 ? false : true;
     }
 
 
@@ -64,7 +70,7 @@ public class KL extends KeyAdapter implements KeyListener
     public boolean isKeyDown(int keyCode){
 
         try{
-           return keyPressedDictionary.get(keyCode);
+            return keyPressedDictionary.get(keyCode);
         }catch (Exception e){
             return  false;
         }

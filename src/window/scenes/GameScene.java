@@ -33,6 +33,9 @@ public class GameScene extends Scene{
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_3)) {
             Time.setDebugSpeed(20);
         }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_4)) {
+            Time.setDebugSpeed(5);
+        }
     }
 
     private void playerUpdate(double deltaTime) {
@@ -80,7 +83,6 @@ public class GameScene extends Scene{
 
             hitDetection();
 
-
         }
 
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE)){
@@ -110,8 +112,16 @@ public class GameScene extends Scene{
         Font myFont = new Font ("Courier New", 1, 17);
         g.setFont(myFont);
 
-        g.drawString(String.format("player1 x position: %2f", player1.x),WindowConstants.SCREEN_WIDTH-1000, (int) (WindowConstants.INSET_SIZE*1.5));
-        g.drawString(String.format("player2 x position: %2f", player2.x),WindowConstants.SCREEN_WIDTH-500, (int) (WindowConstants.INSET_SIZE*1.5));
+        g.drawString(String.format("player1 x,y: %2f,%2f", player1.x,player1.y),WindowConstants.SCREEN_WIDTH-1000, (int) (WindowConstants.INSET_SIZE*1.5));
+        g.drawString(String.format("player2 x,y: %2f,%2f", player2.x,player2.y),WindowConstants.SCREEN_WIDTH-500, (int) (WindowConstants.INSET_SIZE*1.5));
+//        g.drawString(String.format("Current Frame,AnimationLength: %d,%d", player1.animator.getCurrentFrameIndex()+1,player1.animator.getCurrentAnimation().getAnimationLength()),WindowConstants.SCREEN_WIDTH-600, (int) (WindowConstants.INSET_SIZE*1.5));
+
+        int insetGap = 18;
+        for (int i=0;i<player1.inputBuffer.buffer.size();i++) {
+            int insetOffset = 18;
+            g.drawString(String.format("Buffer: %s",player1.inputBuffer.buffer.get(i)),10, (int) (WindowConstants.INSET_SIZE*1.5)+insetGap);
+            insetGap += insetOffset;
+        }
 
     }
 }

@@ -12,8 +12,8 @@ public class IdleState extends State {
     public void enter() {
         fighter.isMoving = false;
         fighter.isCrouching = false;
-        fighter.currAction = fighter.IDLE;
         fighter.vx = 0.0;
+        fighter.currAction = fighter.IDLE;
 
         fighter.animator.changeAnimationTo(fighter.currAction);
     }
@@ -26,30 +26,34 @@ public class IdleState extends State {
     }
 
     public State update(double deltaTime) {
+
         if (fighter.controls.keyListener.isKeyDown(fighter.controls.CROUCH)) {
-            return fighter.stateManager.crouchingState;
+            return fighter.crouchingState;
         }
         if (fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT)) {
-            return fighter.stateManager.walkBackwardState;
+            return fighter.walkBackwardState;
         }
         if (fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)) {
-            return fighter.stateManager.walkForwardState;
+            return fighter.walkForwardState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.JUMP)){
-            return fighter.stateManager.jumpState;
+            return fighter.jumpState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.JUMP) && fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)){
-//            return fighter.stateManager.jumpForwardState;
+//            fighter.currentState = Fighter.States.jumpForward;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.L_ATTACK)) {
-            return fighter.stateManager.attackState;
+            return fighter.attackState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.M_ATTACK)) {
-            return fighter.stateManager.attackState;
+            return fighter.attackState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.H_ATTACK)) {
-            return fighter.stateManager.attackState;
+            return fighter.attackState;
         }
-        return this;
+        if(fighter.controls.keyListener.isKeyDown(fighter.controls.S_ATTACK)) {
+            return fighter.specialAttackState;
+        }
+        return null;
     }
 }

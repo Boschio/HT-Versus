@@ -339,5 +339,59 @@ public class RyuConstants {
             new int[]{0,0,0,14,0,0}
     );
 
+    public final static String SHORYUKEN_PATH = "./src/images/Ryu/ryu_shoryuken.png";
+
+
+    public final static Rect[] SHORYUKEN_SPRITES = {
+            new Rect(0,44,66,86),
+            new Rect(70,40,78,90),
+            new Rect(152,0,62,130),
+            new Rect(218,0,55,121),
+            new Rect(277,4,59,117),
+            new Rect(340,30,62,100),
+            new Rect(406,58,62,72),
+            new Rect(472,65,62,65),
+            new Rect(538,58,62,72),
+            new Rect(604,41,63,89)
+    };
+
+    public final static HurtBox[] SHORYUKEN_HURTBOXES = {
+            new HurtBox(0,0,66,86),
+            new HurtBox(0,0,78,90),
+            new HurtBox(0,0,62,130),
+            new HurtBox(0,0,55,121),
+            new HurtBox(0,0,59,117),
+            new HurtBox(0,0,62,100),
+            new HurtBox(0,0,62,72),
+            new HurtBox(0,0,62,65),
+            new HurtBox(0,0,62,72),
+            new HurtBox(0,0,63,89)
+    };
+
+    public final static HitBox[] SHORYUKEN_HITBOXES = {
+            new HitBox(0,0,0,0),
+            new HitBox(0,0,0,0),
+            new HitBox(0,0,0,0),
+            new HitBox(86, -193, 64, 17),
+            new HitBox(0,0,0,0),
+            new HitBox(0,0,0,0),
+            new HitBox(0,0,0,0),
+            new HitBox(0,0,0,0),
+            new HitBox(0,0,0,0),
+            new HitBox(0,0,0,0)
+
+    };
+
+    public final static int[] SHORYUKEN_FRAMEHOLD = {6,10,12,9,6,5,3,3,3,3};
+
+    public final static Animation SHORYUKEN_ANIMATION = new Animation(
+            SHORYUKEN_PATH, SHORYUKEN_SPRITES, SHORYUKEN_HURTBOXES, SHORYUKEN_HITBOXES, SHORYUKEN_FRAMEHOLD
+    );
+
+    public final static Move SHORYUKEN = new Move(
+            SHORYUKEN_ANIMATION,
+            new boolean[]{false,false,false,false,false,false,false,false,false,false},
+            new int[]{0,0,0,14,0,0,0,0,0,0}
+    );
 
 }
