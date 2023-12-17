@@ -6,6 +6,8 @@ import player.Player;
 import util.Time;
 import util.io.KL;
 import window.WindowConstants;
+import window.stage.Camera;
+import window.stage.Stage;
 import window.ui.pauseScreen;
 
 import java.awt.*;
@@ -13,15 +15,26 @@ import java.awt.event.KeyEvent;
 
 public class GameScene extends Scene{
 
-
     private int _frameRate = 0;
     private String _displayInfo = "";
 
     private pauseScreen pauseScreen = new pauseScreen();
     private boolean isPaused = false;
 
-    Player player1 = new Player(1, FighterConstants.Characters.Ryu);
-    Player player2 = new Player(2, FighterConstants.Characters.Ryu);
+    Stage stage;
+    Player p1;
+    Player p2;
+
+    Camera camera;
+
+    public GameScene() {
+        stage = new Stage("akuma");
+
+        p1 = new Player(1, FighterConstants.Characters.Ryu);
+        p2 = new Player(2, FighterConstants.Characters.Ryu);
+
+        this.camera = new Camera(p1,p2,stage);
+    }
 
     private static void debugGameSpeed() {
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_1)) {
@@ -39,32 +52,32 @@ public class GameScene extends Scene{
     }
 
     private void playerUpdate(double deltaTime) {
-        if (player1.x < player2.x) {
-            player1.isFacingLeft = false;
-            player2.isFacingLeft = true;
+        if (p1.x < p2.x) {
+            p1.isFacingLeft = false;
+            p2.isFacingLeft = true;
         } else {
-            player1.isFacingLeft = true;
-            player2.isFacingLeft = false;
+            p1.isFacingLeft = true;
+            p2.isFacingLeft = false;
         }
-        player1.update(deltaTime);
-        player2.update(deltaTime);
+        p1.update(deltaTime);
+        p2.update(deltaTime);
     }
 
     private void hitDetection() {
-        if(player1.isAttacking && player1.animator.getCurrentHitBox() != null) {
-            if(player1.getHitBox().overlaps(player2.getHurtBox())) {
+        if(p1.isAttacking && p1.animator.getCurrentHitBox() != null) {
+            if(p1.getHitBox().overlaps(p2.getHurtBox())) {
                 System.out.println("P2 HIT!");
-                player2.takeDamage(10);
+                p2.takeDamage(10);
             }
         }
-        if(player2.isAttacking && player2.animator.getCurrentHitBox() != null) {
-            if(player2.getHitBox().overlaps(player1.getHurtBox())) {
+        if(p2.isAttacking && p2.animator.getCurrentHitBox() != null) {
+            if(p2.getHitBox().overlaps(p1.getHurtBox())) {
                 System.out.println("P1 HIT!");
-                player1.takeDamage(10);
+                p1.takeDamage(10);
             }
         }
 
-        if (player2.isToBeDestroyed()) {
+        if (p2.isToBeDestroyed()) {
 //            Window.getWindow().changeState(WindowConstants.MENU_SCENE);
         }
     }
@@ -79,6 +92,7 @@ public class GameScene extends Scene{
         } else {
             debugGameSpeed();
 
+            camera.update(deltaTime);
             playerUpdate(deltaTime);
 
             hitDetection();
@@ -95,11 +109,14 @@ public class GameScene extends Scene{
     public void draw(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(0,0, WindowConstants.SCREEN_WIDTH, WindowConstants.SCREEN_HEIGHT);
+
+        stage.draw(g);
+
         g.setColor(Color.RED);
         g.drawString(_displayInfo,10, (int) (WindowConstants.INSET_SIZE*1.5));
 
-        player1.draw(g);
-        player2.draw(g);
+        p1.draw(g);
+        p2.draw(g);
         if (isPaused) {
             pauseScreen.draw(g);
         }
@@ -112,14 +129,14 @@ public class GameScene extends Scene{
         Font myFont = new Font ("Courier New", 1, 17);
         g.setFont(myFont);
 
-        g.drawString(String.format("player1 x,y: %2f,%2f", player1.x,player1.y),WindowConstants.SCREEN_WIDTH-1000, (int) (WindowConstants.INSET_SIZE*1.5));
-        g.drawString(String.format("player2 x,y: %2f,%2f", player2.x,player2.y),WindowConstants.SCREEN_WIDTH-500, (int) (WindowConstants.INSET_SIZE*1.5));
+        g.drawString(String.format("player1 x,y: %2f,%2f", p1.x, p1.y),WindowConstants.SCREEN_WIDTH-1000, (int) (WindowConstants.INSET_SIZE*1.5));
+        g.drawString(String.format("player2 x,y: %2f,%2f", p2.x, p2.y),WindowConstants.SCREEN_WIDTH-500, (int) (WindowConstants.INSET_SIZE*1.5));
 //        g.drawString(String.format("Current Frame,AnimationLength: %d,%d", player1.animator.getCurrentFrameIndex()+1,player1.animator.getCurrentAnimation().getAnimationLength()),WindowConstants.SCREEN_WIDTH-600, (int) (WindowConstants.INSET_SIZE*1.5));
 
         int insetGap = 18;
-        for (int i=0;i<player1.inputBuffer.buffer.size();i++) {
+        for (int i = 0; i< p1.inputBuffer.buffer.size(); i++) {
             int insetOffset = 18;
-            g.drawString(String.format("Buffer: %s",player1.inputBuffer.buffer.get(i)),10, (int) (WindowConstants.INSET_SIZE*1.5)+insetGap);
+            g.drawString(String.format("Buffer: %s", p1.inputBuffer.buffer.get(i)),10, (int) (WindowConstants.INSET_SIZE*1.5)+insetGap);
             insetGap += insetOffset;
         }
 
