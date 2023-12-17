@@ -1,3 +1,0 @@
-crouching0,0,0,63,89
-crouching1,67,17,62,72
-crouching2,133,24,62,65

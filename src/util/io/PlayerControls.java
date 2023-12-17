@@ -16,14 +16,6 @@ public class PlayerControls {
 
     public int S_ATTACK;
 
-//    public int JUMP = KeyEvent.VK_W;
-//    public int LEFT = KeyEvent.VK_A;
-//    public int CROUCH = KeyEvent.VK_S;
-//    public int RIGHT = KeyEvent.VK_D;
-//
-//    public int L_ATTACK = KeyEvent.VK_J;
-//    public int M_ATTACK = KeyEvent.VK_K;
-//    public int H_ATTACK = KeyEvent.VK_L;
 
     public PlayerControls(int playerNum) {
         switch (playerNum) {

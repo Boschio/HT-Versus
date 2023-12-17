@@ -26,15 +26,14 @@ public class IdleState extends State {
     }
 
     public State update(double deltaTime) {
-
+        if (fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT) && fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)) {
+            return null;
+        }
+        if (fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT) || fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)) {
+            return fighter.moveState;
+        }
         if (fighter.controls.keyListener.isKeyDown(fighter.controls.CROUCH)) {
             return fighter.crouchingState;
-        }
-        if (fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT)) {
-            return fighter.walkBackwardState;
-        }
-        if (fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)) {
-            return fighter.walkForwardState;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.JUMP)){
             return fighter.jumpState;

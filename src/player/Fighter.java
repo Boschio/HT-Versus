@@ -6,6 +6,7 @@ import player.states.*;
 import util.HitBox;
 import util.HurtBox;
 import util.io.PlayerControls;
+import window.WindowConstants;
 
 import static player.FighterConstants.*;
 
@@ -18,7 +19,6 @@ public class Fighter extends Entity {
         idle, crouching, walkforward, walkbackward, jump, attack, specialattack
     }
 
-//    public States currentState;
     public int jumpHeight = 650;
     public final static double gravity = 1500;
     public double ay = gravity;
@@ -43,7 +43,6 @@ public class Fighter extends Entity {
     public final static String H_ATTACK = "5H";
     public final static String CROUCH_H_ATTACK = "2H";
     public final static String SWEEP = "1H";
-
     public final static String S_ATTACK = "5S";
 
 
@@ -54,12 +53,10 @@ public class Fighter extends Entity {
 
     public IdleState idleState;
     public CrouchingState crouchingState;
-    public WalkForwardState walkForwardState;
-    public WalkBackwardState walkBackwardState;
+    public MoveState moveState;
     public JumpState jumpState;
     public AttackState attackState;
     public SpecialAttackState specialAttackState;
-
 
 
     public State currentState;
@@ -68,7 +65,7 @@ public class Fighter extends Entity {
 
 
     public Fighter(int playerNum, FighterConstants.Characters character){
-        super((int) (playerNum == 1 ? FighterConstants.PLAYER1_START_X : FighterConstants.PLAYER2_START_X), (int) FighterConstants.PLAYER_START_Y-100, 80, 80, 100);
+        super((int) (playerNum == 1 ? FighterConstants.PLAYER_START - 300 + IDLE_ANIMATIONS[character.ordinal()].getFrame(0).getIconWidth()/2 : FighterConstants.PLAYER_START + 300 - IDLE_ANIMATIONS[character.ordinal()].getFrame(0).getIconWidth()/2), (int) FighterConstants.PLAYER_START_Y, IDLE_ANIMATIONS[character.ordinal()].getFrame(0).getIconWidth()/2, IDLE_ANIMATIONS[character.ordinal()].getFrame(0).getIconHeight()/2, 100);
 
         this.controls = new PlayerControls(playerNum);
         this.inputBuffer = new InputBuffer();
@@ -76,8 +73,7 @@ public class Fighter extends Entity {
         this.animator = new Animator(0.150);
         this.idleState = new IdleState(this);
         this.crouchingState = new CrouchingState(this);
-        this.walkForwardState = new WalkForwardState(this);
-        this.walkBackwardState = new WalkBackwardState(this);
+        this.moveState = new MoveState(this);
         this.jumpState = new JumpState(this);
         this.attackState = new AttackState(this);
         this.specialAttackState = new SpecialAttackState(this);
@@ -150,11 +146,13 @@ public class Fighter extends Entity {
     }
 
     public void update(double deltaTime){
+        this.x = this.clamp(this.x, this.w*3, WindowConstants.SCREEN_WIDTH - this.w*3);
         inputBuffer.addInput(currAction);
 
 //        boolean hasSequence = inputBuffer.isInputSequence(CROUCHING,WALKFORWARD,L_ATTACK);
-        if (inputBuffer.isInputSequence(CROUCHING,WALKFORWARD,L_ATTACK)) {
+        if (inputBuffer.isInputSequence(CROUCHING,WALKFORWARD,L_ATTACK) || inputBuffer.isInputSequence(CROUCHING,IDLE,WALKFORWARD,L_ATTACK)) {
             System.out.println("Input buffer has sequence!");
+            inputBuffer.clearBuffer();
         }
 
         State newState = currentState.update(deltaTime);
@@ -163,6 +161,7 @@ public class Fighter extends Entity {
         }
 
         animator.update(deltaTime);
+        this.originX = (this.x + this.w) / 2;
     }
 
     public void draw(Graphics g){

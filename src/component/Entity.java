@@ -10,6 +10,8 @@ public class Entity {
     public double w;
     public double h;
 
+    public double originX;
+
     public double vx = 0;
     public double vy = 0;
 
@@ -24,7 +26,7 @@ public class Entity {
 
     Color c = Color.BLACK;
 
-    public static double scale = 2;
+    public static double scale = 3;
 
     public Entity(int x, int y, int w, int h, double maxHealth) {
         this.x = x;
@@ -34,8 +36,14 @@ public class Entity {
         this.w = w;
         this.h = h;
 
+        this.originX = (this.x + this.w) / 2;
+
         this.maxHealth = maxHealth;
         this.currHealth = maxHealth;
+    }
+
+    public static double clamp(double value, double min, double max) {
+        return Math.max(min, Math.min(max, value));
     }
 
 //    public Entity(int x, int y, int w, int h, Color c) {

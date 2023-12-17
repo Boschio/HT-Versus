@@ -7,9 +7,8 @@ import java.util.Map;
 
 public class InputBuffer {
     public List<String> buffer;
-    private final int bufferSize = 10;
+    private final int bufferSize = 5;
 
-    // Introduce a cooldown map to track the last time an input was processed
     private Map<String, Long> inputCooldowns;
     private static final long COOLDOWN_DURATION = 200; // in milliseconds
 
@@ -66,23 +65,5 @@ public class InputBuffer {
 
     public void clearBuffer() {
         buffer.clear();
-    }
-    public static void main(String[] args) {
-        InputBuffer inputBuffer = new InputBuffer();
-
-        // Example usage
-        inputBuffer.addInput("A");
-        inputBuffer.addInput("B");
-        inputBuffer.addInput("C");
-
-        System.out.println("Input buffer: " + inputBuffer.buffer);
-
-        // Check if the input buffer contains a specific sequence
-        boolean hasSequence = inputBuffer.isInputSequence("A", "B", "C");
-        System.out.println("Input buffer has sequence: " + hasSequence);
-
-        // Clear the input buffer
-        inputBuffer.clearBuffer();
-        System.out.println("Input buffer after clearing: " + inputBuffer.buffer);
     }
 }

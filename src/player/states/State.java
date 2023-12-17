@@ -1,7 +1,6 @@
 package player.states;
 
 import player.Fighter;
-import util.io.KL;
 
 public abstract class State {
     Fighter fighter;
@@ -11,10 +10,6 @@ public abstract class State {
 
     public void enter() {
 
-    }
-
-    public State input(KL keyListener) {
-        return null;
     }
 
     public State update(double deltaTime) {
