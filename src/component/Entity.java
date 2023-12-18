@@ -20,7 +20,7 @@ public class Entity {
     static final double G = 0.4; // Gravity
 
     private double maxHealth;
-    private double currHealth;
+    public double currHealth;
 
     private boolean toBeDestroyed = false;
 
@@ -36,7 +36,7 @@ public class Entity {
         this.w = w;
         this.h = h;
 
-        this.originX = (this.x + this.w) / 2;
+        this.originX = this.x + (this.w/2);
 
         this.maxHealth = maxHealth;
         this.currHealth = maxHealth;

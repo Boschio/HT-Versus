@@ -28,7 +28,8 @@ public class Camera {
     public void update(double deltaTime) {
         this.camCenter = (this.x + this.w) / 2;
 
-        stage.setBGOffset((int) (Math.abs(p1.originX - p2.originX)/2));
+        stage.setBGOffset((int) (p1.originX < p2.originX ? ((p2.originX - p1.originX)/2) : ((p1.originX - p2.originX)/2)));
+
         this.camCenter = clamp(this.camCenter, 0, (this.stage.bgFront.getImage().getWidth(null) * stage.scale - this.w));
 
     }

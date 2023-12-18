@@ -8,6 +8,7 @@ import util.io.KL;
 import window.WindowConstants;
 import window.stage.Camera;
 import window.stage.Stage;
+import window.ui.UI;
 import window.ui.pauseScreen;
 
 import java.awt.*;
@@ -26,6 +27,7 @@ public class GameScene extends Scene{
     Player p2;
 
     Camera camera;
+    UI ui;
 
     public GameScene() {
         stage = new Stage("akuma");
@@ -34,6 +36,7 @@ public class GameScene extends Scene{
         p2 = new Player(2, FighterConstants.Characters.Ryu);
 
         this.camera = new Camera(p1,p2,stage);
+        this.ui = new UI();
     }
 
     private static void debugGameSpeed() {
@@ -91,6 +94,17 @@ public class GameScene extends Scene{
 
         } else {
             debugGameSpeed();
+            ui.update(deltaTime);
+            if (ui.timedOut) {
+                // FIXME Need to implement round/game wins
+                if (p1.currHealth > p2.currHealth) {
+                    // p1 win
+                } else if (p2.currHealth > p1.currHealth) {
+                    // p2 win
+                } else {
+                    // draw
+                }
+            }
 
             camera.update(deltaTime);
             playerUpdate(deltaTime);
@@ -121,6 +135,7 @@ public class GameScene extends Scene{
             pauseScreen.draw(g);
         }
 
+        ui.draw(g);
         debugInfo(g);
     }
 

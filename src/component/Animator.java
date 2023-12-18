@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Animator {
     private Map<String, Animation> Animations = new HashMap<>();
+    private String animationName;
     private Animation currentAnimation = null;
     private ImageIcon currentFrame = null;
     private HurtBox currentHurtBox = null;
@@ -30,8 +31,12 @@ public class Animator {
         this.frameTime           = defaultFrameTime;
     }
 
-    public void createAnimation(String AnimationName, String path, Rect[] rects, HurtBox hurtBoxes[]){
+    public String getAnimationName() {
+        return animationName;
+    }
 
+    public void createAnimation(String AnimationName, String path, Rect[] rects, HurtBox hurtBoxes[]){
+        this.animationName = AnimationName;
         Animations.put(AnimationName, new Animation(path, rects, hurtBoxes));
         if (currentAnimation == null){
             currentAnimation = Animations.get(AnimationName);

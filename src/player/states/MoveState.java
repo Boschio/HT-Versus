@@ -31,7 +31,10 @@ public class MoveState extends State {
 
     public State update(double deltaTime) {
         fighter.x += fighter.vx * deltaTime;
-
+        if (fighter.animator.getAnimationName() == fighter.WALKFORWARD && fighter.vx <= 0 ||
+                fighter.animator.getAnimationName() == fighter.WALKBACKWARD && fighter.vx >= 0) {
+            return fighter.idleState;
+        }
         if (!fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT) && !fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT) ||
                 fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT) && fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)) {
             return fighter.idleState;
