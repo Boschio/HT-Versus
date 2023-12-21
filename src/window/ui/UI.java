@@ -33,6 +33,7 @@ public class UI {
                 this.currTimer[0][i] = new ImageIcon(uiImg.getSubimage(16*(i+1),32,12,14));
                 this.currTimer[1][i] = new ImageIcon(uiImg.getSubimage(16*(i+1),32,12,14));
             }
+
         } catch(Exception e) {}
     }
 

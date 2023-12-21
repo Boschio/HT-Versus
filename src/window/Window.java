@@ -21,7 +21,7 @@ public class Window extends JFrame implements Runnable {
 
     private Scene currentScene;
 
-    private double windowsChangeCoolDown = 0.f;
+    public static double windowsChangeCoolDown = 0.f;
 
 
 

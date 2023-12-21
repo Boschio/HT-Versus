@@ -9,7 +9,7 @@ import window.WindowConstants;
 import window.stage.Camera;
 import window.stage.Stage;
 import window.ui.UI;
-import window.ui.pauseScreen;
+import window.ui.PauseScreen;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -19,8 +19,10 @@ public class GameScene extends Scene{
     private int _frameRate = 0;
     private String _displayInfo = "";
 
-    private pauseScreen pauseScreen = new pauseScreen();
-    private boolean isPaused = false;
+    private PauseScreen pauseScreen;
+
+    public static double pauseCooldown = 0.0;
+    public boolean isPaused = false;
 
     Stage stage;
     Player p1;
@@ -37,6 +39,7 @@ public class GameScene extends Scene{
 
         this.camera = new Camera(p1,p2,stage);
         this.ui = new UI();
+        pauseScreen = new PauseScreen(this);
     }
 
     private static void debugGameSpeed() {
@@ -89,7 +92,8 @@ public class GameScene extends Scene{
     public void update(double deltaTime) {
         _frameRate = (int) (1/deltaTime);
         _displayInfo = String.format("%d FPS (%.3f)", _frameRate,deltaTime);
-
+        pauseScreen.update();
+        pauseCooldown -= deltaTime;
         if (isPaused) {
 
         } else {
@@ -113,8 +117,8 @@ public class GameScene extends Scene{
 
         }
 
-        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE)){
-//            Window.getWindow().changeState(WindowConstants.MENU_SCENE);
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE) && pauseCooldown <= 0){
+            pauseCooldown = .5;
             isPaused = !isPaused;
         }
     }
@@ -131,12 +135,12 @@ public class GameScene extends Scene{
 
         p1.draw(g);
         p2.draw(g);
-        if (isPaused) {
-            pauseScreen.draw(g);
-        }
 
         ui.draw(g);
         debugInfo(g);
+        if (isPaused) {
+            pauseScreen.draw(g);
+        }
     }
 
     public void debugInfo(Graphics g) {
