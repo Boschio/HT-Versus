@@ -15,10 +15,6 @@ import java.util.HashMap;
 
 public class Fighter extends Entity {
 
-    public enum states {
-        idle, crouching, walkforward, walkbackward, jump, attack, specialattack
-    }
-
     public int jumpHeight = 650;
     public final static double gravity = 1500;
     public double ay = gravity;
@@ -188,7 +184,6 @@ public class Fighter extends Entity {
                     animator.RenderCurrentHitBoxFlip(g, (int) x, (int) y);
                 }
             }
-
         }
     }
 

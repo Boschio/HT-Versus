@@ -1,5 +1,0 @@
-package player.states;
-
-public enum FighterState {
-    IDLE, STANDING, CROUCHING, JUMP_UP, JUMP_FORWARD, JUMP_BACKWARD, WALK_FORWARD, WALK_BACKWARD, ATTACKING
-}

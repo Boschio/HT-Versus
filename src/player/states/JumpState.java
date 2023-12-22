@@ -2,7 +2,6 @@ package player.states;
 
 import player.Fighter;
 import player.FighterConstants;
-import util.io.KL;
 
 public class JumpState extends State {
     public JumpState(Fighter fighter) {
@@ -26,11 +25,6 @@ public class JumpState extends State {
             return fighter.idleState;
         }
         return null;
-    }
-
-    private void jump(double dy, double dx) {
-        // y = a(x-h)2 + k, where h is the vertex or x^2 = -4ay
-        fighter.vy -= dy;
     }
 
     public void stopFalling() {

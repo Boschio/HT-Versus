@@ -9,14 +9,11 @@ public class CrouchingState extends State {
     }
 
     public void enter() {
-//        fighter.isMoving = false;
+        fighter.isMoving = false;
         fighter.isCrouching = true;
         fighter.currAction = fighter.CROUCHING;
-//        fighter.vx = 0.0;
 
-//        if (fighter.prevState != fighter.currentState) {
-            fighter.animator.changeAnimationTo(fighter.currAction);
-//        }
+        fighter.animator.changeAnimationTo(fighter.currAction);
     }
 
     public State update(double deltaTime) {

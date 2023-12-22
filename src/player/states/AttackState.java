@@ -84,13 +84,7 @@ public class AttackState extends State {
         if(fighter.animator.getCurrentFrameIndex() >= fighter.animator.getCurrentAnimation().getAnimationLength()-1) {
             return fighter.idleState;
         }
-        if(fighter.controls.keyListener.isKeyHeld())
-            return null;
-//        HandleAttack(fighter);
-        return null;
-    }
 
-    private void HandleAttack(Fighter fighter){
-        fighter.isAttacking = true;
+        return null;
     }
 }

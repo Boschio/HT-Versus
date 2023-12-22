@@ -8,12 +8,8 @@ import java.awt.*;
 public class FighterConstants {
 
     public static final double PLAYER_WIDTH = 100;
-    public static final double PLAYER_HEIGHT = 250;
 
-    //200px per second
-    public static final double PLAYER_SPEED = 200.0;
-
-    public static final double SCALE = 2.0;
+    public static final double SCALE = 3.0;
 
 
     public enum Characters {
@@ -97,10 +93,5 @@ public class FighterConstants {
     public static final double PLAYER2_START_X = WindowConstants.SCREEN_WIDTH - (WindowConstants.SCREEN_WIDTH * .25);
 
     public static final double PLAYER_START_Y = FLOOR;
-
-
-
-
-    public static final Color characterColor = new Color(0,255,0,90);
 
 }

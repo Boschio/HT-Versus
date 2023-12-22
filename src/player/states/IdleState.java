@@ -18,13 +18,6 @@ public class IdleState extends State {
         fighter.animator.changeAnimationTo(fighter.currAction);
     }
 
-    public State input(KL e) {
-//        if (e.isKeyDown(KeyEvent.VK_A) || e.isKeyDown(KeyEvent.VK_D)) {
-//            return new MoveState();
-//        }
-        return null;
-    }
-
     public State update(double deltaTime) {
         if (fighter.controls.keyListener.isKeyDown(fighter.controls.LEFT) && fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)) {
             return null;
@@ -37,9 +30,6 @@ public class IdleState extends State {
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.JUMP)){
             return fighter.jumpState;
-        }
-        if(fighter.controls.keyListener.isKeyDown(fighter.controls.JUMP) && fighter.controls.keyListener.isKeyDown(fighter.controls.RIGHT)){
-//            fighter.currentState = Fighter.States.jumpForward;
         }
         if(fighter.controls.keyListener.isKeyDown(fighter.controls.L_ATTACK)) {
             return fighter.attackState;
