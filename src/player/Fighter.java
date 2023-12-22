@@ -151,15 +151,16 @@ public class Fighter extends Entity {
         this.x = this.clamp(this.x, this.w*3, WindowConstants.SCREEN_WIDTH - this.w*3);
         inputBuffer.addInput(currAction);
 
-//        boolean hasSequence = inputBuffer.isInputSequence(CROUCHING,WALKFORWARD,L_ATTACK);
         if (inputBuffer.isInputSequence(CROUCHING,WALKFORWARD,L_ATTACK) || inputBuffer.isInputSequence(CROUCHING,IDLE,WALKFORWARD,L_ATTACK)) {
             System.out.println("Input buffer has sequence!");
             inputBuffer.clearBuffer();
-        }
-
-        State newState = currentState.update(deltaTime);
-        if (newState != null) {
-            changeState(newState);
+            changeState(specialAttackState);
+            currentState.enter();
+        } else {
+            State newState = currentState.update(deltaTime);
+            if (newState != null) {
+                changeState(newState);
+            }
         }
 
         animator.update(deltaTime);

@@ -11,9 +11,7 @@ public class SpecialAttackState extends State {
     public void enter() {
         fighter.isAttacking = true;
 
-        if (fighter.controls.keyListener.isKeyDown(fighter.controls.S_ATTACK)) {
-            fighter.currAction = fighter.S_ATTACK;
-        }
+        fighter.currAction = fighter.S_ATTACK;
 
         fighter.animator.changeAnimationTo(fighter.currAction);
 
