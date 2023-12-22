@@ -53,6 +53,9 @@ public class EditorScene extends Scene {
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_J)){
             player1.animator.debugChangeAnimation(player1.L_ATTACK);
         }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_M)){
+            player1.animator.debugChangeAnimation(player1.CROUCH_L_ATTACK);
+        }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_K)){
             player1.animator.debugChangeAnimation(player1.M_ATTACK);
         }
@@ -61,6 +64,12 @@ public class EditorScene extends Scene {
         }
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_L)){
             player1.animator.debugChangeAnimation(player1.H_ATTACK);
+        }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_PERIOD)){
+            player1.animator.debugChangeAnimation(player1.CROUCH_H_ATTACK);
+        }
+        if(KL.getKeyListener().isKeyDown(KeyEvent.VK_SLASH)){
+            player1.animator.debugChangeAnimation(player1.SWEEP);
         }
 
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_LEFT) && keyDown == false) {

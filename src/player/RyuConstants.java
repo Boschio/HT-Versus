@@ -133,13 +133,13 @@ public class RyuConstants {
 
     public final static HurtBox[] CROUCH_L_ATTACK_HURTBOXES = {
             new HurtBox(0,0,72,66),
-            new HurtBox(0,0,199,66),
+            new HurtBox(0,0,99,66),
             new HurtBox(0,0,72,66)
     };
 
     public final static HitBox[] CROUCH_L_ATTACK_HITBOXES = {
             new HitBox(0,0,0,0),
-            new HitBox(80, -210, 54, 17),
+            new HitBox(80, -128, 54, 17),
             new HitBox(0, 0, 0, 0)
     };
 
@@ -204,8 +204,8 @@ public class RyuConstants {
 
     public final static HitBox[] CROUCH_M_ATTACK_HITBOXES = {
             new HitBox(0,0,0,0),
-            new HitBox(190, -166, 38, 33),
-            new HitBox(187, -188, 35, 54),
+            new HitBox(100, 0, 47, 26),
+            new HitBox(100, 0, 72, 26),
             new HitBox(0,0,0,0)
     };
 
@@ -281,7 +281,7 @@ public class RyuConstants {
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0),
-            new HitBox(86, -193, 64, 17),
+            new HitBox(86, -103, 44, 95),
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0)
 
@@ -296,7 +296,7 @@ public class RyuConstants {
     public final static Move CROUCH_H_ATTACK = new Move(
             CROUCH_H_ATTACK_ANIMATION,
             new boolean[]{false,false,false,false,false,false},
-            new int[]{0,0,0,14,0,0}
+            new int[]{0,0,0,18,0,0}
     );
 
     public final static Rect[] SWEEP_SPRITES = {
@@ -321,13 +321,13 @@ public class RyuConstants {
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0),
-            new HitBox(86, -193, 64, 17),
+            new HitBox(95, 0, 69, 21),
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0)
 
     };
 
-    public final static int[] SWEEP_FRAMEHOLD = {3,3,2,6,2,2};
+    public final static int[] SWEEP_FRAMEHOLD = {3,3,4,6,5,5};
 
     public final static Animation SWEEP_ANIMATION = new Animation(
             CROUCH_ATTACK_PATH, SWEEP_SPRITES, SWEEP_HURTBOXES, SWEEP_HITBOXES, SWEEP_FRAMEHOLD
@@ -371,8 +371,8 @@ public class RyuConstants {
     public final static HitBox[] SHORYUKEN_HITBOXES = {
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0),
-            new HitBox(0,0,0,0),
-            new HitBox(86, -193, 64, 17),
+            new HitBox(46, -193, 32, 69),
+            new HitBox(36, -193, 31, 63),
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0),
             new HitBox(0,0,0,0),
@@ -391,7 +391,7 @@ public class RyuConstants {
     public final static Move SHORYUKEN = new Move(
             SHORYUKEN_ANIMATION,
             new boolean[]{false,false,false,false,false,false,false,false,false,false},
-            new int[]{0,0,0,14,0,0,0,0,0,0}
+            new int[]{0,0,12,9,0,0,0,0,0,0}
     );
 
 }

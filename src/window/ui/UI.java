@@ -101,6 +101,7 @@ public class UI {
 
     public void draw(Graphics g) {
         g.drawImage(healthBarEmpty.getImage(), WindowConstants.SCREEN_WIDTH/2 - (healthBarEmpty.getIconWidth()*scale)/2, 50, healthBarEmpty.getIconWidth()*scale,healthBarEmpty.getIconHeight()*scale,null);
+        g.setColor(Color.GREEN);
         g.fillRect((int) (WindowConstants.SCREEN_WIDTH/2 - (p1HealthBar.w*scale) - 48), 62, (int) p1HealthBar.w*scale, healthBarScaledHeight);
         g.fillRect(WindowConstants.SCREEN_WIDTH/2 + 48, 62, (int) p2HealthBar.w*scale, healthBarScaledHeight);
 
