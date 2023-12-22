@@ -39,7 +39,6 @@
 package player.states;
 
 import player.Fighter;
-import util.io.KL;
 
 public class AttackState extends State {
 
@@ -49,7 +48,6 @@ public class AttackState extends State {
 
     public void enter() {
         fighter.isAttacking = true;
-//        fighter.stateManager.stateLock = true;
 
         if (fighter.isCrouching && fighter.controls.keyListener.isKeyDown(fighter.controls.CROUCH)) {
             if (fighter.controls.keyListener.isKeyDown(fighter.controls.L_ATTACK)) {

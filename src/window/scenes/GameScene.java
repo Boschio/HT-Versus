@@ -5,6 +5,7 @@ import player.Player;
 
 import util.Time;
 import util.io.KL;
+import window.Window;
 import window.WindowConstants;
 import window.stage.Camera;
 import window.stage.Stage;
@@ -22,11 +23,11 @@ public class GameScene extends Scene{
     private PauseScreen pauseScreen;
 
     public static double pauseCooldown = 0.0;
-    public boolean isPaused = false;
+    public boolean isPaused, p1Win, p2Win;
 
     Stage stage;
-    Player p1;
-    Player p2;
+    public Player p1;
+    public Player p2;
 
     Camera camera;
     UI ui;
@@ -38,8 +39,11 @@ public class GameScene extends Scene{
         p2 = new Player(2, FighterConstants.Characters.Ryu);
 
         this.camera = new Camera(p1,p2,stage);
-        this.ui = new UI();
-        pauseScreen = new PauseScreen(this);
+        this.ui = new UI(this);
+        this.pauseScreen = new PauseScreen(this);
+        this.isPaused = false;
+        this.p1Win = false;
+        this.p2Win = false;
     }
 
     private static void debugGameSpeed() {
@@ -71,20 +75,24 @@ public class GameScene extends Scene{
 
     private void hitDetection() {
         if(p1.isAttacking && p1.animator.getCurrentHitBox() != null) {
-            if(p1.getHitBox().overlaps(p2.getHurtBox())) {
-                System.out.println("P2 HIT!");
-                p2.takeDamage(10);
+            if(p1.getHitBox().overlaps(p2.getHurtBox()) && p1.attackCooldown <= 0) {
+                p1.attackCooldown = .2;
+                p2.takeDamage(p1.MoveList.get(p1.currAction).damage[p1.animator.getCurrentFrameIndex()]);
+                if (p2.isToBeDestroyed()) {
+                    ui.roundOver = true;
+                    p1Win = true;
+                }
             }
         }
         if(p2.isAttacking && p2.animator.getCurrentHitBox() != null) {
-            if(p2.getHitBox().overlaps(p1.getHurtBox())) {
-                System.out.println("P1 HIT!");
-                p1.takeDamage(10);
+            if(p2.getHitBox().overlaps(p1.getHurtBox()) && p2.attackCooldown <= 0) {
+                p2.attackCooldown = .2;
+                p1.takeDamage(p2.MoveList.get(p2.currAction).damage[p2.animator.getCurrentFrameIndex()]);
+                if (p1.isToBeDestroyed()) {
+                    ui.roundOver = true;
+                    p2Win = true;
+                }
             }
-        }
-
-        if (p2.isToBeDestroyed()) {
-//            Window.getWindow().changeState(WindowConstants.MENU_SCENE);
         }
     }
 
@@ -99,22 +107,15 @@ public class GameScene extends Scene{
         } else {
             debugGameSpeed();
             ui.update(deltaTime);
-            if (ui.timedOut) {
-                // FIXME Need to implement round/game wins
-                if (p1.currHealth > p2.currHealth) {
-                    // p1 win
-                } else if (p2.currHealth > p1.currHealth) {
-                    // p2 win
-                } else {
-                    // draw
-                }
+            if (!ui.roundOver) {
+
+                camera.update(deltaTime);
+                playerUpdate(deltaTime);
+                hitDetection();
             }
-
-            camera.update(deltaTime);
-            playerUpdate(deltaTime);
-
-            hitDetection();
-
+            if (ui.roundOver && ui.menuCountdown <= 0) {
+                Window.getWindow().changeState(WindowConstants.MENU_SCENE);
+            }
         }
 
         if(KL.getKeyListener().isKeyDown(KeyEvent.VK_ESCAPE) && pauseCooldown <= 0){

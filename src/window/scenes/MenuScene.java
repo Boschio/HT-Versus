@@ -21,7 +21,7 @@ public class MenuScene extends Scene{
     boolean hoveringOverPlay, hoveringOverQuit;
 
     private BufferedImage bg, hero, ui;
-    private ImageIcon cursor, play, test;
+    private ImageIcon cursor, play;
 
     private Rect playRect, quitRect;
 

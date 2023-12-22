@@ -16,7 +16,7 @@ public class Move {
     HurtBox[] hurtBoxes;
     HitBox[] hitBoxes;
     boolean[] cancellableFrames;
-    int[] damage;
+    public int[] damage;
     int[] chipDamage;
     int[] hitStun;
     int[] blockStun;

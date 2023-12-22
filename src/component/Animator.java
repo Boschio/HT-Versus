@@ -234,34 +234,6 @@ public class Animator {
         g.drawRect(x, y, w, h);
     }
 
-//    public void RenderCurrentSpriteFlipHor(Graphics g,int x, int y){
-//        g.drawImage(
-//                currentFrame.getImage(),
-//                (int) (x + currentAnimation.xOffset),
-//                (int) (y + currentAnimation.yOffset + currentFrame.getIconHeight() * currentAnimation.scaleFactor),
-//                (int) (currentFrame.getIconWidth() * currentAnimation.scaleFactor),
-//                (int) (-currentFrame.getIconHeight() * currentAnimation.scaleFactor),
-//                null
-//        );
-//    }
-//
-//    public void RenderCurrentSpriteFlipBoth(Graphics g,int x, int y){
-//        g.drawImage(
-//                currentFrame.getImage(),
-//                (int) (x + currentAnimation.xOffset + currentFrame.getIconWidth() * currentAnimation.scaleFactor),
-//                (int) (y + currentAnimation.yOffset + currentFrame.getIconHeight() * currentAnimation.scaleFactor),
-//                (int) (-currentFrame.getIconWidth() * currentAnimation.scaleFactor),
-//                (int) (-currentFrame.getIconHeight() * currentAnimation.scaleFactor),
-//                null
-//        );
-//    }
-
-
-    public void init() {
-
-    }
-
-
     public void update(double deltaTime) {
         if (currentAnimation!=null){
             if(lastFrame < Time.frame){

@@ -46,7 +46,6 @@ public class Fighter extends Entity {
     public final static String S_ATTACK = "5S";
 
 
-
     public String currAction = IDLE;
 
     public final Animator animator;
@@ -62,6 +61,8 @@ public class Fighter extends Entity {
     public State currentState;
 
     public HashMap<String, Move> MoveList;
+
+    public double attackCooldown = 0.0;
 
 
     public Fighter(int playerNum, FighterConstants.Characters character){
@@ -146,6 +147,7 @@ public class Fighter extends Entity {
     }
 
     public void update(double deltaTime){
+        this.attackCooldown -= deltaTime;
         this.x = this.clamp(this.x, this.w*3, WindowConstants.SCREEN_WIDTH - this.w*3);
         inputBuffer.addInput(currAction);
 

@@ -19,10 +19,10 @@ public class Entity {
 
     static final double G = 0.4; // Gravity
 
-    private double maxHealth;
+    public double maxHealth;
     public double currHealth;
 
-    private boolean toBeDestroyed = false;
+    private boolean toBeDestroyed;
 
     Color c = Color.BLACK;
 
@@ -40,6 +40,7 @@ public class Entity {
 
         this.maxHealth = maxHealth;
         this.currHealth = maxHealth;
+        this.toBeDestroyed = false;
     }
 
     public static double clamp(double value, double min, double max) {
