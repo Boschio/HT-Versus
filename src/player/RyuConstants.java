@@ -8,7 +8,7 @@ import util.Rect;
 public class RyuConstants {
     public static final double MAX_HEALTH = 100;
 
-    public final static String IDLE_PATH = "./src/images/Ryu/ryu_idle_walk.png";
+    public final static String IDLE_PATH = "./src/assets/images/Ryu/ryu_idle_walk.png";
     public final static Rect[] IDLE_SPRITES = {
             new Rect(2,7,66,93),
             new Rect(72,7,66,93),
@@ -39,7 +39,7 @@ public class RyuConstants {
             IDLE_PATH, IDLE_SPRITES, IDLE_HURTBOXES, IDLE_FRAMEHOLD
     );
 
-    public final static String CROUCHING_PATH = "./src/images/Ryu/ryu_crouching.png";
+    public final static String CROUCHING_PATH = "./src/assets/images/Ryu/ryu_crouching.png";
 
     public final static Rect[] CROUCHING_SPRITES = {
             new Rect(0,0,63,89),
@@ -57,7 +57,7 @@ public class RyuConstants {
     );
 
 
-    public final static String WALKFORWARD_PATH = "./src/images/Ryu/ryu_idle_walk.png";
+    public final static String WALKFORWARD_PATH = "./src/assets/images/Ryu/ryu_idle_walk.png";
     public final static Rect[] WALKFORWARD_SPRITES = {
             new Rect(2,111,63,89),
             new Rect(70,107,70,93),
@@ -71,7 +71,7 @@ public class RyuConstants {
             WALKFORWARD_PATH, WALKFORWARD_SPRITES, IDLE_HURTBOXES
     );
 
-    public final static String WALKBACKWARD_PATH = "./src/images/Ryu/ryu_idle_walk.png";
+    public final static String WALKBACKWARD_PATH = "./src/assets/images/Ryu/ryu_idle_walk.png";
     public final static Rect[] WALKBACKWARD_SPRITES = {
             new Rect(2,211,63,89),
             new Rect(72,207,61,93),
@@ -85,8 +85,8 @@ public class RyuConstants {
             WALKBACKWARD_PATH, WALKBACKWARD_SPRITES, IDLE_HURTBOXES
     );
 
-    public final static String ATTACK_PATH = "./src/images/Ryu/ryu_punch.png";
-    public final static String CROUCH_ATTACK_PATH = "./src/images/Ryu/ryu_crouch_attacks.png";
+    public final static String ATTACK_PATH = "./src/assets/images/Ryu/ryu_punch.png";
+    public final static String CROUCH_ATTACK_PATH = "./src/assets/images/Ryu/ryu_crouch_attacks.png";
     public final static Rect[] L_ATTACK_SPRITES = {
             new Rect(0,18,74,94),
             new Rect(78,17,102,95),
@@ -339,7 +339,7 @@ public class RyuConstants {
             new int[]{0,0,0,14,0,0}
     );
 
-    public final static String SHORYUKEN_PATH = "./src/images/Ryu/ryu_shoryuken.png";
+    public final static String SHORYUKEN_PATH = "./src/assets/images/Ryu/ryu_shoryuken.png";
 
 
     public final static Rect[] SHORYUKEN_SPRITES = {

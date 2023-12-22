@@ -36,8 +36,8 @@ public class PauseScreen {
         try {
             this.gs = gs;
 
-            bg = ImageIO.read(new File("./src/images/Menu/pause-bg.png"));
-            BufferedImage ui = ImageIO.read(new File("./src/images/ui.png"));
+            bg = ImageIO.read(new File("./src/assets/images/Menu/pause-bg.png"));
+            BufferedImage ui = ImageIO.read(new File("./src/assets/images/ui.png"));
 
             cursor = new ImageIcon(ui.getSubimage(344,16,16,16));
             cont = new ImageIcon(ui.getSubimage(386,41,93,14));

@@ -3,6 +3,7 @@ package window.scenes;
 import util.Rect;
 import util.io.KL;
 import util.io.ML;
+import util.io.Sound;
 import window.Window;
 import window.WindowConstants;
 
@@ -32,9 +33,9 @@ public class MenuScene extends Scene{
 
     public MenuScene() {
         try {
-            bg = ImageIO.read(new File("./src/images/Menu/menu-bg.png"));
-            hero = ImageIO.read(new File("./src/images/Menu/HeroImage.png"));
-            ui = ImageIO.read(new File("./src/images/ui.png"));
+            bg = ImageIO.read(new File("./src/assets/images/Menu/menu-bg.png"));
+            hero = ImageIO.read(new File("./src/assets/images/Menu/HeroImage.png"));
+            ui = ImageIO.read(new File("./src/assets/images/ui.png"));
 
             cursor = new ImageIcon(ui.getSubimage(344,16,16,16));
 
@@ -56,6 +57,7 @@ public class MenuScene extends Scene{
 
         playRect = new Rect(WindowConstants.SCREEN_WIDTH/2 - (play.getIconWidth()*scale)/2,WindowConstants.SCREEN_HEIGHT/2,play.getIconWidth() * scale,play.getIconHeight() * scale);
         quitRect = new Rect(WindowConstants.SCREEN_WIDTH/2 - (quit[0].getIconWidth()*scale*4)/2,WindowConstants.SCREEN_HEIGHT - 100,quit[0].getIconWidth() * scale*4,quit[0].getIconHeight() * scale);
+        Sound.playMusic(Sound.MENU_BGM.getClip());
     }
 
 

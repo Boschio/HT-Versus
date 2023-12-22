@@ -18,8 +18,8 @@ public class Stage {
     public Stage(String stage) {
 
         try {
-            BufferedImage imgBack  = ImageIO.read(new File("./src/images/stage/" + stage + "-stage-back.png"));
-            BufferedImage imgFront  = ImageIO.read(new File("./src/images/stage/" + stage + "-stage-front.png"));
+            BufferedImage imgBack  = ImageIO.read(new File("./src/assets/images/stage/" + stage + "-stage-back.png"));
+            BufferedImage imgFront  = ImageIO.read(new File("./src/assets/images/stage/" + stage + "-stage-front.png"));
             this.bgBack = new ImageIcon(imgBack);
             this.bgFront = new ImageIcon(imgFront);
         } catch(Exception e) {}

@@ -1,6 +1,7 @@
 package window.ui;
 
 import util.Rect;
+import util.io.Sound;
 import window.Window;
 import window.WindowConstants;
 import window.scenes.GameScene;
@@ -32,7 +33,7 @@ public class UI {
         this.gs = gs;
         this.init();
         try {
-            BufferedImage uiImg = ImageIO.read(new File("./src/images/ui.png"));
+            BufferedImage uiImg = ImageIO.read(new File("./src/assets/images/ui.png"));
             this.healthBarEmpty = new ImageIcon(uiImg.getSubimage(16,1,322,15));
             this.healthBarEmpty = new ImageIcon(uiImg.getSubimage(16,1,322,15));
 

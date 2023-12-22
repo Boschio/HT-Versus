@@ -5,6 +5,7 @@ import player.Player;
 
 import util.Time;
 import util.io.KL;
+import util.io.Sound;
 import window.Window;
 import window.WindowConstants;
 import window.stage.Camera;
@@ -23,7 +24,7 @@ public class GameScene extends Scene{
     private PauseScreen pauseScreen;
 
     public static double pauseCooldown = 0.0;
-    public boolean isPaused, p1Win, p2Win;
+    public boolean isPaused, p1Win, p2Win, gameOver;
 
     Stage stage;
     public Player p1;
@@ -44,6 +45,8 @@ public class GameScene extends Scene{
         this.isPaused = false;
         this.p1Win = false;
         this.p2Win = false;
+        this.gameOver = false;
+        Sound.playMusic(Sound.STAGE_BGM.getClip());
     }
 
     private static void debugGameSpeed() {
@@ -113,8 +116,14 @@ public class GameScene extends Scene{
                 playerUpdate(deltaTime);
                 hitDetection();
             }
-            if (ui.roundOver && ui.menuCountdown <= 0) {
-                Window.getWindow().changeState(WindowConstants.MENU_SCENE);
+            if (ui.roundOver){
+                if (!gameOver) {
+                    gameOver = true;
+                    Sound.playMusic(Sound.GAMEOVER_BGM.getClip());
+                }
+                if (ui.menuCountdown <= 0) {
+                    Window.getWindow().changeState(WindowConstants.MENU_SCENE);
+                }
             }
         }
 

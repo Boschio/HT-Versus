@@ -7,7 +7,7 @@ public class WindowConstants {
 
     public static int INSET_SIZE = 0;
 
-    public static final String SCREEN_TITLE = "Hostile Takeover: Versus";
+    public static final String SCREEN_TITLE = "HT: Versus";
 
 
 
